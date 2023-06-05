@@ -6,9 +6,9 @@ export default defineConfig({
   site: 'https://har.fyi',
   integrations: [
     starlight({
-      title: 'My Docs',
+      title: 'har.fyi',
       social: {
-        github: 'https://github.com/withastro/starlight',
+        github: 'https://github.com/rviscomi/har.fyi',
       },
       sidebar: [
         {
