@@ -1,0 +1,93 @@
+---
+title: Pages table
+description: Reference docs for the httparchive.all.pages table
+---
+
+import { Card } from '@astrojs/starlight/components';
+
+[`httparchive.all.pages`](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!4m3!1shttparchive!2sall!3spages) is a partitioned and clustered table containing one row per page tested in the HTTP Archive. Pages are tested on a monthly basis and as of April 2022, both the root page and one secondary page are tested.
+
+## Schema
+
+Field name | Type | Description
+---|---|---
+[`date`](#date) | `DATE` | YYYY-MM-DD format of the HTTP Archive monthly crawl.
+[`client`](#client) | `STRING` | Test environment: `'desktop'` or `'mobile'`.
+[`page`](#page) | `STRING` | The URL of the page being tested.
+[`is_root_page`](#is_root_page) | `BOOLEAN` | Whether the page is the root of the origin.
+[`root_page`](#root_page) | `STRING` | The URL of the root page being tested, the origin followed by `/`.
+[`rank`](#rank) | `INTEGER` | Site popularity rank, from CrUX
+[`wptid`](#wptid) | `STRING` | ID of the WebPageTest results
+[`payload`](#payload) | `STRING` | JSON-encoded WebPageTest results for the page	
+[`summary`](#summary) | `STRING` | JSON-encoded summarization of the page-level data
+[`custom_metrics`](#custom_metrics) | `STRING` | JSON-encoded test results of the custom metrics	
+[`lighthouse`](#lighthouse) | `STRING` | JSON-encoded Lighthouse report	
+[`features`](#features) | `ARRAY<`[`FEATURE`](/reference/feature)`>` | Blink features detected at runtime
+[`technologies`](#technologies) | `ARRAY<`[`TECHNOLOGY`](/reference/technology)`>` | Technologies detected at runtime
+[`metadata`](#metadata) | `STRING` | Additional metadata about the test
+
+### `date`
+
+**This field is required for all queries over the `pages` table.**
+
+YYYY-MM-DD format of the HTTP Archive monthly crawl.
+
+  Example: `date = '2023-06-01'`
+
+### `client`
+
+Test environment: `'desktop'` or `'mobile'`.
+
+### `page`
+
+The URL of the page being tested.
+
+Example: `page = 'https://har.fyi/'`
+
+### `is_root_page`
+
+Whether the page is the root of the origin.
+
+### `root_page`
+
+The URL of the root page being tested, the origin followed by `/`.
+
+Example: `root_page = 'https://har.fyi/'`
+
+### `rank`
+
+Site popularity rank, from CrUX
+
+### `wptid`
+
+ID of the WebPageTest results
+
+### `payload`
+
+JSON-encoded WebPageTest results for the page	
+
+### `summary`
+
+JSON-encoded summarization of the page-level data
+
+### `custom_metrics`
+
+JSON-encoded test results of the custom metrics	
+
+### `lighthouse`
+
+JSON-encoded Lighthouse report	
+
+### `features`
+
+Blink features detected at runtime (see https://chromestatus.com/features)
+
+### `technologies`
+
+Technologies detected at runtime (see https://www.wappalyzer.com/)
+
+See the [`technology`](/reference/technology) reference for more details.
+
+### `metadata`
+
+Additional metadata about the test

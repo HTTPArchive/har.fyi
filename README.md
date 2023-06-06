@@ -1,6 +1,8 @@
 # har.fyi
 
-## 🚀 Project structure
+Reference documentation for the [HTTP Archive](https://httparchive.org/) dataset on BigQuery.
+
+## Contributing
 
 These docs are powered by Starlight by Astro.
 
@@ -12,7 +14,7 @@ Static assets, like favicons, can be placed in the `public/` directory.
 
 For more info, check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
 
-## 🧞 Commands
+### Development
 
 All commands are run from the root of the project, from a terminal:
 

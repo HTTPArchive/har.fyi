@@ -9,12 +9,16 @@ export default defineConfig({
       title: 'har.fyi',
       social: {
         github: 'https://github.com/rviscomi/har.fyi',
+        twitter: 'https://twitter.com/HTTPArchive',
+      },
+      editLink: {
+        baseUrl: 'https://github.com/rviscomi/har.fyi/edit/main/'
       },
       sidebar: [
         {
           label: 'Guides',
           items: [
-            // Each item here is one entry in the navigation menu.
+            { label: 'Getting started', link: '/guides/getting-started/' },
             { label: 'Example Guide', link: '/guides/example/' },
           ],
         },

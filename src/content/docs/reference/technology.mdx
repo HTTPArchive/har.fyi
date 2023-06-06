@@ -1,0 +1,28 @@
+---
+title: Technology struct
+description: Reference docs for the technology struct
+---
+
+_Appears in: [`pages` table](/reference/pages)_
+
+Technologies are detected by [Wappalyzer](https://www.wappalyzer.com/). Refer to the [Wappalyzer repository](https://github.com/wappalyzer/wappalyzer) on GitHub to request a new technology detection or to browse the source code of existing detections.
+
+## Schema
+
+Field name | Type | Description
+---|---|---
+`technology` | `STRING` | Name of the detected technology
+`categories` | `ARRAY<STRING>` | List of categories to which this technology belongs
+`info` | `ARRAY<STRING>` | Additional metadata about the detected technology, ie version number
+
+### `technology`
+
+Name of the detected technology
+
+### `categories`
+
+List of categories to which this technology belongs
+
+### `info`
+
+Additional metadata about the detected technology, ie version number
