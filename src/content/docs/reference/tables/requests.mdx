@@ -1,0 +1,89 @@
+---
+title: Requests table
+description: Reference docs for the httparchive.all.requests table
+---
+
+[`httparchive.all.requests`](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!4m3!1shttparchive!2sall!3srequests) is a partitioned and clustered table containing one row per request per page tested in the HTTP Archive. Pages are tested on a monthly basis and as of April 2022, both the root page and one secondary page are tested.
+
+## Schema
+
+Field name | Type | Description
+---|---|---
+[`date`](#date) | `DATE` | YYYY-MM-DD format of the HTTP Archive monthly crawl
+[`client`](#client) | `STRING` | Test environment: `'desktop'` or `'mobile'`
+[`page`](#page) | `STRING` | The URL of the page being tested
+[`is_root_page`](#is_root_page) | `BOOLEAN` | Whether the page is the root of the origin
+[`root_page`](#root_page) | `STRING` | The URL of the root page being tested, the origin followed by `/`
+[`url`](#url) | `STRING` | The URL of the request
+[`is_main_document`](#is_main_document) | `BOOLEAN` | Whether this request corresponds with the main HTML document of the page, which is the first HTML request after redirects
+[`type`](#type) | `STRING` | Simplified description of the type of resource (script, html, css, text, other, etc)
+[`index`](#index) | `INTEGER` | The sequential 0-based index of the request
+[`payload`](#payload) | `STRING` | JSON-encoded WebPageTest result data for this request
+[`summary`](#summary) | `STRING` | JSON-encoded summarization of request data
+[`request_headers`](#request_headers) | <code>ARRAY&lt;<a href="/reference/structs/header/">Header</a>></code> | Request headers
+[`response_headers`](#response_headers) | <code>ARRAY&lt;<a href="/reference/structs/header/">Header</a>></code> | Response headers
+[`response_body`](#response_body) | `STRING` | Text-based response body
+
+### `date`
+
+**This field is required for all queries over the `requests` table.**
+
+YYYY-MM-DD format of the HTTP Archive monthly crawl.
+
+  Example: `date = '2023-06-01'`
+
+### `client`
+
+Test environment: `'desktop'` or `'mobile'`.
+
+### `page`
+
+The URL of the page being tested.
+
+Example: `page = 'https://har.fyi/'`
+
+### `is_root_page`
+
+Whether the page is the root of the origin.
+
+### `root_page`
+
+The URL of the root page being tested, the origin followed by `/`.
+
+Example: `root_page = 'https://har.fyi/'`
+
+### `url`
+
+The URL of the request
+
+### `is_main_document`
+
+Whether this request corresponds with the main HTML document of the page, which is the first HTML request after redirects
+
+### `type`
+
+Simplified description of the type of resource (script, html, css, text, other, etc)
+
+### `index`
+
+The sequential 0-based index of the request
+
+### `payload`
+
+JSON-encoded WebPageTest result data for this request
+
+### `summary`
+
+JSON-encoded summarization of request data
+
+### `request_headers`
+
+Request headers
+
+### `response_headers`
+
+Response headers
+
+### `response_body`
+
+Text-based response body

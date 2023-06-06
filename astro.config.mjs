@@ -22,8 +22,16 @@ export default defineConfig({
           ],
         },
         {
-          label: 'Reference',
-          autogenerate: { directory: 'reference' },
+          label: 'Tables',
+          autogenerate: { directory: 'reference/tables' }
+        },
+        {
+          label: 'Structs',
+          autogenerate: { directory: 'reference/structs' }
+        },
+        {
+          label: 'Blobs',
+          autogenerate: { directory: 'reference/blobs' }
         },
       ],
     }),

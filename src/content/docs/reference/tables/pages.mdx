@@ -1,0 +1,146 @@
+---
+title: Pages table
+description: Reference docs for the httparchive.all.pages table
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+[`httparchive.all.pages`](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!4m3!1shttparchive!2sall!3spages) is a partitioned and clustered table containing one row per page tested in the HTTP Archive. Pages are tested on a monthly basis and as of April 2022, both the root page and one secondary page are tested.
+
+## Example queries
+
+Here are some common operations you can perform with the `pages` table.
+
+### Get the median page weight
+
+<Tabs>
+  <TabItem label="Query">
+
+```sql
+/* This query will process 1.12 GB when run. */
+WITH pages AS (
+  SELECT
+    client,
+    CAST(JSON_VALUE(summary, '$.bytesTotal') AS INT64) AS page_weight
+  FROM
+    `httparchive.all.pages` TABLESAMPLE SYSTEM (1 PERCENT)
+  WHERE
+    date = '2023-05-01'
+)
+
+SELECT
+  client,
+  APPROX_QUANTILES(page_weight, 1000)[OFFSET(500)] AS median_page_weight
+FROM
+  pages
+GROUP BY
+  client
+```
+
+  </TabItem>
+  <TabItem label="Results">
+
+client | median_page_weight
+-- | --
+mobile | 1776291
+desktop | 2029751
+
+The median mobile page weighs 1.78 MB and the median desktop page weighs 2.03 MB.
+
+  </TabItem>
+</Tabs>
+
+This query uses the [`APPROX_QUANTILES`](https://cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_quantiles) function to calculate the median page weight for each client type as of May 2023.
+
+The `bytesTotal` property of the `summary` object represents the total number of bytes loaded on the page. This value is stored as a JSON-encoded string, so we use [`JSON_VALUE`](https://cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_value) to extract it and [`CAST`](https://cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions#cast) to convert it to an integer.
+
+We're also using the [`WITH`](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#with_clause) clause here to create a temporary table called `pages`, which is then fed into the main query below. This makes the query a bit easier to read.
+
+Also note that for demonstration purposes, this query processes a 1% sample of the `httparchive.all.pages` table. This reduces the amount of data processed by the query, which can help reduce costs. But note that the results will be less accurate than if you ran the query on the full table.
+
+## Schema
+
+Field name | Type | Description
+---|---|---
+[`date`](#date) | `DATE` | YYYY-MM-DD format of the HTTP Archive monthly crawl
+[`client`](#client) | `STRING` | Test environment: `'desktop'` or `'mobile'`
+[`page`](#page) | `STRING` | The URL of the page being tested
+[`is_root_page`](#is_root_page) | `BOOLEAN` | Whether the page is the root of the origin
+[`root_page`](#root_page) | `STRING` | The URL of the root page being tested, the origin followed by `/`
+[`rank`](#rank) | `INTEGER` | Site popularity rank, from CrUX
+[`wptid`](#wptid) | `STRING` | ID of the WebPageTest results
+[`payload`](#payload) | `STRING` | JSON-encoded WebPageTest results for the page	
+[`summary`](#summary) | `STRING` | JSON-encoded summarization of the page-level data
+[`custom_metrics`](#custom_metrics) | `STRING` | JSON-encoded test results of the custom metrics	
+[`lighthouse`](#lighthouse) | [`Lighthouse`](/reference/blobs/lighthouse/) | JSON-encoded Lighthouse report	
+[`features`](#features) | <code>ARRAY&lt;<a href="/reference/structs/feature/">Feature</a>></code> | Blink features detected at runtime
+[`technologies`](#technologies) | <code>ARRAY&lt;<a href="/reference/structs/technology/">Technology</a>></code> | Technologies detected at runtime
+[`metadata`](#metadata) | `STRING` | Additional metadata about the test
+
+### `date`
+
+**This field is required for all queries over the `pages` table.**
+
+YYYY-MM-DD format of the HTTP Archive monthly crawl.
+
+  Example: `date = '2023-06-01'`
+
+### `client`
+
+Test environment: `'desktop'` or `'mobile'`.
+
+### `page`
+
+The URL of the page being tested.
+
+Example: `page = 'https://har.fyi/'`
+
+### `is_root_page`
+
+Whether the page is the root of the origin.
+
+### `root_page`
+
+The URL of the root page being tested, the origin followed by `/`.
+
+Example: `root_page = 'https://har.fyi/'`
+
+### `rank`
+
+Site popularity rank, from CrUX
+
+### `wptid`
+
+ID of the WebPageTest results
+
+### `payload`
+
+JSON-encoded WebPageTest results for the page	
+
+### `summary`
+
+JSON-encoded summarization of the page-level data
+
+### `custom_metrics`
+
+JSON-encoded test results of the custom metrics	
+
+### `lighthouse`
+
+JSON-encoded Lighthouse report.
+
+See the [`lighthouse`](/reference/blobs/lighthouse/) reference for more details.
+
+### `features`
+
+Blink features detected at runtime (see https://chromestatus.com/features)
+
+### `technologies`
+
+Technologies detected at runtime (see https://www.wappalyzer.com/)
+
+See the [`technology`](/reference/structs/technology/) reference for more details.
+
+### `metadata`
+
+Additional metadata about the test
