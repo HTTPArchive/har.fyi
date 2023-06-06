@@ -3,6 +3,10 @@ title: Getting started accessing the HTTP Archive with BigQuery
 description: Using HTTP Archive on BigQuery for the first time
 ---
 
+:::note
+This guide is a direct copy of the one in the [HTTP Archive repo](https://github.com/HTTPArchive/httparchive.org/blob/main/docs/gettingstarted_bigquery.md). Some information may be out of date and images may be broken. This is meant as a placeholder until we're able to write new documentation.
+:::
+
 The [HTTP Archive](https://httparchive.org) is an open source project that tracks how the web is built. Historical data is provided to show how the web is constantly evolving, and the project is frequently used for research by the web community, scholars and industry leaders. If you are interested in digging into the HTTP Archive and are not sure where to start, then this guide should help you get started quickly.
 
 There are over 1 million pages tracked on desktop and emulated mobile in the most recent HTTP Archive data, and the historical data goes back to 2010. While the HTTP Archive website makes a lot of information available via [curated reports](https://httparchive.org/reports), analyzing the raw data is a powerful way of answering your questions about the web.

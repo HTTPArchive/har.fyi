@@ -1,6 +1,8 @@
-# har.fyi
+# [har.fyi](https://har.fyi/) 🧪
 
 Reference documentation for the [HTTP Archive](https://httparchive.org/) dataset on BigQuery.
+
+This site is still in beta and content will be added gradually. Please [contribute](#contributing) a PR to add new docs or make any corrections!
 
 ## Contributing
 

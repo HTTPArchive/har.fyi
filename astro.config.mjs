@@ -6,7 +6,7 @@ export default defineConfig({
   site: 'https://har.fyi',
   integrations: [
     starlight({
-      title: 'har.fyi',
+      title: 'har.fyi 🧪',
       social: {
         github: 'https://github.com/rviscomi/har.fyi',
         twitter: 'https://twitter.com/HTTPArchive',
