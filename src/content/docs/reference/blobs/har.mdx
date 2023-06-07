@@ -1,0 +1,696 @@
+---
+title: HAR blob
+description: Reference docs for the HAR (HTTP Archvie page) blob
+---
+
+_Appears in: [`pages` table](/reference/tables/pages/)_
+
+JSON-encoded blob of HAR data for the page. See [payload.json](/payload.json), for example.
+
+**The actual schema of the HAR object is liable to change, depending on a number of factors including the output from WebPageTest, custom metrics, Wappalyzer, Lighthouse, and more.**
+
+## Schema
+
+### `startedDateTime`
+
+The date and time the test started, in ISO 8601 format
+
+### `title`
+
+The title of the page
+
+### `id`
+
+The ID of the test
+
+### `testID`
+
+The WebPageTest ID of the test
+
+### `pageTimings`
+
+The page load timings
+
+### `_loadTime`
+
+The time it took to load the page, in milliseconds
+
+### `_docTime`
+
+The time it took to load the page content, in milliseconds
+
+### `_fullyLoaded`
+
+The time it took for the page to load and network activity to go quiet, in milliseconds
+
+### `_bytesOut`
+
+The number of bytes sent by the browser
+
+### `_bytesOutDoc`
+
+The number of bytes sent by the browser at the time of the DOMContentLoaded event
+
+### `_bytesIn`
+
+The number of bytes received by the browser
+
+### `_bytesInDoc`
+
+The number of bytes received by the browser at the time of the DOMContentLoaded event
+
+### `_requests`
+
+The number of requests made by the browser
+
+### `_requestsFull`
+
+The number of requests made by the browser at the time of the load event
+
+### `_requestsDoc`
+
+The number of requests made by the browser at the time of the DOMContentLoaded event
+
+### `_responses_200`
+
+The number of responses with a 200 status code
+
+### `_responses_404`
+
+The number of responses with a 404 status code.
+
+### `_responses_other`
+
+The number of responses with a status code other than 200 or 404.
+
+### `_result`
+
+The result of the test.
+
+### `_testStartOffset`
+
+The offset from the test start time, in milliseconds.
+
+### `_cached`
+
+Indicates whether the page was loaded from cache (1 if cached, 0 otherwise).
+
+### `_optimization_checked`
+
+Indicates whether optimization checks were performed (1 if checked, 0 otherwise).
+
+### `_main_frame`
+
+Indicates whether the request was for the main frame (1 if main frame, 0 otherwise).
+
+### `_loadEventStart`
+
+The time when the load event started, in milliseconds.
+
+### `_loadEventEnd`
+
+The time when the load event ended, in milliseconds.
+
+### `_domContentLoadedEventStart`
+
+The time when the DOMContentLoaded event started, in milliseconds.
+
+### `_domContentLoadedEventEnd`
+
+The time when the DOMContentLoaded event ended, in milliseconds.
+
+### `_URL`
+
+The URL of the page.
+
+### `_connections`
+
+The number of open connections made by the browser.
+
+### `_final_base_page_request`
+
+The final base page request ID.
+
+### `_final_base_page_request_id`
+
+The final base page request ID.
+
+### `_final_url`
+
+The final URL of the page.
+
+### `_domInteractive`
+
+The time when the DOM became interactive, in milliseconds.
+
+### `_firstPaint`
+
+The time of the first paint, in milliseconds.
+
+### `_firstContentfulPaint`
+
+The time of the first contentful paint, in milliseconds.
+
+### `_firstMeaningfulPaint`
+
+The time of the first meaningful paint, in milliseconds.
+
+### `_renderBlockingCSS`
+
+The time spent on render-blocking CSS, in milliseconds.
+
+### `_renderBlockingJS`
+
+The time spent on render-blocking JavaScript, in milliseconds.
+
+### `_metadata`
+
+Metadata related to the test.
+
+### `_TTFB`
+
+The time to first byte, in milliseconds.
+
+### `_basePageSSLTime`
+
+The time spent on SSL for the base page, in milliseconds.
+
+### `_score_cache`
+
+The cache score of the page.
+
+### `_score_cdn`
+
+The CDN score of the page.
+
+### `_score_gzip`
+
+The gzip score of the page.
+
+### `_score_cookies`
+
+The cookies score of the page.
+
+### `_score_keep-alive`
+
+The keep-alive score of the page.
+
+### `_score_minify`
+
+The minify score of the page.
+
+### `_score_combine`
+
+The combine score of the page.
+
+### `_score_compress`
+
+The compress score of the page.
+
+### `_score_etags`
+
+The ETags score of the page.
+
+### `_score_progressive_jpeg`
+
+The progressive JPEG score of the page.
+
+### `_gzip_total`
+
+The total size of resources after gzip compression, in bytes.
+
+### `_gzip_savings`
+
+The savings achieved through gzip compression, in bytes.
+
+### `_minify_total`
+
+The total size of minified resources, in bytes.
+
+### `_minify_savings`
+
+The savings achieved through minification, in bytes.
+
+### `_image_total`
+
+The total size of images, in bytes.
+
+### `_image_savings`
+
+The savings achieved through image optimization, in bytes.
+
+### `_base_page_cdn`
+
+The CDN used for the base page.
+
+### `_cpuTimes`
+
+CPU times related to the test.
+
+### `_cpuTimesDoc`
+
+CPU times related to the document.
+
+### `_v8Stats`
+
+V8 engine statistics.
+
+### `_tester`
+
+The tester name.
+
+### `_start_epoch`
+
+The start epoch timestamp.
+
+### `_osVersion`
+
+The operating system version.
+
+### `_os_version`
+
+The operating system version.
+
+### `_osPlatform`
+
+The operating system platform.
+
+### `_date`
+
+The date.
+
+### `_browserVersion`
+
+The browser version.
+
+### `_browser_version`
+
+The browser version.
+
+### `_fullyLoadedCPUms`
+
+The fully loaded CPU time in milliseconds.
+
+### `_fullyLoadedCPUpct`
+
+The fully loaded CPU percentage.
+
+### `_audit_issues`
+
+The number of audit issues.
+
+### `_document_URL`
+
+The URL of the document.
+
+### `_document_hostname`
+
+The hostname of the document.
+
+### `_document_origin`
+
+The origin of the document.
+
+### `_viewport`
+
+The viewport information.
+
+### `_domElements`
+
+The number of DOM elements.
+
+### `_domComplete`
+
+The time taken for the DOM to complete, in milliseconds.
+
+### `_origin_dns`
+
+DNS information about the origin.
+
+### `_detected`
+
+Detected technologies and applications.
+
+### `_detected_apps`
+
+Detected applications.
+
+### `_detected_technologies`
+
+Detected technologies.
+
+### `_detected_raw`
+
+Raw detection data.
+
+### `_base_page_ip_ptr`
+
+The PTR record of the base page IP.
+
+### `_base_page_cname`
+
+The CNAME record of the base page.
+
+### `_base_page_dns_server`
+
+The DNS server of the base page.
+
+### `_browser_name`
+
+The browser name.
+
+### `_eventName`
+
+The event name.
+
+### `_test_run_time_ms`
+
+The test run time in milliseconds.
+
+### `_testUrl`
+
+The test URL.
+
+### `_custom`
+
+Custom properties.
+
+### `_00_reset`
+
+A reset value.
+
+### `_Colordepth`
+
+The color depth of the screen.
+
+### `_Dpi`
+
+The DPI (dots per inch) of the screen.
+
+### `_Images`
+
+The number of images on the page.
+
+### `_Resolution`
+
+The screen resolution.
+
+### `_a11y`
+
+Accessibility information.
+
+### `_almanac`
+
+Almanac information.
+
+### `_aurora`
+
+Aurora information.
+
+### `_avg_dom_depth`
+
+The average depth of the DOM.
+
+### `_cms`
+
+Content Management System (CMS) information.
+
+### `_crawl_links`
+
+[description]
+
+### `_css`
+
+[description]
+
+### `_css-variables`
+
+[description]
+
+### `_doctype`
+
+[description]
+
+### `_document_height`
+
+[description]
+
+### `_document_width`
+
+[description]
+
+### `_ecommerce`
+
+[description]
+
+### `_element_count`
+
+[description]
+
+### `_event-names`
+
+[description]
+
+### `_fugu-apis`
+
+[description]
+
+### `_has_shadow_root`
+
+[description]
+
+### `_img-loading-attr`
+
+[description]
+
+### `_initiators`
+
+[description]
+
+### `_inline_style_bytes`
+
+[description]
+
+### `_javascript`
+
+[description]
+
+### `_lib-detector-version`
+
+[description]
+
+### `_localstorage_size`
+
+[description]
+
+### `_markup`
+
+[description]
+
+### `_media`
+
+[description]
+
+### `_meta_viewport`
+
+[description]
+
+### `_num_iframes`
+
+[description]
+
+### `_num_scripts`
+
+[description]
+
+### `_num_scripts_async`
+
+[description]
+
+### `_num_scripts_sync`
+
+[description]
+
+### `_observers`
+
+[description]
+
+### `_origin-trials`
+
+[description]
+
+### `_performance`
+
+[description]
+
+### `_privacy`
+
+[description]
+
+### `_pwa`
+
+[description]
+
+### `_quirks_mode`
+
+[description]
+
+### `_responsive_images`
+
+[description]
+
+### `_robots_meta`
+
+[description]
+
+### `_robots_txt`
+
+[description]
+
+### `_sass`
+
+[description]
+
+### `_security`
+
+[description]
+
+### `_sessionstorage_size`
+
+[description]
+
+### `_structured-data`
+
+[description]
+
+### `_third-parties`
+
+[description]
+
+### `_usertiming`
+
+[description]
+
+### `_valid-head`
+
+[description]
+
+### `_well-known`
+
+[description]
+
+### `_wpt_bodies`
+
+[description]
+
+### `_interactivePeriods`
+
+[description]
+
+### `_lastVisualChange`
+
+[description]
+
+### `_render`
+
+[description]
+
+### `_visualComplete85`
+
+[description]
+
+### `_visualComplete90`
+
+[description]
+
+### `_visualComplete95`
+
+[description]
+
+### `_visualComplete99`
+
+[description]
+
+### `_visualComplete`
+
+[description]
+
+### `_SpeedIndex`
+
+[description]
+
+### `_largestPaints`
+
+[description]
+
+### `_LargestContentfulPaintType`
+
+[description]
+
+### `_LargestContentfulPaintNodeType`
+
+[description]
+
+### `_chromeUserTiming`
+
+[description]
+
+### `_blinkFeatureFirstUsed`
+
+[description]
+
+### `_TTIMeasurementEnd`
+
+[description]
+
+### `_LastInteractive`
+
+[description]
+
+### `_testID`
+
+[description]
+
+### `_run`
+
+[description]
+
+### `_step`
+
+[description]
+
+### `_effectiveBps`
+
+[description]
+
+### `_domTime`
+
+[description]
+
+### `_aft`
+
+[description]
+
+### `_titleTime`
+
+[description]
+
+### `_domLoading`
+
+[description]
+
+### `_server_rtt`
+
+[description]
+
+### `_CrUX`
+
+[description]
+
+### `_edge-processed`
+
+[description]
+
+### `_consoleLog`
+
+[description]
