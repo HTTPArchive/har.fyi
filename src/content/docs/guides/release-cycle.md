@@ -5,6 +5,8 @@ description: Learn about the process of testing millions of web pages each month
 
 The HTTP Archive dataset is updated each month with data from millions of web pages. This guide explores the end-to-end release cycle from sourcing URLs to publishing results to BigQuery.
 
+_TODO: Add a diagram_
+
 ## Sourcing URLs
 
 The pages HTTP Archive tests are ultimately sourced from the [Chrome UX Report](https://developer.chrome.com/docs/crux/) (CrUX) dataset. CrUX is a public dataset that contains anonymized, aggregated metrics about real-world Chrome users' experiences on popular destinations on the web. HTTP Archive takes the _origins_ in the public CrUX dataset and classifies them as either desktop and mobile. Origins are segmented by desktop or mobile depending on the [`form_factor`](https://developer.chrome.com/docs/crux/methodology/#form-factor-dimension) dimension in the CrUX schema, which corresponds to the actual device type real visitors used to access the website.
