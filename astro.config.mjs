@@ -19,6 +19,7 @@ export default defineConfig({
           label: 'Guides',
           items: [
             { label: 'Getting started', link: '/guides/getting-started/' },
+            { label: 'Minimizing query costs', link: '/guides/minimizing-costs/' },
           ],
         },
         {
