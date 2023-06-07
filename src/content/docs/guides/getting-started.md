@@ -3,9 +3,7 @@ title: Getting started accessing the HTTP Archive with BigQuery
 description: Using HTTP Archive on BigQuery for the first time
 ---
 
-:::note
-This guide is a direct copy of the one in the [HTTP Archive repo](https://github.com/HTTPArchive/httparchive.org/blob/main/docs/gettingstarted_bigquery.md). Some information may be out of date and images may be broken. This is meant as a placeholder until we're able to write new documentation.
-:::
+_This guide was originally published on [GitHub](https://github.com/HTTPArchive/httparchive.org/blob/main/docs/gettingstarted_bigquery.md) on Sep 21, 2018. Some information may be out of date._
 
 The [HTTP Archive](https://httparchive.org) is an open source project that tracks how the web is built. Historical data is provided to show how the web is constantly evolving, and the project is frequently used for research by the web community, scholars and industry leaders. If you are interested in digging into the HTTP Archive and are not sure where to start, then this guide should help you get started quickly.
 
@@ -22,19 +20,21 @@ In order to access the HTTP Archive via BigQuery, you'll need a Google account. 
 
 1. Navigate to the [Google Cloud Projects Page](https://console.cloud.google.com/start) and log in with your Google account if prompted.  If this is your first time accessing Google Cloud, you may be prompted to accept the terms of service. Once you are logged in, you'll see a page like this -
 
-  <img src="images/google-cloud-welcome.png" width="630" alt="Google Cloud Welcome">
+  <img src="https://github.com/HTTPArchive/httparchive.org/raw/main/docs/images/google-cloud-welcome.png" width="630" alt="Google Cloud Welcome">
 
 2. Click `Select a project` and then "New Project".   This takes you to a New Project page.
 
-  <img src="images/google-cloud-select-project.png" width="423" alt="Google Cloud select project">
+  <img src="https://github.com/HTTPArchive/httparchive.org/raw/main/docs/images/google-cloud-select-project.png" width="423" alt="Google Cloud select project">
 
 3. Give your project a name and then click the `Create` button.
 
-  <img src="images/google-cloud-create-new-project.png" width="423" alt="Create a Project">
+  <img src="https://github.com/HTTPArchive/httparchive.org/raw/main/docs/images/google-cloud-create-new-project.png" width="423" alt="Create a Project">
 
 4. Optional: Enable Billing by clicking on the Billing menu item and adding your billing information.
 
-  *Note:  BigQuery has a [free tier](https://cloud.google.com/bigquery/pricing#free-tier) that you can use to get started without enabling billing. At the time of this writing, the free tier allows 10GB of storage and 1TB of data processing per month. Google also provides a [$300 credit for new accounts](https://cloud.google.com/free/docs/frequently-asked-questions#free-trial).*
+:::note
+BigQuery has a [free tier](https://cloud.google.com/bigquery/pricing#free-tier) that you can use to get started without enabling billing. At the time of this writing, the free tier allows 10GB of storage and 1TB of data processing per month. Google also provides a [$300 credit for new accounts](https://cloud.google.com/free/docs/frequently-asked-questions#free-trial).
+:::
 
 5. Navigate to the [Big Query console](https://console.cloud.google.com/bigquery) where you should see your project, with no data.
 
@@ -44,19 +44,19 @@ In order to access the HTTP Archive via BigQuery, you'll need a Google account. 
 
 8. You should now see the HTTP Archive data set pinned:
 
-  <img src="images/bigquery-httparchive-dataset-pinned.png" width="423" alt="BigQuery HTTPArchive pinned">
+  <img src="https://github.com/HTTPArchive/httparchive.org/raw/main/docs/images/bigquery-httparchive-dataset-pinned.png" width="423" alt="BigQuery HTTPArchive pinned">
 
 9. Let's run a quick sample query to confirm access is all working. Navigate to the `summary_pages` tables and select the first one:
 
-  <img src="images/bigquery-summary_pages.png" width="423" alt="BigQuery summary_pages tables">
+  <img src="https://github.com/HTTPArchive/httparchive.org/raw/main/docs/images/bigquery-summary_pages.png" width="423" alt="BigQuery summary_pages tables">
 
 10. Click on the `QUERY` button and select `In a new tab`:
 
-  <img src="images/bigquery-query-in-a-new-tab.png" width="423" alt="BigQuery Query in a new tab">
+  <img src="https://github.com/HTTPArchive/httparchive.org/raw/main/docs/images/bigquery-query-in-a-new-tab.png" width="423" alt="BigQuery Query in a new tab">
 
 11. Change the query to select some columns (e.g. `SELECT *`) and click the `RUN` button and you should see the results of your query.
 
-  <img src="images/bigquery-run-sample-query.png" width="1012" alt="BigQuery run a sample query">
+  <img src="https://github.com/HTTPArchive/httparchive.org/raw/main/docs/images/bigquery-run-sample-query.png" width="1012" alt="BigQuery run a sample query">
 
 In the next section, we explore the structure of these tables so you can start digging in!
 
@@ -66,14 +66,15 @@ So, now you have access! But what do you have access to?
 
 The table below outlines what some of the different grouping of tables includes. You'll find summaries of page views and HTTP requests. There are also JSON encoded HAR files for pages, requests, lighthouse reports and even response bodies!
 
-<img src="images/httparchive_table_summary.jpg" alt="HTTP Archive Table Summary">
+<img src="https://github.com/HTTPArchive/httparchive.org/raw/main/docs/images/httparchive_table_summary.jpg" alt="HTTP Archive Table Summary">
 
-*Note: The size of the tables you query are important because BigQuery is billed based on the number of processed data.  There is 1TB of processed data included in the free tier, so running a full scan query on one of the larger tables can easily eat up your quota. This is where it becomes important to design queries that process only the data you wish to explore*
-
+:::note
+The size of the tables you query are important because BigQuery is billed based on the number of processed data.  There is 1TB of processed data included in the free tier, so running a full scan query on one of the larger tables can easily eat up your quota. This is where it becomes important to design queries that process only the data you wish to explore
+:::
 
 In order to understand what each of these tables contain, you can click on the table name and view the details. For example, if you expand the `summary_pages` dataset and click on the 2018_09_01_desktop (or mobile) table you can see the schema. Clicking `Details` tells you some information about the table, such as its size and the number of rows. Clicking `Preview` shows an example of some data from the table.
 
-<img src="images/exploring_summary_pages_tables.jpg" alt="Exploring Tables">
+<img src="https://github.com/HTTPArchive/httparchive.org/raw/main/docs/images/exploring_summary_pages_tables.jpg" alt="Exploring Tables">
 
 Some of the types of tables you'll find useful when getting started are described below. These table names all follow the format `yyyy_mm_dd_desktop` and `yyyy_mm_dd_mobile`.
 
@@ -124,18 +125,18 @@ The [HTTP Archive Discuss section](https://discuss.httparchive.org/) has lots of
 
 Now that you are all set up, let's run some queries!  Most HTTP Archive users start off examining the summary tables, so we'll start there as well. Below is a simple aggregate query that tells you how many URLs are contained in the latest HTTP Archive data.
 
-```
+```sql
 SELECT
   COUNT(0) total_pages
 FROM
   `httparchive.summary_pages.2018_09_01_desktop`
 ```
 
-`![Simple Aggregate Query](images/simple_agg_query_example.jpg)`
+![Simple Aggregate Query](https://github.com/HTTPArchive/httparchive.org/raw/main/docs/images/simple_agg_query_example.jpg)
 
 Perhaps you want to JOIN the pages and requests tables together, and see how many page URLs and request URLs are in this data set.
 
-```
+```sql
 SELECT
   COUNT(distinct pages.url) total_pages,
   COUNT(0) total_requests
@@ -149,11 +150,11 @@ ON
 
 When we look at the results of this, you can see how much data was processed during this query.  Writing efficient queries limits the number of bytes processed - which is helpful since that's how BigQuery is billed.   *Note: There is 1TB free per month*
 
-`![Simple JOIN Example](images/simple_join_example.jpg)`
+![Simple JOIN Example](https://github.com/HTTPArchive/httparchive.org/raw/main/docs/images/simple_join_example.jpg)
 
 If you look closely, you'll notice that this particular query could actually be written without the JOIN. For example, we can count `distinct pageid` from the `summary_requests` table instead of JOINing the `summary_pages` table. If you run this query, you'll notice that the results are the same as the previous query, and the processed bytes are less.
 
-```
+```sql
 SELECT
   COUNT(distinct pageid) total_pages,
   COUNT(0) total_requests
@@ -163,7 +164,7 @@ FROM
 
 Next let's summarize  all of the HTTP requests by mime type, and the number of pages that contain at least one request of that mime type.  In the example  below, you can see that I added `mimeType` to the SELECT clause, added a GROUP clause and sorted the results by mimeTypes that have the most requests.
 
-```
+```sql
 SELECT
   mimeType,
   COUNT(distinct pageid) total_pages,
@@ -178,11 +179,11 @@ ORDER BY
 
 Now things are starting to get interesting.
 
-`![Simple JOIN Example](images/mimeType_summary_example_query.jpg)`
+![Simple JOIN Example](https://github.com/HTTPArchive/httparchive.org/raw/main/docs/images/mimeType_summary_example_query.jpg)
 
 So let's try to learn something from this basic example.   We know from the first example that there are 1.2 million URLs in the latest HTTP Archive dataset. Let's calculate the percent of pages that have each mimeType. To do this, we'll divide the number of pages by the total pages (using our first query as a subquery). Then we'll use a `ROUND()` function to trim the result to 2 decimal points.
 
-```
+```sql
 SELECT
   mimeType,
   COUNT(distinct pageid) total_pages,
@@ -205,9 +206,9 @@ ORDER BY
 
 When analyzing the results from this, you can see the % of websites that use different Content-Types for their JavaScript, you can see that 93% of sites have at least one PNG image, 89% have at least 1 GIF, 48% use JSON, and 3% of sites have MP4 videos on their homepage, etc.
 
-`![Simple JOIN Example](images/mimeType_summary_example_query2.jpg)`
+![Simple JOIN Example](https://github.com/HTTPArchive/httparchive.org/raw/main/docs/images/mimeType_summary_example_query2.jpg)
 
-To explore more interactive examples, read the [HTTP Archive Guided Tour](./guided_tour.md).
+To explore more interactive examples, read the [HTTP Archive Guided Tour](https://github.com/HTTPArchive/httparchive.org/blob/main/docs/guided_tour.md).
 
 If you want to explore deeper you have everything you need - infrastructure, documentation, community. Enjoy exploring this data and feel free to share your results and ask questions on the [HTTP Archive Discuss section](https://discuss.httparchive.org/).
 
