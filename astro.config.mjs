@@ -20,6 +20,7 @@ export default defineConfig({
           items: [
             { label: 'Getting started', link: '/guides/getting-started/' },
             { label: 'Minimizing query costs', link: '/guides/minimizing-costs/' },
+            { label: 'Release cycle', link: '/guides/release-cycle/' },
           ],
         },
         {
