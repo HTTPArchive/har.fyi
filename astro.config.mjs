@@ -34,6 +34,10 @@ export default defineConfig({
           label: 'Blobs',
           autogenerate: { directory: 'reference/blobs' }
         },
+        {
+          label: 'Functions',
+          autogenerate: { directory: 'reference/functions' }
+        },
       ],
     }),
   ],
