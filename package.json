@@ -7,10 +7,11 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "update": "npm install @astrojs/starlight@latest"
   },
   "dependencies": {
-    "@astrojs/starlight": "^0.1.0",
+    "@astrojs/starlight": "^0.1.1",
     "astro": "^2.5.0"
   }
 }
