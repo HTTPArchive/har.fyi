@@ -69,7 +69,7 @@ Field name | Type | Description
 [`root_page`](#root_page) | `STRING` | The URL of the root page being tested, the origin followed by `/`
 [`rank`](#rank) | `INTEGER` | Site popularity rank, from CrUX
 [`wptid`](#wptid) | `STRING` | ID of the WebPageTest results
-[`payload`](#payload) | `STRING` | JSON-encoded WebPageTest results for the page	
+[`payload`](#payload) | [`HAR`](/reference/blobs/har/) | JSON-encoded WebPageTest results for the page	
 [`summary`](#summary) | `STRING` | JSON-encoded summarization of the page-level data
 [`custom_metrics`](#custom_metrics) | `STRING` | JSON-encoded test results of the custom metrics	
 [`lighthouse`](#lighthouse) | [`Lighthouse`](/reference/blobs/lighthouse/) | JSON-encoded Lighthouse report	
@@ -111,11 +111,19 @@ Site popularity rank, from CrUX
 
 ### `wptid`
 
-ID of the WebPageTest results
+ID of the WebPageTest results, for example `wptid = '230509_Dx20W_FMHK5'`.
+
+The ID encodes the date of the test at the start in YYMMDD format. The date is followed by an underscore and a `D` or `M` character indicating whether it was a desktop or mobile test. The rest of the ID is randomly generated. In the example above we can tell that the page was tested on May 9, 2023, and that it was a desktop test.
+
+You can view the WebPageTest results in the browser by visiting `https://webpagetest.httparchive.org/result/<wptid>/`, eg https://webpagetest.httparchive.org/result/230509_Dx20W_FMHK5/. This is HTTP Archive's own private instance of WebPageTest, which is required to view any of the results.
 
 ### `payload`
 
-JSON-encoded WebPageTest results for the page	
+JSON-encoded WebPageTest results for the page.
+
+For a full example value, see [payload.json](/payload.json).
+
+See the [`har`](/reference/blobs/har/) reference for more details.
 
 ### `summary`
 
