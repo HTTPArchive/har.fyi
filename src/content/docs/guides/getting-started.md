@@ -20,15 +20,15 @@ In order to access the HTTP Archive via BigQuery, you'll need a Google account. 
 
 1. Navigate to the [Google Cloud Projects Page](https://console.cloud.google.com/start) and log in with your Google account if prompted.  If this is your first time accessing Google Cloud, you may be prompted to accept the terms of service. Once you are logged in, you'll see a page like this -
 
-  <img src="https://github.com/HTTPArchive/httparchive.org/raw/main/docs/images/google-cloud-welcome.png" width="630" alt="Google Cloud Welcome">
+  <img src="https://github.com/HTTPArchive/httparchive.org/raw/main/docs/images/google-cloud-welcome.png" alt="Google Cloud Welcome">
 
 2. Click `Select a project` and then "New Project".   This takes you to a New Project page.
 
-  <img src="https://github.com/HTTPArchive/httparchive.org/raw/main/docs/images/google-cloud-select-project.png" width="423" alt="Google Cloud select project">
+  <img src="https://github.com/HTTPArchive/httparchive.org/raw/main/docs/images/google-cloud-select-project.png" alt="Google Cloud select project">
 
 3. Give your project a name and then click the `Create` button.
 
-  <img src="https://github.com/HTTPArchive/httparchive.org/raw/main/docs/images/google-cloud-create-new-project.png" width="423" alt="Create a Project">
+  <img src="https://github.com/HTTPArchive/httparchive.org/raw/main/docs/images/google-cloud-create-new-project.png" alt="Create a Project">
 
 4. Optional: Enable Billing by clicking on the Billing menu item and adding your billing information.
 
@@ -44,19 +44,19 @@ BigQuery has a [free tier](https://cloud.google.com/bigquery/pricing#free-tier) 
 
 8. You should now see the HTTP Archive data set pinned:
 
-  <img src="https://github.com/HTTPArchive/httparchive.org/raw/main/docs/images/bigquery-httparchive-dataset-pinned.png" width="423" alt="BigQuery HTTPArchive pinned">
+  <img src="https://github.com/HTTPArchive/httparchive.org/raw/main/docs/images/bigquery-httparchive-dataset-pinned.png" alt="BigQuery HTTPArchive pinned">
 
 9. Let's run a quick sample query to confirm access is all working. Navigate to the `summary_pages` tables and select the first one:
 
-  <img src="https://github.com/HTTPArchive/httparchive.org/raw/main/docs/images/bigquery-summary_pages.png" width="423" alt="BigQuery summary_pages tables">
+  <img src="https://github.com/HTTPArchive/httparchive.org/raw/main/docs/images/bigquery-summary_pages.png" alt="BigQuery summary_pages tables">
 
 10. Click on the `QUERY` button and select `In a new tab`:
 
-  <img src="https://github.com/HTTPArchive/httparchive.org/raw/main/docs/images/bigquery-query-in-a-new-tab.png" width="423" alt="BigQuery Query in a new tab">
+  <img src="https://github.com/HTTPArchive/httparchive.org/raw/main/docs/images/bigquery-query-in-a-new-tab.png" alt="BigQuery Query in a new tab">
 
 11. Change the query to select some columns (e.g. `SELECT *`) and click the `RUN` button and you should see the results of your query.
 
-  <img src="https://github.com/HTTPArchive/httparchive.org/raw/main/docs/images/bigquery-run-sample-query.png" width="1012" alt="BigQuery run a sample query">
+  <img src="https://github.com/HTTPArchive/httparchive.org/raw/main/docs/images/bigquery-run-sample-query.png" alt="BigQuery run a sample query">
 
 In the next section, we explore the structure of these tables so you can start digging in!
 
@@ -68,8 +68,10 @@ The table below outlines what some of the different grouping of tables includes.
 
 <img src="https://github.com/HTTPArchive/httparchive.org/raw/main/docs/images/httparchive_table_summary.jpg" alt="HTTP Archive Table Summary">
 
-:::note
-The size of the tables you query are important because BigQuery is billed based on the number of processed data.  There is 1TB of processed data included in the free tier, so running a full scan query on one of the larger tables can easily eat up your quota. This is where it becomes important to design queries that process only the data you wish to explore
+:::danger
+The size of the tables you query are important because BigQuery is billed based on the number of processed data.  There is 1TB of processed data included in the free tier, so running a full scan query on one of the larger tables can easily eat up your quota. This is where it becomes important to design queries that process only the data you wish to explore.
+
+See the guide on [minimizing query costs](/guides/minimizing-costs/) to learn more.
 :::
 
 In order to understand what each of these tables contain, you can click on the table name and view the details. For example, if you expand the `summary_pages` dataset and click on the 2018_09_01_desktop (or mobile) table you can see the schema. Clicking `Details` tells you some information about the table, such as its size and the number of rows. Clicking `Preview` shows an example of some data from the table.
