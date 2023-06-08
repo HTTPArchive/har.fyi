@@ -7,12 +7,12 @@ The HTTP Archive dataset is large and complex, and it's easy to write queries th
 
 ## Use clustered tables
 
-Table | Partitioned on | Clustered on
+Table | Partitioned by | Clustered by
 --- | --- | ---
-`httparchive.all.pages` | `date` | `client`, `is_root_page`, `rank`
-`httparchive.all.requests` | `date` | `client`, `is_root_page`, `is_main_document`, `type`
+`httparchive.all.pages` | `date` | `client`<br>`is_root_page`<br>`rank`
+`httparchive.all.requests` | `date` | `client`<br>`is_root_page`<br>`is_main_document`<br>`type`
 
-For example, the `httparchive.all.pages` table is [partitioned](https://cloud.google.com/bigquery/docs/partitioned-tables) by `date` and [clustered](https://cloud.google.com/bigquery/docs/clustered-tables) on the `client`, `is_root_page`, and `rank` columns, which means that queries that filter on these columns will be much faster and cheaper than queries that don't.
+For example, the `httparchive.all.pages` table is [partitioned](https://cloud.google.com/bigquery/docs/partitioned-tables) by `date` and [clustered](https://cloud.google.com/bigquery/docs/clustered-tables) by the `client`, `is_root_page`, and `rank` columns, which means that queries that filter on these columns will be much faster and cheaper than queries that don't.
 
 Legacy tables like `httparchive.pages.2023_05_01_desktop`, however, do not take advantage of these optimizations and always incur the full cost of scanning the entire table.
 
@@ -92,6 +92,8 @@ Table names correspond to their full-size counterparts of the form `[table]_[cli
 ## Use table previews
 
 BigQuery allows you to preview entire rows of a table without incurring a query cost. This is useful for getting a rough idea of the data in a table before running a more expensive query.
+
+![Preview tab on BigQuery](../../../assets/bq-preview.webp)
 
 To access the preview, click on a table name from the workspace explorer and select the **Preview** tab.
 
