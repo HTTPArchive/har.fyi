@@ -7,6 +7,24 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'har.fyi 🧪',
+      head: [
+        {
+          tag: 'script',
+          attrs: {
+            async: true,
+            src: 'https://www.googletagmanager.com/gtag/js?id=G-SK2FZXB50K'
+          }
+        },
+        {
+          tag: 'script',
+          content: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+          
+            gtag('config', 'G-SK2FZXB50K');`
+        }
+      ],
       social: {
         github: 'https://github.com/rviscomi/har.fyi',
         twitter: 'https://twitter.com/HTTPArchive',
