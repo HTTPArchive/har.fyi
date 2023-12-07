@@ -54,6 +54,10 @@ export default defineConfig({
           autogenerate: { directory: 'reference/blobs' }
         },
         {
+          label: 'Custom Metrics',
+          autogenerate: { directory: 'reference/custom-metrics' }
+        },
+        {
           label: 'Functions',
           autogenerate: { directory: 'reference/functions' }
         },
