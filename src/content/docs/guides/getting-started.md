@@ -3,8 +3,6 @@ title: Getting started accessing the HTTP Archive with BigQuery
 description: Using HTTP Archive on BigQuery for the first time
 ---
 
-_This guide was originally published on [GitHub](https://github.com/HTTPArchive/httparchive.org/blob/main/docs/gettingstarted_bigquery.md) on Sep 21, 2018. Some information may be out of date._
-
 The [HTTP Archive](https://httparchive.org) is an open source project that tracks how the web is built. Historical data is provided to show how the web is constantly evolving, and the project is frequently used for research by the web community, scholars and industry leaders. If you are interested in digging into the HTTP Archive and are not sure where to start, then this guide should help you get started quickly.
 
 There are over 1 million pages tracked on desktop and emulated mobile in the most recent HTTP Archive data, and the historical data goes back to 2010. While the HTTP Archive website makes a lot of information available via [curated reports](https://httparchive.org/reports), analyzing the raw data is a powerful way of answering your questions about the web.
@@ -71,7 +69,11 @@ The table below outlines what some of the different grouping of tables includes.
 :::danger
 The size of the tables you query are important because BigQuery is billed based on the number of processed data.  There is 1TB of processed data included in the free tier, so running a full scan query on one of the larger tables can easily eat up your quota. This is where it becomes important to design queries that process only the data you wish to explore.
 
+HTTP Archive collecting metadata from millions of websites each month, an the dataset is _extremely large_—multiple petabytes.
+
 See the guide on [minimizing query costs](/guides/minimizing-costs/) to learn more.
+
+Also, take a moment setting up [cost controls](https://cloud.google.com/bigquery/docs/custom-quotas) to be informed of the costs inqurred throughout the month.
 :::
 
 In order to understand what each of these tables contain, you can click on the table name and view the details. For example, if you expand the `summary_pages` dataset and click on the 2018_09_01_desktop (or mobile) table you can see the schema. Clicking `Details` tells you some information about the table, such as its size and the number of rows. Clicking `Preview` shows an example of some data from the table.
@@ -120,6 +122,25 @@ The HTTP Archive stores detailed information about each page load in [HAR (HTTP 
     * Lighthouse was intially only run on mobile, but as of May 2021 also runs as part of the desktop crawl.
     * These tables are very large (2.3 TB for Mobile only as of May 2021)
 
+### Other Tables
+
+* [`technologies`](https://console.cloud.google.com/bigquery?ws=!1m4!1m3!3m2!1shttparchive!2stechnologies) tables:
+    * Information about the technologies detected on each page (using [Wappalyser rules](https://github.com/HTTPArchive/wappalyzer)).
+    * Table contains a url and a list of names and categories for technologies detected on the page.
+    * This data is also available in the HAR of the `pages` table but is extracted into the `technologies` table for easy lookup.
+    * These tables are small (15 GB as of May 2024).
+
+* [`blink_features.features`](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!4m3!1shttparchive!2sblink_features!3sfeatures) tables:
+    * Information about the [Blink features](https://chromestatus.com/roadmap) detected on each page. See also the  summary `blink_features.usage` table below.
+    * Table contains a url and Blink feature names detected on the page.
+    * This data is also available in the HAR of the `pages` table but is extracted into the `blink_features` tables for easy lookup.
+    * This table is ~300GB per single platform as of May 2024.
+
+* [`blink_features.usage`](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!4m3!1shttparchive!2sblink_features!3susage) table:
+    * Summary information about the [Blink features](https://chromestatus.com/roadmap) detected on each page.
+    * Table contains the num_urls, the pct_urls and sample urls for each feature.
+    * This data is also available in the HAR of the `pages` table but is extracted into the `blink_features` tables for easy lookup.
+    * This table is 944 MB as of May 2024.
 
 ## Some Example Queries to Get Started Exploring the Data
 
