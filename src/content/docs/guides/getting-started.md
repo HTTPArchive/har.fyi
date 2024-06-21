@@ -105,12 +105,12 @@ Some of the types of tables you'll find useful when getting started are describe
 
 The HTTP Archive stores detailed information about each page load in [HAR (HTTP Archive) files](https://en.wikipedia.org/wiki/.har). Each HAR file is JSON formatted and contains detailed performance data about a web page. The [specification for this format](https://w3c.github.io/web-performance/specs/HAR/Overview.html) is produced by the Web Performance Working Group of the W3C. The HTTP Archive splits each HAR file into multiple BigQuery tables, which are described below.
 
-* [`httparchive.all.pages`](../reference/tables/pages.mdx):
+* [`httparchive.all.pages`](../../reference/tables/pages/):
 
   * HAR extract for each page url.
   * This table is very large (~938TB as of Jun 2024).
 
-* [`httparchive.all.requests`](../reference/tables/requests.mdx):
+* [`httparchive.all.requests`](../../reference/tables/requests/):
 
   * HAR extract for each resource.
   * This table is very large (4.97PB as of Jun 2024)
