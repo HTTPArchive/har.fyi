@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import starlightImageZoom from 'starlight-image-zoom'
 
 // https://astro.build/config
 export default defineConfig({
@@ -21,7 +22,7 @@ export default defineConfig({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-          
+
             gtag('config', 'G-SK2FZXB50K');`
         }
       ],
@@ -36,9 +37,9 @@ export default defineConfig({
         {
           label: 'Guides',
           items: [
-            { label: 'Overview', link: '/guides/overview/' },
             { label: 'Getting started', link: '/guides/getting-started/' },
             { label: 'Minimizing query costs', link: '/guides/minimizing-costs/' },
+            { label: 'Guided tour', link: '/guides/guided-tour/' },
             { label: 'Release cycle', link: '/guides/release-cycle/' },
             { label: 'Migrate queries to `all` dataset', link: '/guides/migrating-to-all-dataset/' },
           ],
@@ -64,6 +65,7 @@ export default defineConfig({
           autogenerate: { directory: 'reference/functions' }
         },
       ],
+      plugins: [starlightImageZoom()],
     }),
   ],
 });
