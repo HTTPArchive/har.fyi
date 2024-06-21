@@ -105,40 +105,42 @@ Some of the types of tables you'll find useful when getting started are describe
 
 The HTTP Archive stores detailed information about each page load in [HAR (HTTP Archive) files](https://en.wikipedia.org/wiki/.har). Each HAR file is JSON formatted and contains detailed performance data about a web page. The [specification for this format](https://w3c.github.io/web-performance/specs/HAR/Overview.html) is produced by the Web Performance Working Group of the W3C. The HTTP Archive splits each HAR file into multiple BigQuery tables, which are described below.
 
-* [`httparchive.all.pages`](../../reference/tables/pages/):
+* [`httparchive.all.pages`](/reference/tables/pages/):
 
   * HAR extract for each page url.
   * This table is very large (~938TB as of Jun 2024).
 
-* [`httparchive.all.requests`](../../reference/tables/requests/):
+* [`httparchive.all.requests`](/reference/tables/requests/):
 
   * HAR extract for each resource.
   * This table is very large (4.97PB as of Jun 2024)
 
-* [`httparchive.response_bodies.YYYY_MM_DD_CLIENT`](https://console.cloud.google.com/bigquery?ws=!1m4!1m3!3m2!1shttparchive!2sresponse_bodies):
+* `httparchive.response_bodies.YYYY_MM_DD_CLIENT`:
 
+  * Tables are **OUTDATED**, please use the [`response_body` column](/reference/tables/requests/#response_body) instead.
   * HAR extract containing response bodies for each request.
   * Table contains a document url, resource url and a JSON-encoded HAR extract containing the first 2MB of each response body.
   * Payloads are truncated at 2MB, and there is a column to indicate whether the payload was truncated.
   * These tables are extremely large (2.5TB as of Aug 2018).
 
-* [`httparchive.lighthouse.YYYY_MM_DD_CLIENT`](https://console.cloud.google.com/bigquery?ws=!1m4!1m3!3m2!1shttparchive!2slighthouse):
+* `httparchive.lighthouse.YYYY_MM_DD_CLIENT`:
 
+  * Tables are **OUTDATED**, please use the [`lighthouse` column](/reference/tables/pages/#lighthouse) instead.
   * Results from a [Lighthouse](https://developers.google.com/web/tools/lighthouse/) audit of a page.
   * Table contains a url, and a JSON-encoded copy of the lighthouse report.
   * Lighthouse was intially only run on mobile, but as of May 2021 also runs as part of the desktop crawl.
   * These tables are very large (2.3 TB for Mobile only as of May 2021)
 
-* `httparchive.pages.YYYY_MM_DD_CLIENT` (**OUTDATED**):
+* `httparchive.pages.YYYY_MM_DD_CLIENT`:
 
-  * Tables are **OUTDATED**, please use the `httparchive.all.pages` tables instead.
+  * Tables are **OUTDATED**, please use the [`httparchive.all.pages` tables](/reference/tables/requests/) instead.
   * HAR extract for each page url.
   * Table contains a url and a JSON-encoded HAR file for the document.
   * These tables are large (~13GB as of Aug 2018).
 
-* `httparchive.requests.YYYY_MM_DD_CLIENT` (**OUTDATED**):
+* `httparchive.requests.YYYY_MM_DD_CLIENT`:
 
-  * Tables are **OUTDATED**, please use the `httparchive.all.requests` tables instead.
+  * Tables are **OUTDATED**, please use the [`httparchive.all.requests` tables](/reference/tables/requests/) instead.
   * HAR extract for each resource.
   * Table contains a document url, resource url and a JSON-encoded HAR extract for each resource.
   * These tables are very large (810GB as of Jun 2024)
@@ -147,7 +149,7 @@ The HTTP Archive stores detailed information about each page load in [HAR (HTTP 
 
 * `httparchive.summary_pages.YYYY_MM_DD_CLIENT`:
 
-  * Tables are **OUTDATED**, please use the `httparchive.all.pages` tables instead.
+  * Tables are **OUTDATED**, please use the [`summary` column](/reference/tables/pages/#summary) instead.
   * Each row contains details about a single page including timings, # of requests, types of requests and sizes.
   * Information about the page load such # of domains, redirects, errors, https requests, CDN, etc.
   * Summary of different caching parameters.
@@ -155,7 +157,7 @@ The HTTP Archive stores detailed information about each page load in [HAR (HTTP 
 
 * `httparchive.summary_requests.YYYY_MM_DD_CLIENT`:
 
-  * Tables are **OUTDATED**, please use the `httparchive.all.requests` tables instead.
+  * Tables are **OUTDATED**, please use the [`summary` column](/reference/tables/requests/#summary) instead.
   * Every single object loaded by all of the pages.
   * Each object has a requestid and a pageid.  The pageid can be used to JOIN the corresponding summary_pages table.
   * Information about the object, and how it was loaded.
@@ -172,7 +174,7 @@ The HTTP Archive stores detailed information about each page load in [HAR (HTTP 
 
 * `httparchive.technologies.YYYY_MM_DD_CLIENT`:
 
-  * Tables are **OUTDATED**, please use the `httparchive.all.pages` tables instead.
+  * Tables are **OUTDATED**, please use the [`technologies` column](/reference/tables/pages/#technologies) instead.
   * Information about the technologies detected on each page (using [Wappalyser rules](https://github.com/HTTPArchive/wappalyzer)).
   * Table contains a url and a list of names and categories for technologies detected on the page.
   * This data is also available in the HAR of the `pages` table but is extracted into the `technologies` table for easy lookup.
@@ -180,7 +182,7 @@ The HTTP Archive stores detailed information about each page load in [HAR (HTTP 
 
 * `httparchive.blink_features.features`:
 
-  * Tables are **OUTDATED**, please use the `httparchive.all.pages` tables instead.
+  * Tables are **OUTDATED**, please use the [`features` column](/reference/tables/pages/#features) instead.
   * Information about the [Blink features](https://chromestatus.com/roadmap) detected on each page. See also the summary `blink_features.usage` table below.
   * Table contains a url and Blink feature names detected on the page.
   * This data is also available in the HAR of the `pages` table but is extracted into the `blink_features` tables for easy lookup.
