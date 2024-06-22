@@ -55,7 +55,7 @@ not available | [`metadata`](/reference/tables/pages/#metadata)
     SELECT
     -  url,
     +  page,
-    -  JSON_QUERY(report, '$.audits.largest-contentful-paint.numericValue') AS LCP
+    -  JSON_QUERY(report, '$.audits.largest-contentful-paint.numericValue') AS LCP,
     +  JSON_QUERY(lighthouse, '$.audits.largest-contentful-paint.numericValue') AS LCP,
     -FROM `httparchive.lighthouse.2024_06_01_desktop`
     +FROM `httparchive.all.pages`
@@ -68,44 +68,34 @@ not available | [`metadata`](/reference/tables/pages/#metadata)
 
     ```diff lang="sql"
     SELECT
-    -- Test environment: desktop or mobile
-    -  _TABLE_SUFFIX AS client,
-    +  client,
-    -- The URL of the page being tested
     -  url,
     +  page,
+    -  _TABLE_SUFFIX AS client,
+    +  client,
+    -  JSON_QUERY(payload, '$.testID') AS testID,
+    +  wptid,
     -- JSON with the results of the custom metrics,
     -  JSON_QUERY(payload, '$._privacy') AS custom_metrics,
     +  JSON_QUERY(custom_metrics, '$.privacy') AS custom_metrics,
-    -  JSON_QUERY(payload, '$.testID') AS testID
-    +  wptid
     -FROM `httparchive.pages.2022_06_01_*`
     +FROM `httparchive.all.pages`
-    -- Filtering by partition column required
-    +WHERE
-    +  date = '2022-06-01'
-    -- Filtering by clustering columns client, is_root_page, rank are optional, help to reduce costs
-
-    -- This boolean parameter filters for only root pages on the origin
+    +WHERE date = '2022-06-01'
     +  AND is_root_page
     ```
 
-- From `summary_pages.YYYY_MM_DD_client` to `all.pages`.
+- From `summary_pages.YYYY_MM_DD_client` to `all.pages`. (194 MB -> 110 GB)
 
     ```diff lang="sql"
     SELECT
     -  numDomains,
     +  CAST(JSON_VALUE(summary, '$.numDomains') AS INT64) AS numDomains,
       COUNT(0) pages,
-    -  ROUND(AVG(reqTotal),2) avg_requests
-    +  ROUND(AVG(CAST(JSON_VALUE(summary, '$.reqTotal') AS INT64)),2) as avg_requests
-    FROM
-    -  `httparchive.summary_pages.2024_06_01_desktop`
-    +  `httparchive.all.pages`
-    +WHERE
-    +  date = '2024-06-01'
+    -  ROUND(AVG(reqTotal),2) avg_requests,
+    +  ROUND(AVG(CAST(JSON_VALUE(summary, '$.reqTotal') AS INT64)),2) as avg_requests,
+    -FROM `httparchive.summary_pages.2024_06_01_desktop`
+    +FROM `httparchive.all.pages`
+    +WHERE date = '2024-06-01'
     +  AND client = 'desktop'
-    -- This boolean parameter filters for only root pages on the origin
     +  AND is_root_page
     GROUP BY
       numDomains
@@ -115,22 +105,23 @@ not available | [`metadata`](/reference/tables/pages/#metadata)
       numDomains ASC
     ```
 
-- From `technologies.YYYY_MM_DD_client` to `all.pages`.
+- From `technologies.YYYY_MM_DD_client` to `all.pages`. (6 -> 27 GB)
 
     ```diff lang="sql"
     SELECT
+    -  url,
+    +  page,
     -  category,
-    +  technologies.category,
+    +  technologies.categories,
     -  app,
     +  technologies.technology,
     -  info
     +  technologies.info
-    FROM
-    -  `httparchive.technologies.2024_06_01_desktop`
-    +  `httparchive.all.pages`
-    WHERE
-      date = '2024-06-01'
-    -- This boolean parameter filters for only root pages on the origin
+    -FROM `httparchive.technologies.2024_06_01_desktop`
+    +FROM `httparchive.all.pages`,
+    +UNNEST (technologies) AS technologies
+    +WHERE date = '2024-06-01'
+    +  AND client = 'desktop'
     +  AND is_root_page
     ```
 
