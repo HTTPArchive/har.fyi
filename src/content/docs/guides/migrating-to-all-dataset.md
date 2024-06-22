@@ -154,152 +154,65 @@ not available | [`type`](/reference/tables/requests/#type)
 
     ```diff lang="sql"
     SELECT
-    -- Request headers
-    -  LOWER(JSON_VALUE(request_header, '$.name')) AS header_name,
-    +  LOWER(request_header.name) AS header_name,
-    -  JSON_VALUE(request_header, '$.value') AS header_value
-    +  request_headers.value AS header_value
-    FROM
-    -  `httparchive.almanac.requests`
-    +  `httparchive.all.requests`
-    -UNNEST(JSON_QUERY_ARRAY(request_headers)) request_header
-    +UNNEST(request_headers) request_header
-    WHERE
-      date = '2022-06-01'
-    -- This boolean parameter filters for only root pages on the origin
-    +  AND is_root_page
-    -- Filtering the main document requests
+    -  LOWER(JSON_VALUE(request_headers, '$.name')) AS header_name,
+    +  LOWER(request_headers.name) AS header_name,
+    -  JSON_VALUE(request_headers, '$.value') AS header_value,
+    +  request_headers.value AS header_value,
+    -FROM `httparchive.almanac.requests`,
+    +FROM `httparchive.all.requests`,
+    -UNNEST(JSON_QUERY_ARRAY(request_headers)) AS request_headers
+    +UNNEST(request_headers) AS request_headers
+    WHERE date = '2024-06-01'
+      AND client = 'desktop'
     -  AND firstHtml
     +  AND is_main_document
-    ```
-
-    ```diff lang="sql"
-    SELECT
-    -- Response headers
-    -  LOWER(JSON_VALUE(response_header, '$.name')) AS header_name,
-    +  LOWER(response_header.name) AS header_name,
-    -  JSON_VALUE(response_header, '$.value') AS header_value
-    +  response_headers.value AS header_value
-    FROM
-    -  `httparchive.almanac.requests`
-    +  `httparchive.all.requests`
-    -UNNEST(JSON_QUERY_ARRAY(response_headers)) response_header
-    +UNNEST(response_headers) response_header
-    WHERE
-      date = '2022-06-01'
-    -- This boolean parameter filters for only root pages on the origin
     +  AND is_root_page
-    -- Filtering the main document requests
-    -  AND firstHtml
-    +  AND is_main_document
-    ```
-
-- From `almanac.summary_requests` to `all.requests`.
-
-    ```diff lang="sql"
-    SELECT
-    -  ROUND(respBodySize/(1024*100))*100 responseSize100KB,
-    +  ROUND(CAST(JSON_VALUE(summary, '$.respBodySize') AS INT64)/(1024*100))*100 responseSize100KB,
-      COUNT(0) requests
-    FROM
-    -  `httparchive.summary_requests.2018_09_01_desktop`
-    +  `httparchive.all.requests`
-    +WHERE
-    +  date = '2024-06-01'
-    +  AND client = 'desktop'
-    -- This boolean parameter filters for only root pages on the origin
-    +  AND is_root_page
-    GROUP BY
-      responseSize100KB
-    HAVING
-      responseSize100KB > 0
-    ORDER BY
-      responseSize100KB ASC
-    ```
-
-- From `almanac.summary_response_bodies` to `all.requests`.
-
-    ```diff lang="sql"
-    SELECT
-    -  ROUND(size/(1024*100))*100 responseSize100KB,
-    +  ROUND(size/(1024*100))*100 responseSize100KB,
-      COUNT(0) requests
-    FROM
-    -  `httparchive.summary_response_bodies.2018_09_01_desktop`
-    +  `httparchive.all.requests`
-    +WHERE
-    +  date = '2024-06-01'
-    +  AND client = 'desktop'
-    -- This boolean parameter filters for only root pages on the origin
-    +  AND is_root_page
-    GROUP BY
-      responseSize100KB
-    HAVING
-      responseSize100KB > 0
-    ORDER BY
-      responseSize100KB ASC
     ```
 
 - FROM `requests.YYYY_MM_DD_client` to `all.requests`.
 
     ```diff lang="sql"
     SELECT
-    -- The URL of the request
-    -  url,
-    +  url,
-    -- The type of the request
-    -  type,
-    +  type,
-    -- The size of the response body in bytes
-    -  respBodySize,
-    +  CAST(JSON_VALUE(summary, '$.respBodySize') AS INT64) AS respBodySize
-    FROM
-    -  `httparchive.requests.2022_06_01_desktop`
-    +  `httparchive.all.requests`
-    WHERE
-      date = '2022-06-01'
-    -- This boolean parameter filters for only root pages on the origin
-    +  AND is_root_page
-    ```
-
-- From `response_bodies.YYYY_MM_DD_client` to `all.requests`.
-
-    ```diff lang="sql"
-    SELECT
-    -- The URL of the request
-    -  url,
-    +  url,
-    -- The size of the response body in bytes
-    -  size
-    +  size
-    FROM
-    -  `httparchive.response_bodies.2022_06_01_desktop`
-    +  `httparchive.all.requests`
-    WHERE
-      date = '2022-06-01'
-    -- This boolean parameter filters for only root pages on the origin
-    +  AND is_root_page
-    ```
-
-- From `summary_requests.YYYY_MM_DD_client` to `all.requests`.
-
-    ```diff lang="sql"
-    SELECT
-    -  ROUND(respBodySize/(1024*100))*100 responseSize100KB,
-    +  ROUND(CAST(JSON_VALUE(summary, '$.respBodySize') AS INT64)/(1024*100))*100 responseSize100KB,
-      COUNT(0) requests
-    FROM
-    -  `httparchive.summary_requests.2018_09_01_desktop`
-    +  `httparchive.all.requests`
-    +WHERE
-    +  date = '2024-06-01'
+      page,
+      url,
+    -  JSON_VALUE(payload, '$.response.content.mimeType') AS mimeType,
+    +  JSON_VALUE(summary, '$.mimeType') AS mimeType,
+    -  CAST(JSON_VALUE(payload, '$.response.bodySize') AS INT64) AS respBodySize,
+    +  CAST(JSON_VALUE(summary, '$.respBodySize') AS INT64) AS respBodySize,
+    -FROM `httparchive.requests.2024_06_01_desktop`
+    +FROM `httparchive.all.requests`
+    +WHERE date = '2024-06-01'
     +  AND client = 'desktop'
-    -- This boolean parameter filters for only root pages on the origin
     +  AND is_root_page
-    GROUP BY
-      responseSize100KB
-    HAVING
-      responseSize100KB > 0
-    ORDER BY
-      responseSize100KB ASC
+    ```
+
+- From `response_bodies.YYYY_MM_DD_client` to `all.requests`. (40 -> 174 TB)
+
+    ```diff lang="sql"
+    SELECT
+      page,
+      url,
+      BYTE_LENGTH(response_body) AS bodySize
+    -FROM `httparchive.response_bodies.2024_06_01_desktop`
+    +FROM `httparchive.all.requests`
+    +WHERE date = '2024-06-01'
+    +  AND client = 'desktop'
+    +  AND is_root_page
+    ```
+
+- From `summary_requests.YYYY_MM_DD_client` to `all.requests`. (8 GB -> 10 TB)
+
+    ```diff lang="sql"
+    SELECT
+    -  ROUND(respBodySize/1024/100)*100 AS responseSize100KB,
+    +  ROUND(CAST(JSON_VALUE(summary, '$.respBodySize') AS INT64)/1024/100)*100 AS responseSize100KB,
+      COUNT(0) requests,
+    -FROM `httparchive.summary_requests.2024_06_01_desktop`
+    +FROM `httparchive.all.requests`
+    +WHERE date = '2024-06-01'
+    +  AND client = 'desktop'
+    +  AND is_root_page
+    GROUP BY responseSize100KB
+    HAVING responseSize100KB > 0
+    ORDER BY responseSize100KB ASC
     ```
