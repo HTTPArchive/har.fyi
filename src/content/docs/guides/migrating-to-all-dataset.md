@@ -8,26 +8,26 @@ description: Assisting with query migration to the new dataset
 
 ### Schema difference
 
-| all.pages columns | pages.YYYY_MM_DD_* columns | Column difference description |
-|---|---|---|
-date | not available
+all.pages columns | pages.YYYY_MM_DD_* columns | Column difference description
+---|---|---
+date | not available |
 client | in _TABLE_SUFFIX | column format is easier and enables table partitioning
-page | url
-is_root_page | not available
-root_page | not available
-rank | not available
-wptid
-payload
-summary
-custom_metrics | payload
-lighthouse
-features
-technologies
-metadata
+page | url |
+is_root_page | not available |
+root_page | not available |
+rank | not available |
+wptid | |
+payload | |
+summary | |
+custom_metrics | payload |
+lighthouse | |
+features | |
+technologies | |
+metadata | |
 
 ### Query difference
 
-```diff
+```diff lang="sql"
 SELECT
  -- Test environment: desktop or mobile
 -  _TABLE_SUFFIX AS client,

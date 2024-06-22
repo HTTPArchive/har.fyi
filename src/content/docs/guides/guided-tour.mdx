@@ -3,6 +3,8 @@ title: Guided Tour
 description: HTTP Archive data analysis in BigQuery
 ---
 
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
 The HTTP Archive contains a tremendous amount of information that can be used to understand the evolution of the web. And since the raw data is available in Google BigQuery, you can start digging into it with a minimal amount of setup!
 
 If you are new to BigQuery, then the [Getting Started guide](./getting-started.md) will walk you through the basic setup. That guide ends with a sample query that explores MIME types from the `pages` tables. In this guide, we'll explore more of the tables and build additional queries that you can learn from. The easiest way to get started is by following along, testing some of the queries and learning from them. If you need any help then there is plenty of support available from the community at [https://discuss.httparchive.org](https://discuss.httparchive.org).
@@ -20,18 +22,6 @@ Migration Guides:
 
 This guide is split into multiple sections, each one focusing on different tables in the HTTP Archive. Each section builds on top of the previous one:
 
-- Exploring the `httparchive.all.pages` tables
-- Exploring the `httparchive.all.requests` tables
-- JOINing `pages` and `requests` tables
-
-### Exploring the `httparchive.all.pages` tables
-
-
-
-### Exploring the `httparchive.all.requests` tables
-
-
-
-### JOINing `pages` and `requests` tables
-
-
+- [Exploring the `httparchive.all.pages` tables](https://colab.research.google.com/drive/1Djg34nDFGRnNA9J2AiVG2RUzDojBUJOa)
+- [Exploring the `httparchive.all.requests` tables](https://colab.research.google.com/drive/1QOTqjREqz72j_WsD4OZU7NcAkJmXzafs)
+- [JOINing `pages` and `requests` tables]()
