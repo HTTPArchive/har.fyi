@@ -49,7 +49,11 @@ not available | [`metadata`](/reference/tables/pages/#metadata)
     +  AND is_root_page
     ```
 
-- From `lighthouse.YYYY_MM_DD_client` to `all.pages`. (4 -> 17 TB)
+- From `lighthouse.YYYY_MM_DD_client` to `all.pages`.
+
+    :::note
+    In the example query changes lead to query size increase: 4 TB -> 17 TB.
+    :::
 
     ```diff lang="sql"
     SELECT
@@ -83,7 +87,11 @@ not available | [`metadata`](/reference/tables/pages/#metadata)
     +  AND is_root_page
     ```
 
-- From `summary_pages.YYYY_MM_DD_client` to `all.pages`. (194 MB -> 110 GB)
+- From `summary_pages.YYYY_MM_DD_client` to `all.pages`.
+
+    :::note
+    In the example query changes lead to query size increase: 194 MB -> 110 GB.
+    :::
 
     ```diff lang="sql"
     SELECT
@@ -105,7 +113,11 @@ not available | [`metadata`](/reference/tables/pages/#metadata)
       numDomains ASC
     ```
 
-- From `technologies.YYYY_MM_DD_client` to `all.pages`. (6 -> 27 GB)
+- From `technologies.YYYY_MM_DD_client` to `all.pages`.
+
+    :::note
+    In the example query changes lead to query size increase: 6 GB -> 27 GB.
+    :::
 
     ```diff lang="sql"
     SELECT
@@ -184,7 +196,11 @@ not available | [`root_page`](/reference/tables/requests/#root_page)
     +  AND is_root_page
     ```
 
-- From `response_bodies.YYYY_MM_DD_client` to `all.requests`. (40 -> 174 TB)
+- From `response_bodies.YYYY_MM_DD_client` to `all.requests`.
+
+    :::note
+    In the example query changes lead to query size increase: 40 TB -> 174 TB.
+    :::
 
     ```diff lang="sql"
     SELECT
@@ -198,7 +214,11 @@ not available | [`root_page`](/reference/tables/requests/#root_page)
     +  AND is_root_page
     ```
 
-- From `summary_requests.YYYY_MM_DD_client` to `all.requests`. (8 GB -> 10 TB)
+- From `summary_requests.YYYY_MM_DD_client` to `all.requests`.
+
+    :::note
+    In the example query changes lead to query size increase: 8 GB -> 10 TB.
+    :::
 
     ```diff lang="sql"
     SELECT
