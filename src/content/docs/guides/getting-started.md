@@ -236,7 +236,7 @@ There is [1TB free per month](https://cloud.google.com/bigquery/pricing#on_deman
 
 ![Simple JOIN Example](./simple_join_example.png)
 
-If you look closely, you'll notice that this particular query could actually be written without the JOIN. For example, we can count `distinct pages.page` from the `requests` table instead of JOINing the `pages` table. If you run this query, you'll notice that the results are the same as the previous query, and the processed bytes are a bit less.
+If you look closely, you'll notice that this particular query could actually be written without the JOIN. For example, we can count `distinct page` from the `requests` table instead of JOINing the `pages` table. If you run this query, you'll notice that the results are the same as the previous query, and the processed bytes are a bit less.
 
 ```sql
 SELECT
