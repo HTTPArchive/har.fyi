@@ -65,14 +65,15 @@ You can also integrate this function into another SQL query by joining its resul
 
 ```sql
 SELECT
-  r.url,
-  c.category_id,
-  c.full_category,
-  c.subcategory,
-  c.parent_category
+  url,
+  category_id,
+  full_category,
+  subcategory,
+  parent_category
 FROM
-  `httparchive.urls.latest_crux_mobile` AS r,
-  UNNEST(httparchive.fn.GET_HOST_CATEGORIES(r.url)) AS c;
+  `httparchive.urls.latest_crux_mobile`
+LEFT JOIN
+  UNNEST(`httparchive.fn.GET_HOST_CATEGORIES`(url))
   ```
   
   </TabItem>
