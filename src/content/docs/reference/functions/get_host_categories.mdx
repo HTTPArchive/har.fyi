@@ -83,7 +83,7 @@ LEFT JOIN
 ## Methodology
 The classification of hostnames is performed using Chrome's Topics API (currently `chrome5`)  by [Nurullah Demir](https://ndemir.com) and [Yohan Beugin](https://yohan.beugin.org/) using [this repository](https://github.com/yohhaan/httparchive-topics-classification). The taxonomy used is version 2, which consists of 469 categories as defined in the [Topics API taxonomy v2](https://github.com/patcg-individual-drafts/topics/blob/a116e9e404dd96c7793fe6542c53e9a9d93cb75b/taxonomy_v2.md).
 
-This model is applied to all requests in the HTTPArchive's dataset, including not only the visited origins but also the seen requests during the crawl up until June 2024. 
+This model is applied to all requests in the HTTP Archive's dataset from the first crawl in November 2010 to June 2024. These requests include the page's HTML document itself as well as all of its subresources.
 
 ### Raw Data
 The raw data for the classifications is stored in the `httparchive.urls.categories` table. This table consists of pre-classified hostnames with their corresponding categories. The categories follow a hierarchical structure, providing both specific subcategories and broader parent categories.
