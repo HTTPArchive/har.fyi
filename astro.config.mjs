@@ -21,7 +21,7 @@ export default defineConfig({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-          
+
             gtag('config', 'G-SK2FZXB50K');`
         }
       ],
@@ -38,7 +38,9 @@ export default defineConfig({
           items: [
             { label: 'Getting started', link: '/guides/getting-started/' },
             { label: 'Minimizing query costs', link: '/guides/minimizing-costs/' },
+            { label: 'Guided tour', link: '/guides/guided-tour/' },
             { label: 'Release cycle', link: '/guides/release-cycle/' },
+            { label: 'Migrate queries to `all` dataset', link: '/guides/migrating-to-all-dataset/' },
           ],
         },
         {

@@ -22,3 +22,5 @@ pnpm-debug.log*
 
 # local tools
 *.code-workspace
+.idx/dev.nix
+.vscode/settings.json
