@@ -51,7 +51,7 @@ Here are some common operations you can perform with the `requests` table.
   /* This query will process 26 GB when run. */
   WITH requests AS (
     SELECT
-      ROUND(CAST(JSON_VALUE(summary, '$.respBodySize') AS INT64)/1024/100)*100 AS responseSize100KB,
+      CEIL(CAST(JSON_VALUE(summary, '$.respBodySize') AS INT64)/1024/100)*100 AS responseSize100KB,
       COUNT(0) OVER () AS total_requests
     FROM
       `httparchive.all.requests` TABLESAMPLE SYSTEM (1 PERCENT)
