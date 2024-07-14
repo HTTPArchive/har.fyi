@@ -298,7 +298,7 @@ FROM requests
 GROUP BY
   type
 ORDER BY
-  requests_total DESC
+  pages_percent DESC
 ```
 
 When analyzing the results from this, you can see the % of websites that use different Content-Types for their JavaScript, you can see that 93% of sites have at least one PNG image, 89% have at least 1 GIF, 48% use JSON, and 3% of sites have MP4 videos on their homepage, etc.
