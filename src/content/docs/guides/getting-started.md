@@ -273,7 +273,7 @@ Now things are starting to get interesting.
 
 ![Simple JOIN Example](./type_summary_example_query.png)
 
-So let's try to learn something from this basic example. We know from the first example that there are 12.7 million URLs in the latest HTTP Archive dataset. Let's calculate the percent of pages that have each mimeType. To do this, we'll divide the number of pages by the total pages (using our first query as a subquery). Then we'll use a `ROUND()` function to trim the result to 2 decimal points.
+So let's try to learn something from this basic example. We know from the first example that there are 12.7 million URLs in the latest HTTP Archive dataset. Let's calculate the percent of pages that have each resource type. To do this, we'll divide the number of pages by the total pages (using our first query as a subquery). Then we'll use a `ROUND()` function to trim the result to 2 decimal points.
 
 ```sql
 WITH requests AS (
@@ -301,7 +301,12 @@ ORDER BY
   pages_percent DESC
 ```
 
-When analyzing the results from this, you can see the % of websites that use different Content-Types for their JavaScript, you can see that 93% of sites have at least one PNG image, 89% have at least 1 GIF, 48% use JSON, and 3% of sites have MP4 videos on their homepage, etc.
+When analyzing the results from this, you can see the % of websites that use different resource types. You can see that:
+
+* 100% of sites have HTML and at least one image,
+* 97% have at least 1 script resource,
+* 96% load at least 1 CSS style,
+* and 87% load fonts on their homepage, etc.
 
 ![Simple JOIN Example](./type_summary_example_query2.png)
 
