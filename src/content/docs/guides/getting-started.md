@@ -310,6 +310,6 @@ When analyzing the results from this, you can see the % of websites that use dif
 
 ![Simple JOIN Example](./type_summary_example_query2.png)
 
-To explore more interactive examples, read the [Guided Tour](./guided-tour.md).
+To explore more interactive examples, read the [Guided Tour](../guided-tour/).
 
 If you want to explore deeper you have everything you need - infrastructure, documentation, community. Enjoy exploring this data and feel free to share your results and ask questions on the [HTTP Archive Discuss section](https://discuss.httparchive.org/).
