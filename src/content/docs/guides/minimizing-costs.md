@@ -29,6 +29,7 @@ WHERE
   client = 'desktop' AND
   rank = 1000
 ```
+
 :::
 
 ## Use `TABLESAMPLE`
@@ -81,6 +82,7 @@ WHERE
 LIMIT
   1
 ```
+
 :::
 
 ## Use the `sample_data` dataset
