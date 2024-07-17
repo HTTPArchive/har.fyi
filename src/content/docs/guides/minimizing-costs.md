@@ -14,6 +14,10 @@ Table | Partitioned by | Clustered by
 
 For example, the `httparchive.all.pages` table is [partitioned](https://cloud.google.com/bigquery/docs/partitioned-tables) by `date` and [clustered](https://cloud.google.com/bigquery/docs/clustered-tables) by the `client`, `is_root_page`, and `rank` columns, which means that queries that filter on these columns will be much faster and cheaper than queries that don't.
 
+:::caution
+BigQuery [doesn't guarantee](https://cloud.google.com/bigquery/docs/clustered-tables#clustered_table_pricing:~:text=BigQuery%20might%20not%20be%20able%20to%20accurately%20estimate%20the%20bytes%20to%20be%20processed) accuracy of estimations for 'Bytes processed' when querying clustered tables ([Issue Link](https://issuetracker.google.com/issues/176795805)). The actual data volume may be smaller than the amount provided in the estimate.
+:::
+
 Legacy tables like `httparchive.pages.2023_05_01_desktop`, however, do not take advantage of these optimizations and always incur the full cost of scanning the entire table.
 
 :::tip
