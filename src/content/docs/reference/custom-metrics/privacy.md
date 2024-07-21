@@ -8,42 +8,42 @@ _As: [`privacy`](/reference/structs/custom-metrics/#privacy)_
 
 ## Schema
 
-| Field name | Type | Description |
-| --- | --- | --- |
-| `privacy_wording_links` | array | Links related to privacy policy. |
-| `privacy_wording_links[i].text` | string | Title of the link. |
-| `iab_tcf_v1` | record | IAB TCF v1 settings. |
-| `iab_tcf_v1.present` | boolean | Presence of IAB TCF v1. |
-| `iab_tcf_v1.data` | record | TCF v1 vendor consents. [VendorConsents](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/CMP%20JS%20API%20v1.1%20Final.md#vendorconsents-) |
-| `iab_tcf_v1.compliant_setup` | boolean | Verifies compliance of TCF v1 vendor consents. |
-| `iab_tcf_v2` | record | IAB TCF v2 settings. |
-| `iab_tcf_v2.present` | boolean | Presence of IAB TCF v2. |
-| `iab_tcf_v2.data` | record | TCF v2 vendor consents. [TCData](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md#tcdata) |
-| `iab_tcf_v2.compliant_setup` | boolean | Verifies compliance of TCF v2 vendor consents. |
-| `iab_usp` | record | Shows the presence of IAB U.S. Privacy String. |
-| `iab_usp.present` | boolean | Shows the presence of IAB U.S. Privacy String. |
-| `iab_usp.privacy_string` | string | IAB U.S. Privacy String. |
-| `navigator_doNotTrack` | boolean | Indicates whether the browser's "Do Not Track" setting is enabled. |
-| `navigator_globalPrivacyControl` | boolean | Indicates whether the browser's Global Privacy Control setting is enabled. |
-| `document_permissionsPolicy` | boolean | Indicates the presence of the Permissions Policy. |
-| `document_featurePolicy` | boolean | Indicates the presence of the Feature Policy. |
-| `referrerPolicy` | record | Specifies the referrer policy for the entire document and individual requests. |
-| `referrerPolicy.entire_document_policy` | string | Referrer policy for the entire document. |
-| `referrerPolicy.individual_requests` | string | Referrer policy for individual requests. |
-| `referrerPolicy.link_relations` | string | Referrer policy for link relations. |
-| `media_devices` | record | Tracks the usage of media device APIs like `enumerateDevices` and `getUserMedia`. |
-| `media_devices["API_NAME"]` | boolean | Indicates usage of a particular API. |
-| `geolocation` | record | Tracks the usage of geolocation APIs like `getCurrentPosition` and `watchPosition`. |
-| `geolocation["API_NAME"]` | boolean | Indicates usage of a particular API. |
-| `fingerprinting` | record | Tracks potential fingerprinting attempts by counting API calls and listing likely fingerprinting scripts. |
-| `fingerprinting.counts` | record | Counts of fingerprinting-related API calls. |
-| `fingerprinting.counts["API_NAME"]` | integer | Counts of fingerprinting-related API calls. |
-| `fingerprinting.likelyFingerprintingScripts` | array[string] | List of likely fingerprinting script URLs. |
-| `request_hostnames_with_cname` | record | Lists hostnames with their corresponding CNAME records. |
-| `request_hostnames_with_cname.["HOSTNAME"]` | array | CNAME records for a given hostname. |
-| `ccpa_link` | record | California Consumer Privacy Act (CCPA) compliance. |
-| `ccpa_link.hasCCPALink` | boolean | Presence of a CCPA link. |
-| `ccpa_link.CCPALinkPhrases` | array[string] | Related CCPA link phrases. |
+| Field name                                   | Type          | Description                                                                                                                                                                                    |
+| -------------------------------------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `privacy_wording_links`                      | array<object> | Links related to privacy policy.                                                                                                                                                               |
+| `privacy_wording_links[i].text`              | string        | Title of the link.                                                                                                                                                                             |
+| `iab_tcf_v1`                                 | object        | IAB TCF v1 settings.                                                                                                                                                                           |
+| `iab_tcf_v1.present`                         | boolean       | Presence of IAB TCF v1.                                                                                                                                                                        |
+| `iab_tcf_v1.data`                            | object        | TCF v1 vendor consents. [VendorConsents](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/CMP%20JS%20API%20v1.1%20Final.md#vendorconsents-) |
+| `iab_tcf_v1.compliant_setup`                 | boolean       | Verifies compliance of TCF v1 vendor consents.                                                                                                                                                 |
+| `iab_tcf_v2`                                 | object        | IAB TCF v2 settings.                                                                                                                                                                           |
+| `iab_tcf_v2.present`                         | boolean       | Presence of IAB TCF v2.                                                                                                                                                                        |
+| `iab_tcf_v2.data`                            | object        | TCF v2 vendor consents. [TCData](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md#tcdata)    |
+| `iab_tcf_v2.compliant_setup`                 | boolean       | Verifies compliance of TCF v2 vendor consents.                                                                                                                                                 |
+| `iab_usp`                                    | object        | Shows the presence of IAB U.S. Privacy String.                                                                                                                                                 |
+| `iab_usp.present`                            | boolean       | Shows the presence of IAB U.S. Privacy String.                                                                                                                                                 |
+| `iab_usp.privacy_string`                     | string        | IAB U.S. Privacy String.                                                                                                                                                                       |
+| `navigator_doNotTrack`                       | boolean       | Indicates whether the browser's "Do Not Track" setting is enabled.                                                                                                                             |
+| `navigator_globalPrivacyControl`             | boolean       | Indicates whether the browser's Global Privacy Control setting is enabled.                                                                                                                     |
+| `document_permissionsPolicy`                 | boolean       | Indicates the presence of the Permissions Policy.                                                                                                                                              |
+| `document_featurePolicy`                     | boolean       | Indicates the presence of the Feature Policy.                                                                                                                                                  |
+| `referrerPolicy`                             | object        | Specifies the referrer policy for the entire document and individual requests.                                                                                                                 |
+| `referrerPolicy.entire_document_policy`      | string        | Referrer policy for the entire document.                                                                                                                                                       |
+| `referrerPolicy.individual_requests`         | string        | Referrer policy for individual requests.                                                                                                                                                       |
+| `referrerPolicy.link_relations`              | string        | Referrer policy for link relations.                                                                                                                                                            |
+| `media_devices`                              | object        | Tracks the usage of media device APIs like `enumerateDevices` and `getUserMedia`.                                                                                                              |
+| `media_devices["API_NAME"]`                  | boolean       | Indicates usage of a particular API.                                                                                                                                                           |
+| `geolocation`                                | object        | Tracks the usage of geolocation APIs like `getCurrentPosition` and `watchPosition`.                                                                                                            |
+| `geolocation["API_NAME"]`                    | boolean       | Indicates usage of a particular API.                                                                                                                                                           |
+| `fingerprinting`                             | object        | Tracks potential fingerprinting attempts by counting API calls and listing likely fingerprinting scripts.                                                                                      |
+| `fingerprinting.counts`                      | object        | Counts of fingerprinting-related API calls.                                                                                                                                                    |
+| `fingerprinting.counts["API_NAME"]`          | integer       | Counts of fingerprinting-related API calls.                                                                                                                                                    |
+| `fingerprinting.likelyFingerprintingScripts` | array<string> | List of likely fingerprinting script URLs.                                                                                                                                                     |
+| `request_hostnames_with_cname`               | object        | Lists hostnames with their corresponding CNAME records.                                                                                                                                        |
+| `request_hostnames_with_cname.["HOSTNAME"]`  | array<string> | CNAME records for a given hostname.                                                                                                                                                            |
+| `ccpa_link`                                  | object        | California Consumer Privacy Act (CCPA) compliance.                                                                                                                                             |
+| `ccpa_link.hasCCPALink`                      | boolean       | Presence of a CCPA link.                                                                                                                                                                       |
+| `ccpa_link.CCPALinkPhrases`                  | array<string> | Related CCPA link phrases.                                                                                                                                                                     |
 
 Here's an example of the decoded object from `https://www.google.com/` page crawl:
 
