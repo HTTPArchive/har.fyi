@@ -270,171 +270,171 @@ Here's an example of the decoded object:
 
 Field | Type | Description
 -- | -- | --
-pageref | string | Reference to the page containing this request.
-_run | int | The run number of the test.
-_cached | int | Indicates if the request was cached (0 or 1).
-startedDateTime | string | Start time of the request.
-time | int | Total time taken for the request in milliseconds.
-request | object | Details of the request.
-request.method | string | HTTP method used for the request.
-request.url | string | URL of the requested resource.
-request.headersSize | int | Size of the request headers.
-request.bodySize | int | Size of the request body.
-request.cookies | array | Cookies sent with the request.
-request.headers | array | Headers sent with the request.
-request.headers[].name | string | Header name.
-request.headers[].value | string | Header value.
-request.httpVersion | string | HTTP version used for the request.
-request.queryString | array | Query string parameters.
-response | object | Details of the response.
-response.status | int | HTTP response status code.
-response.statusText | string | Status text of the response.
-response.headersSize | int | Size of the response headers.
-response.bodySize | int | Size of the response body.
-response.headers | array | Headers sent with the response.
-response.headers[].name | string | Header name.
-response.headers[].value | string | Header value.
-response.httpVersion | string | HTTP version used for the response.
-response.content | object | Content details of the response.
-response.content.size | int | Size of the content.
-response.content.mimeType | string | MIME type of the content.
-response.cookies | array | Cookies received with the response.
-cache | object | Cache details (empty in this example).
-timings | object | Timing details of various stages of the request.
-timings.blocked | int | Time spent in blocking.
-timings.dns | int | Time spent in DNS lookup.
-timings.connect | int | Time spent in establishing a connection.
-timings.ssl | int | Time spent in SSL handshake.
-timings.send | int | Time spent in sending the request.
-timings.wait | int | Time spent in waiting for the response.
-timings.receive | int | Time spent in receiving the response.
-_type | int | Type identifier for the request.
-_id | string | Unique identifier for the request.
-_request_id | string | Identifier for the original request.
-_ip_addr | string | IP address of the requested server.
-_full_url | string | Full URL of the request.
-_is_secure | int | Indicates if the request is secure (0 or 1).
-_method | string | HTTP method used for the request.
-_host | string | Host of the request.
-_url | string | URL path of the request.
-_raw_id | string | Raw ID for the request.
-_frame_id | string | Frame ID where the request was made.
-_documentURL | string | Document URL of the request.
-_responseCode | int | HTTP response code.
-_request_type | string | Type of the request (e.g., Document).
-_load_ms | int | Load time in milliseconds.
-_ttfb_ms | int | Time to first byte in milliseconds.
-_load_start | int | Start time of load in milliseconds.
-_load_start_float | float | Precise start time of load.
-_bytesIn | int | Number of bytes received.
-_objectSize | int | Size of the object received.
-_objectSizeUncompressed | int | Uncompressed size of the object received.
-_chunks | array | Array of chunks received.
-_chunks[].ts | int | Timestamp of the chunk.
-_chunks[].bytes | int | Size of the chunk.
-_chunks[].inflated | int | Size of the inflated chunk.
-_expires | string | Expiry date of the request.
-_cacheControl | string | Cache control header value.
-_contentType | string | Content type of the response.
-_contentEncoding | string | Content encoding of the response.
-_socket | int | Socket used for the request.
-_protocol | string | Protocol used for the request.
-_dns_start | int | DNS start time.
-_dns_end | int | DNS end time.
-_connect_start | int | Connection start time.
-_connect_end | int | Connection end time.
-_ssl_start | int | SSL handshake start time.
-_ssl_end | int | SSL handshake end time.
-_securityDetails | object | Security details of the request.
-_securityDetails.protocol | string | Security protocol used.
-_securityDetails.keyExchange | string | Key exchange used.
-_securityDetails.keyExchangeGroup | string | Key exchange group used.
-_securityDetails.cipher | string | Cipher used.
-_securityDetails.certificateId | int | Certificate ID.
-_securityDetails.subjectName | string | Subject name of the certificate.
-_securityDetails.sanList | array | Subject alternative names.
-_securityDetails.issuer | string | Issuer of the certificate.
-_securityDetails.validFrom | int | Valid from date of the certificate.
-_securityDetails.validTo | int | Valid to date of the certificate.
-_securityDetails.signedCertificateTimestampList | array | List of signed certificate timestamps.
-_securityDetails.certificateTransparencyCompliance | string | Certificate transparency compliance.
-_securityDetails.serverSignatureAlgorithm | int | Server signature algorithm.
-_securityDetails.encryptedClientHello | int | Indicates if the client hello is encrypted.
-_initiator | string | Initiator of the request.
-_initiator_line | string | Line number of the initiator.
-_initiator_column | string | Column number of the initiator.
-_initiator_type | string | Type of initiator (e.g., script).
-_priority | string | Priority of the request.
-_initial_priority | string | Initial priority of the request.
-_server_rtt | int | Server round-trip time.
-_headers | object | Headers for the request and response.
-_headers.request | array | Request headers.
-_headers.response | array | Response headers.
-_bytesOut | int | Number of bytes sent.
-_score_cache | int | Cache score.
-_score_cdn | int | CDN score.
-_score_gzip | int | Gzip compression score.
-_score_cookies | int | Cookies score.
-_score_keep-alive | int | Keep-alive score.
-_score_minify | int | Minification score.
-_score_combine | int | Combine score.
-_score_compress | int | Compression score.
-_score_etags | int | ETags score.
-_dns_ms | int | DNS lookup time in milliseconds.
-_connect_ms | int | Connection time in milliseconds.
-_ssl_ms | int | SSL handshake time in milliseconds.
-_gzip_total | int | Total size of the gzip-compressed content.
-_gzip_save | int | Size saved due to gzip compression.
-_minify_total | int | Total size of minified content.
-_minify_save | int | Size saved due to minification.
-_image_total | int | Total size of images.
-_image_save | int | Size saved due to image optimization.
-_cache_time | int | Cache time.
-_cdn_provider | string | CDN provider used.
-_server_count | int | Number of servers used.
-_created | int | Creation time of the request.
-_dns_info | object | DNS information.
-_dns_info.secure | int | Indicates if the DNS query is secure.
-_dns_info.transactions_needed | array | Transactions needed for DNS query.
-_dns_info.transactions_needed[].dns_query_type | string | Type of DNS query.
-_dns_info.results | object | Results of the DNS query.
-_dns_info.results.aliases | array | Aliases for the domain.
-_dns_info.results.canonical_names | array | Canonical names for the domain.
-_dns_info.results.endpoint_metadatas | array | Endpoint metadata.
-_dns_info.results.expiration | string | Expiration date of the DNS query.
-_dns_info.results.host_ports | array | Host ports.
-_dns_info.results.hostname_results | array | Hostname results.
-_dns_info.results.ip_endpoints | array | IP endpoints.
-_dns_info.results.ip_endpoints[].endpoint_address | string | IP address of the endpoint.
-_dns_info.results.ip_endpoints[].endpoint_port | int | Port of the endpoint.
-_dns_info.results.text_records | array | Text records.
-_socket_group | string | Socket group.
-_http2_stream_id | int | HTTP/2 stream ID.
-_http2_stream_dependency | int | HTTP/2 stream dependency.
-_http2_stream_weight | int | HTTP/2 stream weight.
-_http2_stream_exclusive | int | HTTP/2 stream exclusivity.
-_http2_server_settings | object | HTTP/2 server settings.
-_tls_version | string | TLS version used.
-_tls_resumed | string | Indicates if the TLS session was resumed.
-_tls_next_proto | string | Next protocol used.
-_tls_cipher_suite | int | Cipher suite used.
-_netlog_id | int | Netlog ID.
-_certificates | array | Certificates used.
-_server_port | string | Server port.
-_final_base_page | int | Indicates if the request is the final base page.
-_is_base_page | int | Indicates if the request is the base page.
-_load_end | int | Load end time.
-_ttfb_start | int | Time to first byte start time.
-_ttfb_end | int | Time to first byte end time.
-_download_start | int | Download start time.
-_download_end | int | Download end time.
-_download_ms | int | Download time in milliseconds.
-_all_start | int | Start time of all operations.
-_all_end | int | End time of all operations.
-_all_ms | int | Total time taken for all operations.
-_index | int | Index of the request.
-_number | int | Number of the request.
-_body_file | string | File containing the body of the request.
+`pageref` | `string` | Reference to the page containing this request.
+`_run` | `int` | The run number of the test.
+`_cached` | `int` | Indicates if the request was cached (0 or 1).
+`startedDateTime` | `string` | Start time of the request.
+`time` | `int` | Total time taken for the request in milliseconds.
+`request` | `object` | Details of the request.
+`request.method` | `string` | HTTP method used for the request.
+`request.url` | `string` | URL of the requested resource.
+`request.headersSize` | `int` | Size of the request headers.
+`request.bodySize` | `int` | Size of the request body.
+`request.cookies` | `array` | Cookies sent with the request.
+`request.headers` | `array` | Headers sent with the request.
+`request.headers[].name` | `string` | Header name.
+`request.headers[].value` | `string` | Header value.
+`request.httpVersion` | `string` | HTTP version used for the request.
+`request.queryString` | `array` | Query string parameters.
+`response` | `object` | Details of the response.
+`response.status` | `int` | HTTP response status code.
+`response.statusText` | `string` | Status text of the response.
+`response.headersSize` | `int` | Size of the response headers.
+`response.bodySize` | `int` | Size of the response body.
+`response.headers` | `array` | Headers sent with the response.
+`response.headers[].name` | `string` | Header name.
+`response.headers[].value` | `string` | Header value.
+`response.httpVersion` | `string` | HTTP version used for the response.
+`response.content` | `object` | Content details of the response.
+`response.content.size` | `int` | Size of the content.
+`response.content.mimeType` | `string` | MIME type of the content.
+`response.cookies` | `array` | Cookies received with the response.
+`cache` | `object` | Cache details (empty in this example).
+`timings` | `object` | Timing details of various stages of the request.
+`timings.blocked` | `int` | Time spent in blocking.
+`timings.dns` | `int` | Time spent in DNS lookup.
+`timings.connect` | `int` | Time spent in establishing a connection.
+`timings.ssl` | `int` | Time spent in SSL handshake.
+`timings.send` | `int` | Time spent in sending the request.
+`timings.wait` | `int` | Time spent in waiting for the response.
+`timings.receive` | `int` | Time spent in receiving the response.
+`_type` | `int` | Type identifier for the request.
+`_id` | `string` | Unique identifier for the request.
+`_request_id` | `string` | Identifier for the original request.
+`_ip_addr` | `string` | IP address of the requested server.
+`_full_url` | `string` | Full URL of the request.
+`_is_secure` | `int` | Indicates if the request is secure (0 or 1).
+`_method` | `string` | HTTP method used for the request.
+`_host` | `string` | Host of the request.
+`_url` | `string` | URL path of the request.
+`_raw_id` | `string` | Raw ID for the request.
+`_frame_id` | `string` | Frame ID where the request was made.
+`_documentURL` | `string` | Document URL of the request.
+`_responseCode` | `int` | HTTP response code.
+`_request_type` | `string` | Type of the request (e.g., Document).
+`_load_ms` | `int` | Load time in milliseconds.
+`_ttfb_ms` | `int` | Time to first byte in milliseconds.
+`_load_start` | `int` | Start time of load in milliseconds.
+`_load_start_float` | `float` | Precise start time of load.
+`_bytesIn` | `int` | Number of bytes received.
+`_objectSize` | `int` | Size of the object received.
+`_objectSizeUncompressed` | `int` | Uncompressed size of the object received.
+`_chunks` | `array` | Array of chunks received.
+`_chunks[].ts` | `int` | Timestamp of the chunk.
+`_chunks[].bytes` | `int` | Size of the chunk.
+`_chunks[].inflated` | `int` | Size of the inflated chunk.
+`_expires` | `string` | Expiry date of the request.
+`_cacheControl` | `string` | Cache control header value.
+`_contentType` | `string` | Content type of the response.
+`_contentEncoding` | `string` | Content encoding of the response.
+`_socket` | `int` | Socket used for the request.
+`_protocol` | `string` | Protocol used for the request.
+`_dns_start` | `int` | DNS start time.
+`_dns_end` | `int` | DNS end time.
+`_connect_start` | `int` | Connection start time.
+`_connect_end` | `int` | Connection end time.
+`_ssl_start` | `int` | SSL handshake start time.
+`_ssl_end` | `int` | SSL handshake end time.
+`_securityDetails` | `object` | Security details of the request.
+`_securityDetails.protocol` | `string` | Security protocol used.
+`_securityDetails.keyExchange` | `string` | Key exchange used.
+`_securityDetails.keyExchangeGroup` | `string` | Key exchange group used.
+`_securityDetails.cipher` | `string` | Cipher used.
+`_securityDetails.certificateId` | `int` | Certificate ID.
+`_securityDetails.subjectName` | `string` | Subject name of the certificate.
+`_securityDetails.sanList` | `array` | Subject alternative names.
+`_securityDetails.issuer` | `string` | Issuer of the certificate.
+`_securityDetails.validFrom` | `int` | Valid from date of the certificate.
+`_securityDetails.validTo` | `int` | Valid to date of the certificate.
+`_securityDetails.signedCertificateTimestampList` | `array` | List of signed certificate timestamps.
+`_securityDetails.certificateTransparencyCompliance` | `string` | Certificate transparency compliance.
+`_securityDetails.serverSignatureAlgorithm` | `int` | Server signature algorithm.
+`_securityDetails.encryptedClientHello` | `int` | Indicates if the client hello is encrypted.
+`_initiator` | `string` | Initiator of the request.
+`_initiator_line` | `string` | Line number of the initiator.
+`_initiator_column` | `string` | Column number of the initiator.
+`_initiator_type` | `string` | Type of initiator (e.g., script).
+`_priority` | `string` | Priority of the request.
+`_initial_priority` | `string` | Initial priority of the request.
+`_server_rtt` | `int` | Server round-trip time.
+`_headers` | `object` | Headers for the request and response.
+`_headers.request` | `array` | Request headers.
+`_headers.response` | `array` | Response headers.
+`_bytesOut` | `int` | Number of bytes sent.
+`_score_cache` | `int` | Cache score.
+`_score_cdn` | `int` | CDN score.
+`_score_gzip` | `int` | Gzip compression score.
+`_score_cookies` | `int` | Cookies score.
+`_score_keep-alive` | `int` | Keep-alive score.
+`_score_minify` | `int` | Minification score.
+`_score_combine` | `int` | Combine score.
+`_score_compress` | `int` | Compression score.
+`_score_etags` | `int` | ETags score.
+`_dns_ms` | `int` | DNS lookup time in milliseconds.
+`_connect_ms` | `int` | Connection time in milliseconds.
+`_ssl_ms` | `int` | SSL handshake time in milliseconds.
+`_gzip_total` | `int` | Total size of the gzip-compressed content.
+`_gzip_save` | `int` | Size saved due to gzip compression.
+`_minify_total` | `int` | Total size of minified content.
+`_minify_save` | `int` | Size saved due to minification.
+`_image_total` | `int` | Total size of images.
+`_image_save` | `int` | Size saved due to image optimization.
+`_cache_time` | `int` | Cache time.
+`_cdn_provider` | `string` | CDN provider used.
+`_server_count` | `int` | Number of servers used.
+`_created` | `int` | Creation time of the request.
+`_dns_info` | `object` | DNS information.
+`_dns_info.secure` | `int` | Indicates if the DNS query is secure.
+`_dns_info.transactions_needed` | `array` | Transactions needed for DNS query.
+`_dns_info.transactions_needed[].dns_query_type` | `string` | Type of DNS query.
+`_dns_info.results` | `object` | Results of the DNS query.
+`_dns_info.results.aliases` | `array` | Aliases for the domain.
+`_dns_info.results.canonical_names` | `array` | Canonical names for the domain.
+`_dns_info.results.endpoint_metadatas` | `array` | Endpoint metadata.
+`_dns_info.results.expiration` | `string` | Expiration date of the DNS query.
+`_dns_info.results.host_ports` | `array` | Host ports.
+`_dns_info.results.hostname_results` | `array` | Hostname results.
+`_dns_info.results.ip_endpoints` | `array` | IP endpoints.
+`_dns_info.results.ip_endpoints[].endpoint_address` | `string` | IP address of the endpoint.
+`_dns_info.results.ip_endpoints[].endpoint_port` | `int` | Port of the endpoint.
+`_dns_info.results.text_records` | `array` | Text records.
+`_socket_group` | `string` | Socket group.
+`_http2_stream_id` | `int` | HTTP/2 stream ID.
+`_http2_stream_dependency` | `int` | HTTP/2 stream dependency.
+`_http2_stream_weight` | `int` | HTTP/2 stream weight.
+`_http2_stream_exclusive` | `int` | HTTP/2 stream exclusivity.
+`_http2_server_settings` | `object` | HTTP/2 server settings.
+`_tls_version` | `string` | TLS version used.
+`_tls_resumed` | `string` | Indicates if the TLS session was resumed.
+`_tls_next_proto` | `string` | Next protocol used.
+`_tls_cipher_suite` | `int` | Cipher suite used.
+`_netlog_id` | `int` | Netlog ID.
+`_certificates` | `array` | Certificates used.
+`_server_port` | `string` | Server port.
+`_final_base_page` | `int` | Indicates if the request is the final base page.
+`_is_base_page` | `int` | Indicates if the request is the base page.
+`_load_end` | `int` | Load end time.
+`_ttfb_start` | `int` | Time to first byte start time.
+`_ttfb_end` | `int` | Time to first byte end time.
+`_download_start` | `int` | Download start time.
+`_download_end` | `int` | Download end time.
+`_download_ms` | `int` | Download time in milliseconds.
+`_all_start` | `int` | Start time of all operations.
+`_all_end` | `int` | End time of all operations.
+`_all_ms` | `int` | Total time taken for all operations.
+`_index` | `int` | Index of the request.
+`_number` | `int` | Number of the request.
+`_body_file` | `string` | File containing the body of the request.
 
 ### `pageref`
 
