@@ -8,6 +8,8 @@ _As: `payload`_
 
 JSON-encoded WebPageTest result data for a request.
 
+**The actual schema of the WebPageTest result data is liable to change, depending on a request.**
+
 Here's an example of the decoded object:
 
 ```json
@@ -433,3 +435,663 @@ _all_ms | int | Total time taken for all operations.
 _index | int | Index of the request.
 _number | int | Number of the request.
 _body_file | string | File containing the body of the request.
+
+### `pageref`
+
+Reference to the page containing this request.
+
+### `_run`
+
+The run number of the test.
+
+### `_cached`
+
+Indicates if the request was cached (0 or 1).
+
+### `startedDateTime`
+
+Start time of the request.
+
+### `time`
+
+Total time taken for the request in milliseconds.
+
+### `request`
+
+Details of the request.
+
+- #### `request.method`
+
+  HTTP method used for the request.
+
+- #### `request.url`
+
+  URL of the requested resource.
+
+- #### `request.headersSize`
+
+  Size of the request headers.
+
+- #### `request.bodySize`
+
+  Size of the request body.
+
+- #### `request.cookies`
+
+  Cookies sent with the request.
+
+- #### `request.headers`
+
+  Headers sent with the request.
+
+- #### `request.headers[].name`
+
+  Header name.
+
+- #### `request.headers[].value`
+
+  Header value.
+
+- #### `request.httpVersion`
+
+  HTTP version used for the request.
+
+- #### `request.queryString`
+
+  Query string parameters.
+
+### `response`
+
+Details of the response.
+
+- #### `response.status`
+
+  HTTP response status code.
+
+- #### `response.statusText`
+
+  Status text of the response.
+
+- #### `response.headersSize`
+
+  Size of the response headers.
+
+- #### `response.bodySize`
+
+  Size of the response body.
+
+- #### `response.headers`
+
+  Headers sent with the response.
+
+- #### `response.headers[].name`
+
+  Header name.
+
+- #### `response.headers[].value`
+
+  Header value.
+
+- #### `response.httpVersion`
+
+  HTTP version used for the response.
+
+- #### `response.content`
+
+  Content details of the response.
+
+- #### `response.content.size`
+
+  Size of the content.
+
+- #### `response.content.mimeType`
+
+  MIME type of the content.
+
+- #### `response.cookies`
+
+  Cookies received with the response.
+
+### `cache`
+
+Cache details (empty in this example).
+
+### `timings`
+
+Timing details of various stages of the request.
+
+- #### `timings.blocked`
+
+  Time spent in blocking.
+
+- #### `timings.dns`
+
+  Time spent in DNS lookup.
+
+- #### `timings.connect`
+
+  Time spent in establishing a connection.
+
+- #### `timings.ssl`
+
+  Time spent in SSL handshake.
+
+- #### `timings.send`
+
+  Time spent in sending the request.
+
+- #### `timings.wait`
+
+  Time spent in waiting for the response.
+
+- #### `timings.receive`
+
+  Time spent in receiving the response.
+
+### `_type`
+
+Type identifier for the request.
+
+### `_id`
+
+Unique identifier for the request.
+
+### `_request_id`
+
+Identifier for the original request.
+
+### `_ip_addr`
+
+IP address of the requested server.
+
+### `_full_url`
+
+Full URL of the request.
+
+### `_is_secure`
+
+Indicates if the request is secure (0 or 1).
+
+### `_method`
+
+HTTP method used for the request.
+
+### `_host`
+
+Host of the request.
+
+### `_url`
+
+URL path of the request.
+
+### `_raw_id`
+
+Raw ID for the request.
+
+### `_frame_id`
+
+Frame ID where the request was made.
+
+### `_documentURL`
+
+Document URL of the request.
+
+### `_responseCode`
+
+HTTP response code.
+
+### `_request_type`
+
+Type of the request (e.g., Document).
+
+### `_load_ms`
+
+Load time in milliseconds.
+
+### `_ttfb_ms`
+
+Time to first byte in milliseconds.
+
+### `_load_start`
+
+Start time of load in milliseconds.
+
+### `_load_start_float`
+
+float | Precise start time of load.
+
+### `_bytesIn`
+
+Number of bytes received.
+
+### `_objectSize`
+
+Size of the object received.
+
+### `_objectSizeUncompressed`
+
+Uncompressed size of the object received.
+
+### `_chunks`
+
+array | Array of chunks received.
+
+- #### `_chunks[].ts`
+
+  Timestamp of the chunk.
+
+- #### `_chunks[].bytes`
+
+  Size of the chunk.
+
+- #### `_chunks[].inflated`
+
+  Size of the inflated chunk.
+
+### `_expires`
+
+Expiry date of the request.
+
+### `_cacheControl`
+
+Cache control header value.
+
+### `_contentType`
+
+Content type of the response.
+
+### `_contentEncoding`
+
+Content encoding of the response.
+
+### `_socket`
+
+Socket used for the request.
+
+### `_protocol`
+
+Protocol used for the request.
+
+### `_dns_start`
+
+DNS start time.
+
+### `_dns_end`
+
+DNS end time.
+
+### `_connect_start`
+
+Connection start time.
+
+### `_connect_end`
+
+Connection end time.
+
+### `_ssl_start`
+
+SSL handshake start time.
+
+### `_ssl_end`
+
+SSL handshake end time.
+
+### `_securityDetails`
+
+Security details of the request.
+
+- #### `_securityDetails.protocol`
+
+  Security protocol used.
+
+- #### `_securityDetails.keyExchange`
+
+  Key exchange used.
+
+- #### `_securityDetails.keyExchangeGroup`
+
+  Key exchange group used.
+
+- #### `_securityDetails.cipher`
+
+  Cipher used.
+
+- #### `_securityDetails.certificateId`
+
+  Certificate ID.
+
+- #### `_securityDetails.subjectName`
+
+  Subject name of the certificate.
+
+- #### `_securityDetails.sanList`
+
+  Subject alternative names.
+
+- #### `_securityDetails.issuer`
+
+  Issuer of the certificate.
+
+- #### `_securityDetails.validFrom`
+
+  Valid from date of the certificate.
+
+- #### `_securityDetails.validTo`
+
+  Valid to date of the certificate.
+
+- #### `_securityDetails.signedCertificateTimestampList`
+
+  List of signed certificate timestamps.
+
+- #### `_securityDetails.certificateTransparencyCompliance`
+
+  Certificate transparency compliance.
+
+- #### `_securityDetails.serverSignatureAlgorithm`
+
+  Server signature algorithm.
+
+- #### `_securityDetails.encryptedClientHello`
+
+  Indicates if the client hello is encrypted.
+
+### `_initiator`
+
+Initiator of the request.
+
+### `_initiator_line`
+
+Line number of the initiator.
+
+### `_initiator_column`
+
+Column number of the initiator.
+
+### `_initiator_type`
+
+Type of initiator (e.g., script).
+
+### `_priority`
+
+Priority of the request.
+
+### `_initial_priority`
+
+Initial priority of the request.
+
+### `_server_rtt`
+
+Server round-trip time.
+
+### `_headers`
+
+Headers for the request and response.
+
+- #### `_headers.request`
+
+  Request headers.
+
+- #### `_headers.response`
+
+  Response headers.
+
+### `_bytesOut`
+
+Number of bytes sent.
+
+### `_score_cache`
+
+Cache score.
+
+### `_score_cdn`
+
+CDN score.
+
+### `_score_gzip`
+
+Gzip compression score.
+
+### `_score_cookies`
+
+Cookies score.
+
+### `_score_keep-alive`
+
+Keep-alive score.
+
+### `_score_minify`
+
+Minification score.
+
+### `_score_combine`
+
+Combine score.
+
+### `_score_compress`
+
+Compression score.
+
+### `_score_etags`
+
+ETags score.
+
+### `_dns_ms`
+
+DNS lookup time in milliseconds.
+
+### `_connect_ms`
+
+Connection time in milliseconds.
+
+### `_ssl_ms`
+
+SSL handshake time in milliseconds.
+
+### `_gzip_total`
+
+Total size of the gzip-compressed content.
+
+### `_gzip_save`
+
+Size saved due to gzip compression.
+
+### `_minify_total`
+
+Total size of minified content.
+
+### `_minify_save`
+
+Size saved due to minification.
+
+### `_image_total`
+
+Total size of images.
+
+### `_image_save`
+
+Size saved due to image optimization.
+
+### `_cache_time`
+
+Cache time.
+
+### `_cdn_provider`
+
+CDN provider used.
+
+### `_server_count`
+
+Number of servers used.
+
+### `_created`
+
+Creation time of the request.
+
+### `_dns_info`
+
+DNS information.
+
+- #### `_dns_info.secure`
+
+  Indicates if the DNS query is secure.
+
+- #### `_dns_info.transactions_needed`
+
+  Transactions needed for DNS query.
+
+- #### `_dns_info.transactions_needed[].dns_query_type`
+
+  Type of DNS query.
+
+- #### `_dns_info.results`
+
+  Results of the DNS query.
+
+- #### `_dns_info.results.aliases`
+
+  Aliases for the domain.
+
+- #### `_dns_info.results.canonical_names`
+
+  Canonical names for the domain.
+
+- #### `_dns_info.results.endpoint_metadatas`
+
+  Endpoint metadata.
+
+- #### `_dns_info.results.expiration`
+
+  Expiration date of the DNS query.
+
+- #### `_dns_info.results.host_ports`
+
+  Host ports.
+
+- #### `_dns_info.results.hostname_results`
+
+  Hostname results.
+
+- #### `_dns_info.results.ip_endpoints`
+
+  IP endpoints.
+
+- #### `_dns_info.results.ip_endpoints[].endpoint_address`
+
+  IP address of the endpoint.
+
+- #### `_dns_info.results.ip_endpoints[].endpoint_port`
+
+  Port of the endpoint.
+
+- #### `_dns_info.results.text_records`
+
+  Text records.
+
+### `_socket_group`
+
+Socket group.
+
+### `_http2_stream_id`
+
+HTTP/2 stream ID.
+
+### `_http2_stream_dependency`
+
+HTTP/2 stream dependency.
+
+### `_http2_stream_weight`
+
+HTTP/2 stream weight.
+
+### `_http2_stream_exclusive`
+
+HTTP/2 stream exclusivity.
+
+### `_http2_server_settings`
+
+HTTP/2 server settings.
+
+### `_tls_version`
+
+TLS version used.
+
+### `_tls_resumed`
+
+Indicates if the TLS session was resumed.
+
+### `_tls_next_proto`
+
+Next protocol used.
+
+### `_tls_cipher_suite`
+
+Cipher suite used.
+
+### `_netlog_id`
+
+Netlog ID.
+
+### `_certificates`
+
+array | Certificates used.
+
+### `_server_port`
+
+Server port.
+
+### `_final_base_page`
+
+Indicates if the request is the final base page.
+
+### `_is_base_page`
+
+Indicates if the request is the base page.
+
+### `_load_end`
+
+Load end time.
+
+### `_ttfb_start`
+
+Time to first byte start time.
+
+### `_ttfb_end`
+
+Time to first byte end time.
+
+### `_download_start`
+
+Download start time.
+
+### `_download_end`
+
+Download end time.
+
+### `_download_ms`
+
+Download time in milliseconds.
+
+### `_all_start`
+
+Start time of all operations.
+
+### `_all_end`
+
+End time of all operations.
+
+### `_all_ms`
+
+Total time taken for all operations.
+
+### `_index`
+
+Index of the request.
+
+### `_number`
+
+Number of the request.
+
+### `_body_file`
+
+File containing the body of the request.
