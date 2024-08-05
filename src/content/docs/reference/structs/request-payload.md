@@ -3,7 +3,7 @@ title: Request payload struct
 description: Reference docs for the request payload struct
 ---
 
-_Appears in: [`requests` table](/reference/tables/requests/)_\
+_Appears in: [`requests` table](/reference/tables/requests/#payload)_\
 _As: `payload`_
 
 JSON-encoded WebPageTest result data for a request.
@@ -274,9 +274,38 @@ _cached | int | Indicates if the request was cached (0 or 1).
 startedDateTime | string | Start time of the request.
 time | int | Total time taken for the request in milliseconds.
 request | object | Details of the request.
+request.method | string | HTTP method used for the request.
+request.url | string | URL of the requested resource.
+request.headersSize | int | Size of the request headers.
+request.bodySize | int | Size of the request body.
+request.cookies | array | Cookies sent with the request.
+request.headers | array | Headers sent with the request.
+request.headers[].name | string | Header name.
+request.headers[].value | string | Header value.
+request.httpVersion | string | HTTP version used for the request.
+request.queryString | array | Query string parameters.
 response | object | Details of the response.
+response.status | int | HTTP response status code.
+response.statusText | string | Status text of the response.
+response.headersSize | int | Size of the response headers.
+response.bodySize | int | Size of the response body.
+response.headers | array | Headers sent with the response.
+response.headers[].name | string | Header name.
+response.headers[].value | string | Header value.
+response.httpVersion | string | HTTP version used for the response.
+response.content | object | Content details of the response.
+response.content.size | int | Size of the content.
+response.content.mimeType | string | MIME type of the content.
+response.cookies | array | Cookies received with the response.
 cache | object | Cache details (empty in this example).
 timings | object | Timing details of various stages of the request.
+timings.blocked | int | Time spent in blocking.
+timings.dns | int | Time spent in DNS lookup.
+timings.connect | int | Time spent in establishing a connection.
+timings.ssl | int | Time spent in SSL handshake.
+timings.send | int | Time spent in sending the request.
+timings.wait | int | Time spent in waiting for the response.
+timings.receive | int | Time spent in receiving the response.
 _type | int | Type identifier for the request.
 _id | string | Unique identifier for the request.
 _request_id | string | Identifier for the original request.
@@ -299,6 +328,9 @@ _bytesIn | int | Number of bytes received.
 _objectSize | int | Size of the object received.
 _objectSizeUncompressed | int | Uncompressed size of the object received.
 _chunks | array | Array of chunks received.
+_chunks[].ts | int | Timestamp of the chunk.
+_chunks[].bytes | int | Size of the chunk.
+_chunks[].inflated | int | Size of the inflated chunk.
 _expires | string | Expiry date of the request.
 _cacheControl | string | Cache control header value.
 _contentType | string | Content type of the response.
@@ -312,6 +344,20 @@ _connect_end | int | Connection end time.
 _ssl_start | int | SSL handshake start time.
 _ssl_end | int | SSL handshake end time.
 _securityDetails | object | Security details of the request.
+_securityDetails.protocol | string | Security protocol used.
+_securityDetails.keyExchange | string | Key exchange used.
+_securityDetails.keyExchangeGroup | string | Key exchange group used.
+_securityDetails.cipher | string | Cipher used.
+_securityDetails.certificateId | int | Certificate ID.
+_securityDetails.subjectName | string | Subject name of the certificate.
+_securityDetails.sanList | array | Subject alternative names.
+_securityDetails.issuer | string | Issuer of the certificate.
+_securityDetails.validFrom | int | Valid from date of the certificate.
+_securityDetails.validTo | int | Valid to date of the certificate.
+_securityDetails.signedCertificateTimestampList | array | List of signed certificate timestamps.
+_securityDetails.certificateTransparencyCompliance | string | Certificate transparency compliance.
+_securityDetails.serverSignatureAlgorithm | int | Server signature algorithm.
+_securityDetails.encryptedClientHello | int | Indicates if the client hello is encrypted.
 _initiator | string | Initiator of the request.
 _initiator_line | string | Line number of the initiator.
 _initiator_column | string | Column number of the initiator.
@@ -320,6 +366,8 @@ _priority | string | Priority of the request.
 _initial_priority | string | Initial priority of the request.
 _server_rtt | int | Server round-trip time.
 _headers | object | Headers for the request and response.
+_headers.request | array | Request headers.
+_headers.response | array | Response headers.
 _bytesOut | int | Number of bytes sent.
 _score_cache | int | Cache score.
 _score_cdn | int | CDN score.
@@ -344,6 +392,20 @@ _cdn_provider | string | CDN provider used.
 _server_count | int | Number of servers used.
 _created | int | Creation time of the request.
 _dns_info | object | DNS information.
+_dns_info.secure | int | Indicates if the DNS query is secure.
+_dns_info.transactions_needed | array | Transactions needed for DNS query.
+_dns_info.transactions_needed[].dns_query_type | string | Type of DNS query.
+_dns_info.results | object | Results of the DNS query.
+_dns_info.results.aliases | array | Aliases for the domain.
+_dns_info.results.canonical_names | array | Canonical names for the domain.
+_dns_info.results.endpoint_metadatas | array | Endpoint metadata.
+_dns_info.results.expiration | string | Expiration date of the DNS query.
+_dns_info.results.host_ports | array | Host ports.
+_dns_info.results.hostname_results | array | Hostname results.
+_dns_info.results.ip_endpoints | array | IP endpoints.
+_dns_info.results.ip_endpoints[].endpoint_address | string | IP address of the endpoint.
+_dns_info.results.ip_endpoints[].endpoint_port | int | Port of the endpoint.
+_dns_info.results.text_records | array | Text records.
 _socket_group | string | Socket group.
 _http2_stream_id | int | HTTP/2 stream ID.
 _http2_stream_dependency | int | HTTP/2 stream dependency.
