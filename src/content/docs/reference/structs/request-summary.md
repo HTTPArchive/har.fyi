@@ -3,7 +3,7 @@ title: Request summary struct
 description: Reference docs for the request summary struct
 ---
 
-_Appears in: [`requests` table](/reference/tables/requests/)_\
+_Appears in: [`requests` table](/reference/tables/requests/#summary)_\
 _As: `summary`_
 
 JSON-encoded summarization of request data.
