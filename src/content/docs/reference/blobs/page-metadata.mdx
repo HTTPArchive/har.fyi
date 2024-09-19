@@ -67,7 +67,7 @@ From the list of candidates, the link with the largest hit area is selected to b
 
 At a given crawl depth, this value represents the index in the list of pages being tested. Currently, HTTP Archive only crawls one page per level, so this value is always `0`.
 
-Hypothetically, HTTP Archive can crawl multiple pages per level. For example, at crawl depth `0`, the page is the root. Given that there's only one root page, the `link_depth` would be `0`. At crawl depth `1`, there may be many secondary page candidates. Instead of testing only one of them, HTTP Archive could test multiple secondary pages that are all linked from the root page. These pages would have a `link_depth` of `0`, `1`, `2`, etc, where the smaller indexes represent the pages that are more prominently linked from the preceding page. 
+Hypothetically, HTTP Archive can crawl multiple pages per level. For example, at crawl depth `0`, the page is the root. Given that there's only one root page, the `link_depth` would be `0`. At crawl depth `1`, there may be many secondary page candidates. Instead of testing only one of them, HTTP Archive could test multiple secondary pages that are all linked from the root page. These pages would have a `link_depth` of `0`, `1`, `2`, etc, where the smaller indexes represent the pages that are more prominently linked from the preceding page.
 
 ### `root_page_id`
 
