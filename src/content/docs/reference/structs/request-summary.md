@@ -12,19 +12,12 @@ Here's an example of the decoded object:
 
 ```json
 {
-    "requestid": 103235745187102721,
-    "pageid": 24036445,
-    "crawlid": 0,
-    "startedDateTime": 1720729879,
     "time": 260,
     "_cdn_provider": "Edgecast",
     "_gzip_save": 0,
     "method": "GET",
-    "url": "https://www.example.com/",
-    "urlShort": "https://www.example.com/",
     "reqHeadersSize": 683,
     "reqBodySize": null,
-    "reqOtherHeaders": "priority = u=0, i, sec-ch-ua = \" Not A;Brand\";v=\"99\", \"Chromium\";v=\"126\", \"Google Chrome\";v=\"126\", sec-ch-ua-mobile = ?0, sec-ch-ua-platform = \"Unknown\", sec-fetch-dest = document, sec-fetch-mode = navigate, sec-fetch-site = cross-site, upgrade-insecure-requests = 1",
     "reqCookieLen": 0,
     "status": 200,
     "respHttpVersion": "HTTP/2",
@@ -36,27 +29,8 @@ Here's an example of the decoded object:
     "ext": "",
     "type": "html",
     "format": "",
-    "respOtherHeaders": "x-cache = HIT",
     "respCookieLen": 0,
     "expAge": 604800,
-    "req_accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-    "req_accept_encoding": "gzip, deflate, br, zstd",
-    "req_accept_language": "en-US,en;q=0.9",
-    "req_user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 PTST/240709.152506",
-    "resp_accept_ranges": "bytes",
-    "resp_age": "238899",
-    "resp_cache_control": "max-age=604800",
-    "resp_content_encoding": "gzip",
-    "resp_content_length": "648",
-    "resp_content_type": "text/html; charset=UTF-8",
-    "resp_date": "Thu, 11 Jul 2024 20:31:19 GMT",
-    "resp_etag": "\"3147526947+gzip\"",
-    "resp_expires": "Thu, 18 Jul 2024 20:31:19 GMT",
-    "resp_last_modified": "Thu, 17 Oct 2019 07:18:26 GMT",
-    "resp_server": "ECAcc (dna/62BC)",
-    "resp_vary": "Accept-Encoding",
-    "firstReq": true,
-    "firstHtml": true
 }
 ```
 

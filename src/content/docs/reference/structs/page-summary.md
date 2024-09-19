@@ -13,15 +13,6 @@ Here's an example of the decoded object:
 ```json
 {
     "metadata": "{\"rank\": 500000, \"page_id\": 24036445, \"tested_url\": \"https://www.example.com/\", \"layout\": \"Desktop\", \"crawl_depth\": 0, \"link_depth\": 0, \"root_page_id\": 24036445, \"root_page_url\": \"https://www.example.com/\", \"root_page_test_id\": \"240709_Dx1UR_EB6N1\"}",
-    "pageid": 24036445,
-    "createDate": 1720729906,
-    "startedDateTime": 1720729879,
-    "archive": "All",
-    "label": "Jul 1 2024",
-    "crawlid": 0,
-    "url": "https://www.example.com/",
-    "urlhash": 56511,
-    "urlShort": "https://www.example.com/",
     "TTFB": 236,
     "renderStart": 400,
     "fullyLoaded": 338,
@@ -33,21 +24,7 @@ Here's an example of the decoded object:
     "onContentLoaded": 254,
     "cdn": "Edgecast",
     "SpeedIndex": 400,
-    "PageSpeed": null,
     "_connections": 1,
-    "_adult_site": false,
-    "avg_dom_depth": 3,
-    "doctype": "html",
-    "document_height": 993,
-    "document_width": 1920,
-    "localstorage_size": 0,
-    "sessionstorage_size": 0,
-    "meta_viewport": "width=device-width, initial-scale=1",
-    "num_iframes": 0,
-    "num_scripts": 0,
-    "num_scripts_sync": 0,
-    "num_scripts_async": 0,
-    "usertiming": 0,
     "reqTotal": 2,
     "bytesTotal": 1296,
     "reqJS": 0,
@@ -97,10 +74,7 @@ Here's an example of the decoded object:
     "numGlibs": 0,
     "numHttps": 2,
     "numCompressed": 2,
-    "maxDomainReqs": 1,
-    "wptid": "240709_Dx1UR_EB6N1",
-    "wptrun": 1,
-    "rank": 500000
+    "maxDomainReqs": 1
 }
 ```
 
