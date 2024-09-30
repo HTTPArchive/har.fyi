@@ -138,12 +138,12 @@ Field name | Type | Description
 [`rank`](#rank) | `INTEGER` | Site popularity rank, from CrUX
 [`wptid`](#wptid) | `STRING` | ID of the WebPageTest results
 [`payload`](#payload) | [`HAR`](/reference/blobs/har/) | JSON-encoded WebPageTest results for the page
-[`summary`](#summary) | `STRING` | JSON-encoded summarization of the page-level data
-[`custom_metrics`](#custom_metrics) | `STRING` | JSON-encoded test results of the custom metrics
+[`summary`](#summary) | [`Page summary`](/reference/structs/page-summary/) | JSON-encoded summarization of the page-level data
+[`custom_metrics`](#custom_metrics) | [`Custom metrics`](/reference/structs/custom-metrics/) | JSON-encoded test results of the custom metrics
 [`lighthouse`](#lighthouse) | [`Lighthouse`](/reference/blobs/lighthouse/) | JSON-encoded Lighthouse report
 [`features`](#features) | <code>ARRAY&lt;<a href="/reference/structs/feature/">Feature</a>></code> | Blink features detected at runtime
 [`technologies`](#technologies) | <code>ARRAY&lt;<a href="/reference/structs/technology/">Technology</a>></code> | Technologies detected at runtime
-[`metadata`](#metadata) | `STRING` | Additional metadata about the test
+[`metadata`](#metadata) | [`Page metadata`](/reference/blobs/page-metadata/) | Additional metadata about the test
 
 ### `date`
 
