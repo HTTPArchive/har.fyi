@@ -12,7 +12,6 @@ Here's an example of the decoded object:
 
 ```json
 {
-    "metadata": "{\"rank\": 500000, \"page_id\": 24036445, \"tested_url\": \"https://www.example.com/\", \"layout\": \"Desktop\", \"crawl_depth\": 0, \"link_depth\": 0, \"root_page_id\": 24036445, \"root_page_url\": \"https://www.example.com/\", \"root_page_test_id\": \"240709_Dx1UR_EB6N1\"}",
     "TTFB": 236,
     "renderStart": 400,
     "fullyLoaded": 338,
