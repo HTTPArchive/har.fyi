@@ -25,12 +25,6 @@ Here's an example of the decoded object:
         "headersSize": 705,
         "bodySize": -1,
         "cookies": [],
-        "headers": [
-            {
-                "name": "accept",
-                "value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
-            }
-        ],
         "httpVersion": "HTTP/2",
         "queryString": []
     },
@@ -39,12 +33,6 @@ Here's an example of the decoded object:
         "statusText": "",
         "headersSize": 354,
         "bodySize": 648,
-        "headers": [
-            {
-                "name": "age",
-                "value": "297291"
-            }
-        ],
         "httpVersion": "HTTP/2",
         "content": {
             "size": 648,
@@ -138,41 +126,6 @@ Here's an example of the decoded object:
     "_priority": "Highest",
     "_initial_priority": "Highest",
     "_server_rtt": null,
-    "_headers": {
-        "request": [
-            ":authority: www.example.com",
-            ":method: GET",
-            ":path: /",
-            ":scheme: https",
-            "accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-            "accept-encoding: gzip, deflate, br, zstd",
-            "accept-language: en-US,en;q=0.9",
-            "priority: u=0, i",
-            "sec-ch-ua: \" Not A;Brand\";v=\"99\", \"Chromium\";v=\"126\", \"Google Chrome\";v=\"126\"",
-            "sec-ch-ua-mobile: ?1",
-            "sec-ch-ua-platform: \"Android\"",
-            "sec-fetch-dest: document",
-            "sec-fetch-mode: navigate",
-            "sec-fetch-site: cross-site",
-            "upgrade-insecure-requests: 1",
-            "user-agent: Mozilla/5.0 (Linux; Android 8.1.0; Moto G (4)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36 PTST/240709.152506"
-        ],
-        "response": [
-            "age: 297291",
-            "cache-control: max-age=604800",
-            "content-encoding: gzip",
-            "content-length: 648",
-            "content-type: text/html; charset=UTF-8",
-            "date: Fri, 12 Jul 2024 12:44:31 GMT",
-            "etag: \"3147526947+gzip\"",
-            "expires: Fri, 19 Jul 2024 12:44:31 GMT",
-            "last-modified: Thu, 17 Oct 2019 07:18:26 GMT",
-            "server: ECAcc (lac/55D2)",
-            "vary: Accept-Encoding",
-            "x-cache: HIT",
-            ":status: 200"
-        ]
-    },
     "_bytesOut": 2209,
     "_score_cache": -1,
     "_score_cdn": 100,
@@ -281,9 +234,6 @@ Field | Type | Description
 `request.headersSize` | `int` | Size of the request headers.
 `request.bodySize` | `int` | Size of the request body.
 `request.cookies` | `array` | Cookies sent with the request.
-`request.headers` | `array` | Headers sent with the request.
-`request.headers[].name` | `string` | Header name.
-`request.headers[].value` | `string` | Header value.
 `request.httpVersion` | `string` | HTTP version used for the request.
 `request.queryString` | `array` | Query string parameters.
 `response` | `object` | Details of the response.
@@ -291,9 +241,6 @@ Field | Type | Description
 `response.statusText` | `string` | Status text of the response.
 `response.headersSize` | `int` | Size of the response headers.
 `response.bodySize` | `int` | Size of the response body.
-`response.headers` | `array` | Headers sent with the response.
-`response.headers[].name` | `string` | Header name.
-`response.headers[].value` | `string` | Header value.
 `response.httpVersion` | `string` | HTTP version used for the response.
 `response.content` | `object` | Content details of the response.
 `response.content.size` | `int` | Size of the content.
@@ -367,9 +314,6 @@ Field | Type | Description
 `_priority` | `string` | Priority of the request.
 `_initial_priority` | `string` | Initial priority of the request.
 `_server_rtt` | `int` | Server round-trip time.
-`_headers` | `object` | Headers for the request and response.
-`_headers.request` | `array` | Request headers.
-`_headers.response` | `array` | Response headers.
 `_bytesOut` | `int` | Number of bytes sent.
 `_score_cache` | `int` | Cache score.
 `_score_cdn` | `int` | CDN score.
@@ -480,18 +424,6 @@ Details of the request.
 
   Cookies sent with the request.
 
-- #### `request.headers`
-
-  Headers sent with the request.
-
-- #### `request.headers[].name`
-
-  Header name.
-
-- #### `request.headers[].value`
-
-  Header value.
-
 - #### `request.httpVersion`
 
   HTTP version used for the request.
@@ -519,18 +451,6 @@ Details of the response.
 - #### `response.bodySize`
 
   Size of the response body.
-
-- #### `response.headers`
-
-  Headers sent with the response.
-
-- #### `response.headers[].name`
-
-  Header name.
-
-- #### `response.headers[].value`
-
-  Header value.
 
 - #### `response.httpVersion`
 
@@ -823,18 +743,6 @@ Initial priority of the request.
 ### `_server_rtt`
 
 Server round-trip time.
-
-### `_headers`
-
-Headers for the request and response.
-
-- #### `_headers.request`
-
-  Request headers.
-
-- #### `_headers.response`
-
-  Response headers.
 
 ### `_bytesOut`
 
