@@ -290,167 +290,167 @@ Here's an example of the decoded object:
 
 Field | Type | Description
 -- | -- | --
-[`_LargestContentfulPaintNodeType`](#_LargestContentfulPaintNodeType) | `STRING` | The node type of the largest contentful paint
-[`_LargestContentfulPaintType`](#_LargestContentfulPaintType) | `STRING` | The type of the largest contentful paint
-[`_LastInteractive`](#_LastInteractive) | `INTEGER` | The time when the page was last interactive in milliseconds
-[`_PerformancePaintTiming.first-contentful-paint`](#_PerformancePaintTimingfirst-contentful-paint) | `FLOAT` | The time when the first contentful paint occurred in milliseconds
-[`_PerformancePaintTiming.first-paint`](#_PerformancePaintTimingfirst-paint) | `FLOAT` | The time when the first paint occurred in milliseconds
-[`_SpeedIndex`](#_SpeedIndex) | `INTEGER` | The Speed Index score
-[`_TTFB`](#_TTFB) | `INTEGER` | The time to first byte in milliseconds
-[`_TTIMeasurementEnd`](#_TTIMeasurementEnd) | `INTEGER` | The time when the TTI measurement ended in milliseconds
-[`_URL`](#_URL) | `STRING` | The URL of the page
-[`_aft`](#_aft) | `INTEGER` | The above-the-fold time in milliseconds
-[`_audit_issues`](#_audit_issues) | <code>ARRAY&lt;`AuditIssue`></code> | Audit issues
-[`_basePageSSLTime`](#_basePageSSLTime) | `INTEGER` | The time spent on SSL for the base page in milliseconds
-[`_base_page_cdn`](#_base_page_cdn) | `STRING` | The CDN used for the base page
-[`_base_page_cname`](#_base_page_cname) | `STRING` | The CNAME used for the base page
-[`_base_page_dns_server`](#_base_page_dns_server) | `STRING` | The DNS server used for the base page
-[`_base_page_ip_ptr`](#_base_page_ip_ptr) | `STRING` | The IP PTR used for the base page
-[`_browserVersion`](#_browserVersion) | `STRING` | The browser version
-[`_browser_name`](#_browser_name) | `STRING` | The browser name
-[`_browser_version`](#_browser_version) | `STRING` | The browser version
-[`_bytesIn`](#_bytesIn) | `INTEGER` | The number of bytes received in
-[`_bytesInDoc`](#_bytesInDoc) | `INTEGER` | The number of bytes received in the document
-[`_bytesOut`](#_bytesOut) | `INTEGER` | The number of bytes sent out
-[`_bytesOutDoc`](#_bytesOutDoc) | `INTEGER` | The number of bytes sent out in the
-[`_cached`](#_cached) | `INTEGER` | Whether the page was cached
-[`_chromeUserTiming`](#_chromeUserTiming) | <code>ARRAY&lt;`ChromeUserTiming`></code> | Chrome user timing
-[`_chromeUserTiming.CumulativeLayoutShift`](#_chromeUserTimingCumulativeLayoutShift) | `INTEGER` | The cumulative layout shift
-[`_chromeUserTiming.LargestContentfulPaint`](#_chromeUserTimingLargestContentfulPaint) | `INTEGER` | The largest contentful paint
-[`_chromeUserTiming.LargestTextPaint`](#_chromeUserTimingLargestTextPaint) | `INTEGER` | The largest text paint
-[`_chromeUserTiming.TotalLayoutShift`](#_chromeUserTimingTotalLayoutShift) | `INTEGER` | The total layout shift
-[`_chromeUserTiming.commitNavigationEnd`](#_chromeUserTimingcommitNavigationEnd) | `INTEGER` | The commit navigation end
-[`_chromeUserTiming.domComplete`](#_chromeUserTimingdomComplete) | `INTEGER` | The DOM complete
-[`_chromeUserTiming.domContentLoadedEventEnd`](#_chromeUserTimingdomContentLoadedEventEnd) | `INTEGER` | The DOM content loaded event end
-[`_chromeUserTiming.domContentLoadedEventStart`](#_chromeUserTimingdomContentLoadedEventStart) | `INTEGER` | The DOM content loaded event start
-[`_chromeUserTiming.domInteractive`](#_chromeUserTimingdomInteractive) | `INTEGER` | The DOM interactive
-[`_chromeUserTiming.domLoading`](#_chromeUserTimingdomLoading) | `INTEGER` | The DOM loading
-[`_chromeUserTiming.fetchStart`](#_chromeUserTimingfetchStart) | `INTEGER` | The fetch start
-[`_chromeUserTiming.firstContentfulPaint`](#_chromeUserTimingfirstContentfulPaint) | `INTEGER` | The first contentful paint
-[`_chromeUserTiming.firstMeaningfulPaint`](#_chromeUserTimingfirstMeaningfulPaint) | `INTEGER` | The first meaningful paint
-[`_chromeUserTiming.firstMeaningfulPaintCandidate`](#_chromeUserTimingfirstMeaningfulPaintCandidate) | `INTEGER` | The first meaningful paint candidate
-[`_chromeUserTiming.firstPaint`](#_chromeUserTimingfirstPaint) | `INTEGER` | The first paint
-[`_chromeUserTiming.loadEventEnd`](#_chromeUserTimingloadEventEnd) | `INTEGER` | The load event end
-[`_chromeUserTiming.loadEventStart`](#_chromeUserTimingloadEventStart) | `INTEGER` | The load event start
-[`_chromeUserTiming.markAsMainFrame`](#_chromeUserTimingmarkAsMainFrame) | `INTEGER` | The mark as main frame
-[`_chromeUserTiming.navigationStart`](#_chromeUserTimingnavigationStart) | `INTEGER` | The navigation start
-[`_chromeUserTiming.responseEnd`](#_chromeUserTimingresponseEnd) | `INTEGER` | The response end
-[`_chromeUserTiming.unloadEventEnd`](#_chromeUserTimingunloadEventEnd) | `INTEGER` | The unload event end
-[`_chromeUserTiming.unloadEventStart`](#_chromeUserTimingunloadEventStart) | `INTEGER` | The unload event start
-[`_connections`](#_connections) | `INTEGER` | The number of connections
-[`_consoleLog`](#_consoleLog) | <code>ARRAY&lt;`ConsoleLog`></code> | Console logs
-[`_cpu.CommitLoad`](#_cpuCommitLoad) | `INTEGER` | The CPU time spent on commit load in milliseconds
-[`_cpu.EventDispatch`](#_cpuEventDispatch) | `INTEGER` | The CPU time spent on event dispatch in milliseconds
-[`_cpu.FunctionCall`](#_cpuFunctionCall) | `INTEGER` | The CPU time spent on function call in milliseconds
-[`_cpu.HTMLDocumentParser::FetchQueuedPreloads`](#_cpuHTMLDocumentParserFetchQueuedPreloads) | `INTEGER` | The CPU time spent on HTML document parser fetch queued preloads in milliseconds
-[`_cpu.Idle`](#_cpuIdle) | `INTEGER` | The CPU time spent on idle in milliseconds
-[`_cpu.Layerize`](#_cpuLayerize) | `INTEGER` | The CPU time spent on layerize in milliseconds
-[`_cpu.Layout`](#_cpuLayout) | `INTEGER` | The CPU time spent on layout in milliseconds
-[`_cpu.MarkDOMContent`](#_cpuMarkDOMContent) | `INTEGER` | The CPU time spent on marking DOM content in milliseconds
-[`_cpu.MarkLoad`](#_cpuMarkLoad) | `INTEGER` | The CPU time spent on marking load in milliseconds
-[`_cpu.Paint`](#_cpuPaint) | `INTEGER` | The CPU time spent on paint in milliseconds
-[`_cpu.ParseHTML`](#_cpuParseHTML) | `INTEGER` | The CPU time spent on parsing HTML in milliseconds
-[`_cpu.PrePaint`](#_cpuPrePaint) | `INTEGER` | The CPU time spent on pre-paint in milliseconds
-[`_cpu.ResourceFetcher::requestResource`](#_cpuResourceFetcherrequestResource) | `INTEGER` | The CPU time spent on resource fetcher request resource in milliseconds
-[`_cpu.UpdateLayoutTree`](#_cpuUpdateLayoutTree) | `INTEGER` | The CPU time spent on updating layout tree in milliseconds
-[`_cpu.V8.GC_TIME_TO_SAFEPOINT`](#_cpuV8GC_TIMETO_SAFEPOINT) | `INTEGER` | The CPU time spent on V8 GC time to safepoint in milliseconds
-[`_cpu.largestContentfulPaint::Candidate`](#_cpulargestContentfulPaintCandidate) | `INTEGER` | The CPU time spent on largest contentful paint candidate in milliseconds
-[`_cpuTimes`](#_cpuTimes) | <code>OBJECT&lt;`CPU`></code> | CPU times
-[`_cpuTimesDoc`](#_cpuTimesDoc) | <code>OBJECT&lt;`CPU`></code> | CPU times for the document
-[`_date`](#_date) | `FLOAT` | The date in Unix timestamp format
-[`_docTime`](#_docTime) | `INTEGER` | The document time in milliseconds
-[`_document_URL`](#_document_URL) | `STRING` | The URL of the document
-[`_document_hostname`](#_document_hostname) | `STRING` | The hostname of the document
-[`_document_origin`](#_document_origin) | `STRING` | The origin of the document
-[`_domComplete`](#_domComplete) | `INTEGER` | The DOM complete in milliseconds
-[`_domContentLoadedEventEnd`](#_domContentLoadedEventEnd) | `INTEGER` | The DOM content loaded event end in milliseconds
-[`_domContentLoadedEventStart`](#_domContentLoadedEventStart) | `INTEGER` | The DOM content loaded event start in milliseconds
-[`_domElements`](#_domElements) | `INTEGER` | The number of DOM elements
-[`_domInteractive`](#_domInteractive) | `INTEGER` | The DOM interactive in milliseconds
-[`_domLoading`](#_domLoading) | `INTEGER` | The DOM loading in milliseconds
-[`_domTime`](#_domTime) | `INTEGER` | The DOM time in milliseconds
-[`_edge-processed`](#_edge-processed) | `BOOLEAN` | Whether the page was processed by Edge
-[`_effectiveBps`](#_effectiveBps) | `INTEGER` | The effective BPS
-[`_eventName`](#_eventName) | `STRING` | The event name
-[`_execution_contexts`](#_execution_contexts) | <code>ARRAY&lt;`ExecutionContext`></code> | Execution contexts
-[`_final_base_page_request`](#_final_base_page_request) | `INTEGER` | The final base page request
-[`_final_base_page_request_id`](#_final_base_page_request_id) | `STRING` | The final base page request ID
-[`_final_url`](#_final_url) | `STRING` | The final URL
-[`_firstContentfulPaint`](#_firstContentfulPaint) | `INTEGER` | The first contentful paint in milliseconds
-[`_firstMeaningfulPaint`](#_firstMeaningfulPaint) | `INTEGER` | The first meaningful paint in milliseconds
-[`_firstPaint`](#_firstPaint) | `FLOAT` | The first paint in milliseconds
-[`_fullyLoaded`](#_fullyLoaded) | `INTEGER` | The fully loaded time in milliseconds
-[`_fullyLoadedCPUms`](#_fullyLoadedCPUms) | `INTEGER` | The fully loaded CPU time in milliseconds
-[`_fullyLoadedCPUpct`](#_fullyLoadedCPUpct) | `FLOAT` | The fully loaded CPU percentage
-[`_gzip_savings`](#_gzip_savings) | `INTEGER` | The bytes saved by gzip compression
-[`_gzip_total`](#_gzip_total) | `INTEGER` | The total bytes in gzip compression
-[`_image_savings`](#_image_savings) | `INTEGER` | The bytes saved by image compression
-[`_image_total`](#_image_total) | `INTEGER` | The total bytes in image compression
-[`_interactivePeriods`](#_interactivePeriods) | <code>ARRAY&lt;`InteractivePeriod`></code> | Interactive periods
-[`_largestPaints`](#_largestPaints) | <code>ARRAY&lt;`LargestPaint`></code> | Largest paints
-[`_lastVisualChange`](#_lastVisualChange) | `INTEGER` | The time of the last visual change in milliseconds
-[`_lighthouse.Accessibility`](#_lighthouseAccessibility) | `FLOAT` | The Lighthouse accessibility score
-[`_lighthouse.BestPractices`](#_lighthouseBestPractices) | `FLOAT` | The Lighthouse best practices score
-[`_lighthouse.Performance`](#_lighthousePerformance) | `FLOAT` | The Lighthouse performance score
-[`_lighthouse.Performance.cumulative-layout-shift`](#_lighthousePerformancecumulative-layout-shift) | `INTEGER` | The Lighthouse cumulative layout shift
-[`_lighthouse.Performance.first-contentful-paint`](#_lighthousePerformancefirst-contentful-paint) | `FLOAT` | The Lighthouse first contentful paint
-[`_lighthouse.Performance.largest-contentful-paint`](#_lighthousePerformancelargest-contentful-paint) | `FLOAT` | The Lighthouse largest contentful paint
-[`_lighthouse.Performance.speed-index`](#_lighthousePerformancespeed-index) | `INTEGER` | The Lighthouse speed index
-[`_lighthouse.Performance.total-blocking-time`](#_lighthousePerformancetotal-blocking-time) | `INTEGER` | The Lighthouse total blocking time
-[`_lighthouse.SEO`](#_lighthouseSEO) | `FLOAT` | The Lighthouse SEO score
-[`_loadEventEnd`](#_loadEventEnd) | `INTEGER` | The load event end in milliseconds
-[`_loadEventStart`](#_loadEventStart) | `INTEGER` | The load event start in milliseconds
-[`_loadTime`](#_loadTime) | `INTEGER` | The load time in milliseconds
-[`_main_frame`](#_main_frame) | `STRING` | The main frame
-[`_minify_savings`](#_minify_savings) | `INTEGER` | The bytes saved by minification
-[`_minify_total`](#_minify_total) | `INTEGER` | The total bytes in minification
-[`_optimization_checked`](#_optimization_checked) | `INTEGER` | Whether optimization checks were performed
-[`_origin_dns`](#_origin_dns) | <code>OBJECT&lt;`OriginDNS`></code> | Origin DNS
-[`_osPlatform`](#_osPlatform) | `STRING` | The OS platform
-[`_osVersion`](#_osVersion) | `STRING` | The OS version
-[`_os_version`](#_os_version) | `STRING` | The OS version
-[`_render`](#_render) | `INTEGER` | The render time in milliseconds
-[`_renderBlockingCSS`](#_renderBlockingCSS) | `INTEGER` | The render blocking CSS time in milliseconds
-[`_renderBlockingJS`](#_renderBlockingJS) | `INTEGER` | The render blocking JS time in milliseconds
-[`_requests`](#_requests) | `INTEGER` | The number of requests
-[`_requestsDoc`](#_requestsDoc) | `INTEGER` | The number of requests in the document
-[`_requestsFull`](#_requestsFull) | `INTEGER` | The number of full requests
-[`_responses_200`](#_responses_200) | `INTEGER` | The number of 200 responses
-[`_responses_404`](#_responses_404) | `INTEGER` | The number of 404 responses
-[`_responses_other`](#_responses_other) | `INTEGER` | The number of other responses
-[`_result`](#_result) | `INTEGER` | The result
-[`_run`](#_run) | `INTEGER` | The run
-[`_score_cache`](#_score_cache) | `INTEGER` | The cache score
-[`_score_cdn`](#_score_cdn) | `INTEGER` | The CDN score
-[`_score_combine`](#_score_combine) | `INTEGER` | The combine score
-[`_score_compress`](#_score_compress) | `INTEGER` | The compress score
-[`_score_cookies`](#_score_cookies) | `INTEGER` | The cookies score
-[`_score_etags`](#_score_etags) | `INTEGER` | The etags score
-[`_score_gzip`](#_score_gzip) | `INTEGER` | The gzip score
-[`_score_keep-alive`](#_score_keep-alive) | `INTEGER` | The keep-alive score
-[`_score_minify`](#_score_minify) | `INTEGER` | The minify score
-[`_score_progressive_jpeg`](#_score_progressive_jpeg) | `INTEGER` | The progressive JPEG score
-[`_server_rtt`](#_server_rtt) | `INTEGER` | The server RTT
-[`_start_epoch`](#_start_epoch) | `FLOAT` | The start epoch in Unix timestamp format
-[`_step`](#_step) | `INTEGER` | The step
-[`_testID`](#_testID) | `STRING` | The test ID
-[`_testStartOffset`](#_testStartOffset) | `INTEGER` | The test start offset
-[`_testUrl`](#_testUrl) | `STRING` | The test URL
-[`_test_run_time_ms`](#_test_run_time_ms) | `INTEGER` | The test run time in milliseconds
-[`_tester`](#_tester) | `STRING` | The tester
-[`_titleTime`](#_titleTime) | `INTEGER` | The title time in milliseconds
-[`_v8Stats`](#_v8Stats) | <code>OBJECT&lt;`V8Stats`></code> | V8 stats
-[`_viewport`](#_viewport) | <code>OBJECT&lt;`Viewport`></code> | The viewport
-[`_visualComplete`](#_visualComplete) | `INTEGER` | The visual complete time in milliseconds
-[`_visualComplete85`](#_visualComplete85) | `INTEGER` | The 85th percentile visual complete time in milliseconds
-[`_visualComplete90`](#_visualComplete90) | `INTEGER` | The 90th percentile visual complete time in milliseconds
-[`_visualComplete95`](#_visualComplete95) | `INTEGER` | The 95th percentile visual complete time in milliseconds
-[`_visualComplete99`](#_visualComplete99) | `INTEGER` | The 99th percentile visual complete time in milliseconds
-[`id`](#id) | `STRING` | The page ID
-[`pageTimings`](#pageTimings) | <code>OBJECT&lt;`PageTimings`></code> | Page timings
-[`startedDateTime`](#startedDateTime) | `STRING` | The start date and time of the page in Unix timestamp format
-[`testID`](#testID) | `STRING` | The test ID
-[`title`](#title) | `STRING` | The page title
+[`_LargestContentfulPaintNodeType`](#_largestcontentfulpaintnodetype) | `string` | The node type of the largest contentful paint
+[`_LargestContentfulPaintType`](#_largestcontentfulpainttype) | `string` | The type of the largest contentful paint
+[`_LastInteractive`](#_lastinteractive) | `int` | The time when the page was last interactive in milliseconds
+[`_PerformancePaintTiming.first-contentful-paint`](#_performancepainttimingfirst-contentful-paint) | `float` | The time when the first contentful paint occurred in milliseconds
+[`_PerformancePaintTiming.first-paint`](#_performancepainttimingfirst-paint) | `float` | The time when the first paint occurred in milliseconds
+[`_SpeedIndex`](#_speedindex) | `int` | The Speed Index score
+[`_TTFB`](#_ttfb) | `int` | The time to first byte in milliseconds
+[`_TTIMeasurementEnd`](#_ttimeasurementend) | `int` | The time when the TTI measurement ended in milliseconds
+[`_URL`](#_url) | `string` | The URL of the page
+[`_aft`](#_aft) | `int` | The above-the-fold time in milliseconds
+[`_audit_issues`](#_audit_issues) | `array` | Audit issues
+[`_basePageSSLTime`](#_basepagessltime) | `int` | The time spent on SSL for the base page in milliseconds
+[`_base_page_cdn`](#_base_page_cdn) | `string` | The CDN used for the base page
+[`_base_page_cname`](#_base_page_cname) | `string` | The CNAME used for the base page
+[`_base_page_dns_server`](#_base_page_dns_server) | `string` | The DNS server used for the base page
+[`_base_page_ip_ptr`](#_base_page_ip_ptr) | `string` | The IP PTR used for the base page
+[`_browserVersion`](#_browserversion) | `string` | The browser version
+[`_browser_name`](#_browser_name) | `string` | The browser name
+[`_browser_version`](#_browser_version) | `string` | The browser version
+[`_bytesIn`](#_bytesin) | `int` | The number of bytes received in
+[`_bytesInDoc`](#_bytesindoc) | `int` | The number of bytes received in the document
+[`_bytesOut`](#_bytesout) | `int` | The number of bytes sent out
+[`_bytesOutDoc`](#_bytesoutdoc) | `int` | The number of bytes sent out in the
+[`_cached`](#_cached) | `int` | Whether the page was cached
+[`_chromeUserTiming`](#_chromeusertiming) | `array` | Chrome user timing
+[`_chromeUserTiming.CumulativeLayoutShift`](#_chromeusertimingcumulativelayoutshift) | `int` | The cumulative layout shift
+[`_chromeUserTiming.LargestContentfulPaint`](#_chromeusertiminglargestcontentfulpaint) | `int` | The largest contentful paint
+[`_chromeUserTiming.LargestTextPaint`](#_chromeusertiminglargesttextpaint) | `int` | The largest text paint
+[`_chromeUserTiming.TotalLayoutShift`](#_chromeusertimingtotallayoutshift) | `int` | The total layout shift
+[`_chromeUserTiming.commitNavigationEnd`](#_chromeusertimingcommitnavigationend) | `int` | The commit navigation end
+[`_chromeUserTiming.domComplete`](#_chromeusertimingdomcomplete) | `int` | The DOM complete
+[`_chromeUserTiming.domContentLoadedEventEnd`](#_chromeusertimingdomcontentloadedeventend) | `int` | The DOM content loaded event end
+[`_chromeUserTiming.domContentLoadedEventStart`](#_chromeusertimingdomcontentloadedeventstart) | `int` | The DOM content loaded event start
+[`_chromeUserTiming.domInteractive`](#_chromeusertimingdominteractive) | `int` | The DOM interactive
+[`_chromeUserTiming.domLoading`](#_chromeusertimingdomloading) | `int` | The DOM loading
+[`_chromeUserTiming.fetchStart`](#_chromeusertimingfetchstart) | `int` | The fetch start
+[`_chromeUserTiming.firstContentfulPaint`](#_chromeusertimingfirstcontentfulpaint) | `int` | The first contentful paint
+[`_chromeUserTiming.firstMeaningfulPaint`](#_chromeusertimingfirstmeaningfulpaint) | `int` | The first meaningful paint
+[`_chromeUserTiming.firstMeaningfulPaintCandidate`](#_chromeusertimingfirstmeaningfulpaintcandidate) | `int` | The first meaningful paint candidate
+[`_chromeUserTiming.firstPaint`](#_chromeusertimingfirstpaint) | `int` | The first paint
+[`_chromeUserTiming.loadEventEnd`](#_chromeusertimingloadeventend) | `int` | The load event end
+[`_chromeUserTiming.loadEventStart`](#_chromeusertimingloadeventstart) | `int` | The load event start
+[`_chromeUserTiming.markAsMainFrame`](#_chromeusertimingmarkasmainframe) | `int` | The mark as main frame
+[`_chromeUserTiming.navigationStart`](#_chromeusertimingnavigationstart) | `int` | The navigation start
+[`_chromeUserTiming.responseEnd`](#_chromeusertimingresponseend) | `int` | The response end
+[`_chromeUserTiming.unloadEventEnd`](#_chromeusertimingunloadeventend) | `int` | The unload event end
+[`_chromeUserTiming.unloadEventStart`](#_chromeusertimingunloadeventstart) | `int` | The unload event start
+[`_connections`](#_connections) | `int` | The number of connections
+[`_consoleLog`](#_consolelog) | `array` | Console logs
+[`_cpu.CommitLoad`](#_cpucommitload) | `int` | The CPU time spent on commit load in milliseconds
+[`_cpu.EventDispatch`](#_cpueventdispatch) | `int` | The CPU time spent on event dispatch in milliseconds
+[`_cpu.FunctionCall`](#_cpufunctioncall) | `int` | The CPU time spent on function call in milliseconds
+[`_cpu.HTMLDocumentParser::FetchQueuedPreloads`](#_cpuhtmldocumentparserfetchqueuedpreloads) | `int` | The CPU time spent on HTML document parser fetch queued preloads in milliseconds
+[`_cpu.Idle`](#_cpuidle) | `int` | The CPU time spent on idle in milliseconds
+[`_cpu.Layerize`](#_cpulayerize) | `int` | The CPU time spent on layerize in milliseconds
+[`_cpu.Layout`](#_cpulayout) | `int` | The CPU time spent on layout in milliseconds
+[`_cpu.MarkDOMContent`](#_cpumarkdomcontent) | `int` | The CPU time spent on marking DOM content in milliseconds
+[`_cpu.MarkLoad`](#_cpumarkload) | `int` | The CPU time spent on marking load in milliseconds
+[`_cpu.Paint`](#_cpupaint) | `int` | The CPU time spent on paint in milliseconds
+[`_cpu.ParseHTML`](#_cpuparsehtml) | `int` | The CPU time spent on parsing HTML in milliseconds
+[`_cpu.PrePaint`](#_cpuprepaint) | `int` | The CPU time spent on pre-paint in milliseconds
+[`_cpu.ResourceFetcher::requestResource`](#_cpuresourcefetcherrequestresource) | `int` | The CPU time spent on resource fetcher request resource in milliseconds
+[`_cpu.UpdateLayoutTree`](#_cpuupdatelayouttree) | `int` | The CPU time spent on updating layout tree in milliseconds
+[`_cpu.V8.GC_TIME_TO_SAFEPOINT`](#_cpuv8gc_timeto_safepoint) | `int` | The CPU time spent on V8 GC time to safepoint in milliseconds
+[`_cpu.largestContentfulPaint::Candidate`](#_cpulargestcontentfulpaintcandidate) | `int` | The CPU time spent on largest contentful paint candidate in milliseconds
+[`_cpuTimes`](#_cputimes) | `object` | CPU times
+[`_cpuTimesDoc`](#_cputimesdoc) | `object` | CPU times for the document
+[`_date`](#_date) | `float` | The date in Unix timestamp format
+[`_docTime`](#_doctime) | `int` | The document time in milliseconds
+[`_document_URL`](#_document_url) | `string` | The URL of the document
+[`_document_hostname`](#_document_hostname) | `string` | The hostname of the document
+[`_document_origin`](#_document_origin) | `string` | The origin of the document
+[`_domComplete`](#_domcomplete) | `int` | The DOM complete in milliseconds
+[`_domContentLoadedEventEnd`](#_domcontentloadedeventend) | `int` | The DOM content loaded event end in milliseconds
+[`_domContentLoadedEventStart`](#_domcontentloadedeventstart) | `int` | The DOM content loaded event start in milliseconds
+[`_domElements`](#_domelements) | `int` | The number of DOM elements
+[`_domInteractive`](#_dominteractive) | `int` | The DOM interactive in milliseconds
+[`_domLoading`](#_domloading) | `int` | The DOM loading in milliseconds
+[`_domTime`](#_domtime) | `int` | The DOM time in milliseconds
+[`_edge-processed`](#_edge-processed) | `boolean` | Whether the page was processed by Edge
+[`_effectiveBps`](#_effectivebps) | `int` | The effective BPS
+[`_eventName`](#_eventname) | `string` | The event name
+[`_execution_contexts`](#_execution_contexts) | `array` | Execution contexts
+[`_final_base_page_request`](#_final_base_page_request) | `int` | The final base page request
+[`_final_base_page_request_id`](#_final_base_page_request_id) | `string` | The final base page request ID
+[`_final_url`](#_final_url) | `string` | The final URL
+[`_firstContentfulPaint`](#_firstcontentfulpaint) | `int` | The first contentful paint in milliseconds
+[`_firstMeaningfulPaint`](#_firstmeaningfulpaint) | `int` | The first meaningful paint in milliseconds
+[`_firstPaint`](#_firstpaint) | `float` | The first paint in milliseconds
+[`_fullyLoaded`](#_fullyloaded) | `int` | The fully loaded time in milliseconds
+[`_fullyLoadedCPUms`](#_fullyloadedcpums) | `int` | The fully loaded CPU time in milliseconds
+[`_fullyLoadedCPUpct`](#_fullyloadedcpupct) | `float` | The fully loaded CPU percentage
+[`_gzip_savings`](#_gzip_savings) | `int` | The bytes saved by gzip compression
+[`_gzip_total`](#_gzip_total) | `int` | The total bytes in gzip compression
+[`_image_savings`](#_image_savings) | `int` | The bytes saved by image compression
+[`_image_total`](#_image_total) | `int` | The total bytes in image compression
+[`_interactivePeriods`](#_interactiveperiods) | `array` | Interactive periods
+[`_largestPaints`](#_largestpaints) | `array` | Largest paints
+[`_lastVisualChange`](#_lastvisualchange) | `int` | The time of the last visual change in milliseconds
+[`_lighthouse.Accessibility`](#_lighthouseaccessibility) | `float` | The Lighthouse accessibility score
+[`_lighthouse.BestPractices`](#_lighthousebestpractices) | `float` | The Lighthouse best practices score
+[`_lighthouse.Performance`](#_lighthouseperformance) | `float` | The Lighthouse performance score
+[`_lighthouse.Performance.cumulative-layout-shift`](#_lighthouseperformancecumulative-layout-shift) | `int` | The Lighthouse cumulative layout shift
+[`_lighthouse.Performance.first-contentful-paint`](#_lighthouseperformancefirst-contentful-paint) | `float` | The Lighthouse first contentful paint
+[`_lighthouse.Performance.largest-contentful-paint`](#_lighthouseperformancelargest-contentful-paint) | `float` | The Lighthouse largest contentful paint
+[`_lighthouse.Performance.speed-index`](#_lighthouseperformancespeed-index) | `int` | The Lighthouse speed index
+[`_lighthouse.Performance.total-blocking-time`](#_lighthouseperformancetotal-blocking-time) | `int` | The Lighthouse total blocking time
+[`_lighthouse.SEO`](#_lighthouseseo) | `float` | The Lighthouse SEO score
+[`_loadEventEnd`](#_loadeventend) | `int` | The load event end in milliseconds
+[`_loadEventStart`](#_loadeventstart) | `int` | The load event start in milliseconds
+[`_loadTime`](#_loadtime) | `int` | The load time in milliseconds
+[`_main_frame`](#_main_frame) | `string` | The main frame
+[`_minify_savings`](#_minify_savings) | `int` | The bytes saved by minification
+[`_minify_total`](#_minify_total) | `int` | The total bytes in minification
+[`_optimization_checked`](#_optimization_checked) | `int` | Whether optimization checks were performed
+[`_origin_dns`](#_origin_dns) | `object` | Origin DNS
+[`_osPlatform`](#_osplatform) | `string` | The OS platform
+[`_osVersion`](#_osversion) | `string` | The OS version
+[`_os_version`](#_os_version) | `string` | The OS version
+[`_render`](#_render) | `int` | The render time in milliseconds
+[`_renderBlockingCSS`](#_renderblockingcss) | `int` | The render blocking CSS time in milliseconds
+[`_renderBlockingJS`](#_renderblockingjs) | `int` | The render blocking JS time in milliseconds
+[`_requests`](#_requests) | `int` | The number of requests
+[`_requestsDoc`](#_requestsdoc) | `int` | The number of requests in the document
+[`_requestsFull`](#_requestsfull) | `int` | The number of full requests
+[`_responses_200`](#_responses_200) | `int` | The number of 200 responses
+[`_responses_404`](#_responses_404) | `int` | The number of 404 responses
+[`_responses_other`](#_responses_other) | `int` | The number of other responses
+[`_result`](#_result) | `int` | The result
+[`_run`](#_run) | `int` | The run
+[`_score_cache`](#_score_cache) | `int` | The cache score
+[`_score_cdn`](#_score_cdn) | `int` | The CDN score
+[`_score_combine`](#_score_combine) | `int` | The combine score
+[`_score_compress`](#_score_compress) | `int` | The compress score
+[`_score_cookies`](#_score_cookies) | `int` | The cookies score
+[`_score_etags`](#_score_etags) | `int` | The etags score
+[`_score_gzip`](#_score_gzip) | `int` | The gzip score
+[`_score_keep-alive`](#_score_keep-alive) | `int` | The keep-alive score
+[`_score_minify`](#_score_minify) | `int` | The minify score
+[`_score_progressive_jpeg`](#_score_progressive_jpeg) | `int` | The progressive JPEG score
+[`_server_rtt`](#_server_rtt) | `int` | The server RTT
+[`_start_epoch`](#_start_epoch) | `float` | The start epoch in Unix timestamp format
+[`_step`](#_step) | `int` | The step
+[`_testID`](#_testid) | `string` | The test ID
+[`_testStartOffset`](#_teststartoffset) | `int` | The test start offset
+[`_testUrl`](#_testurl) | `string` | The test URL
+[`_test_run_time_ms`](#_test_run_time_ms) | `int` | The test run time in milliseconds
+[`_tester`](#_tester) | `string` | The tester
+[`_titleTime`](#_titletime) | `int` | The title time in milliseconds
+[`_v8Stats`](#_v8stats) | `object` | V8 stats
+[`_viewport`](#_viewport) | `object` | The viewport
+[`_visualComplete`](#_visualcomplete) | `int` | The visual complete time in milliseconds
+[`_visualComplete85`](#_visualcomplete85) | `int` | The 85th percentile visual complete time in milliseconds
+[`_visualComplete90`](#_visualcomplete90) | `int` | The 90th percentile visual complete time in milliseconds
+[`_visualComplete95`](#_visualcomplete95) | `int` | The 95th percentile visual complete time in milliseconds
+[`_visualComplete99`](#_visualcomplete99) | `int` | The 99th percentile visual complete time in milliseconds
+[`id`](#id) | `string` | The page ID
+[`pageTimings`](#pagetimings) | `object` | Page timings
+[`startedDateTime`](#starteddatetime) | `string` | The start date and time of the page in Unix timestamp format
+[`testID`](#testid) | `string` | The test ID
+[`title`](#title) | `string` | The page title
 
 ### `_LargestContentfulPaintNodeType`
 
