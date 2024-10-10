@@ -12,26 +12,27 @@ Here's an example of the decoded object:
 
 ```json
 {
-    "pageid": 24036445,
-    "crawlid": 0,
-    "time": 260,
     "_cdn_provider": "Edgecast",
     "_gzip_save": 0,
-    "method": "GET",
-    "reqHeadersSize": 683,
-    "reqBodySize": null,
-    "reqCookieLen": 0,
-    "status": 200,
-    "respHttpVersion": "HTTP/2",
-    "redirectUrl": null,
-    "respHeadersSize": 376,
-    "respBodySize": 648,
-    "respSize": 648,
-    "mimeType": "text/html",
+    "crawlid": 0,
+    "expAge": 604800,
     "ext": "",
     "format": "",
+    "method": "GET",
+    "mimeType": "text/html",
+    "pageid": 24982509,
+    "redirectUrl": null,
+    "reqBodySize": null,
+    "reqCookieLen": 0,
+    "reqHeadersSize": 683,
+    "respBodySize": 648,
     "respCookieLen": 0,
-    "expAge": 604800,
+    "respHeadersSize": 376,
+    "respHttpVersion": "HTTP/2",
+    "respSize": 648,
+    "status": 200,
+    "time": 285,
+    "type": "html"
 }
 ```
 
