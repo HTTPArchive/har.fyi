@@ -14,13 +14,11 @@ Here's an example of the decoded object:
 {
     "_cdn_provider": "Edgecast",
     "_gzip_save": 0,
-    "crawlid": 0,
     "expAge": 604800,
     "ext": "",
     "format": "",
     "method": "GET",
     "mimeType": "text/html",
-    "pageid": 24982509,
     "redirectUrl": null,
     "reqBodySize": null,
     "reqCookieLen": 0,
@@ -37,14 +35,6 @@ Here's an example of the decoded object:
 ```
 
 ## Schema
-
-### `pageid`
-
-The unique identifier for the page associated with the request.
-
-### `crawlid`
-
-The crawl identifier.
 
 ### `time`
 
