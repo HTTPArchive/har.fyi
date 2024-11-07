@@ -1,11 +1,11 @@
 ---
 title: Requests table
-description: Reference docs for the httparchive.all.requests table
+description: Reference docs for the httparchive.crawl.requests table
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-[`httparchive.all.requests`](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!4m3!1shttparchive!2sall!3srequests) is a partitioned and clustered table containing one row per request per page tested in the HTTP Archive. Pages are tested on a monthly basis and as of April 2022, both the root page and one secondary page are tested.
+[`httparchive.crawl.requests`](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!4m3!1shttparchive!2scrawl!3srequests) is a partitioned and clustered table containing one row per request per page tested in the HTTP Archive. Pages are tested on a monthly basis and as of April 2022, both the root page and one secondary page are tested.
 
 ## Example queries
 
@@ -22,7 +22,7 @@ Here are some common operations you can perform with the `requests` table.
     client,
     is_root_page,
     count(0) AS requests_total
-  FROM `httparchive.all.requests`
+  FROM `httparchive.crawl.requests`
   WHERE date = "2024-05-01"
   group by client, is_root_page
   ```
@@ -54,7 +54,7 @@ Let's check the size of individual requests served from websites across the enti
       CEIL(INT64(summary.respBodySize)/1024/100)*100 AS responseSize100KB,
       COUNT(0) OVER () AS total_requests
     FROM
-      `httparchive.all.requests` TABLESAMPLE SYSTEM (1 PERCENT)
+      `httparchive.crawl.requests` TABLESAMPLE SYSTEM (1 PERCENT)
     WHERE
       date = '2024-06-01'
       AND client = 'desktop'
@@ -111,7 +111,7 @@ Let's filter out all of the non-Image content and examine the popularity of vari
       COUNT(0) OVER() AS total_requests,
       COUNT(DISTINCT page) OVER() AS total_pages
     FROM
-      `httparchive.all.requests` TABLESAMPLE SYSTEM (1 PERCENT)
+      `httparchive.crawl.requests` TABLESAMPLE SYSTEM (1 PERCENT)
     WHERE
       date = '2024-06-01'
       AND client = 'desktop'

@@ -43,7 +43,7 @@ In order to access the HTTP Archive via BigQuery, you'll need a Google account. 
 
     ![BigQuery HTTPArchive pinned](./bigquery-httparchive-dataset-pinned.png)
 
-9. Let's run a quick sample query to confirm access is all working. Navigate to the `all` dataset and select the `pages` table:
+9. Let's run a quick sample query to confirm access is all working. Navigate to the `crawl` dataset and select the `pages` table:
 
     ![BigQuery summary_pages tables](./bigquery-summary_pages.png)
 
@@ -65,7 +65,7 @@ In order to access the HTTP Archive via BigQuery, you'll need a Google account. 
 
     ```sql
     SELECT *
-    FROM `httparchive.all.pages` TABLESAMPLE SYSTEM (0.00001 PERCENT)
+    FROM `httparchive.crawl.pages` TABLESAMPLE SYSTEM (0.00001 PERCENT)
     WHERE date = "2024-05-01"
     ```
 
@@ -86,8 +86,8 @@ summary_requests.* | ~1.9 TB | Desktop: ~1.3B, Mobile: ~1.5B | Desktop: Nov 2010
 pages.* | ~3.1 TB | Desktop: ~13 M, Mobile: ~16 M | Jan 2016
 requests.* | ~12.5 TB | Desktop: ~1.3 B, Mobile: ~1.5 B | Jan 2016
 response_bodies.* | ~48 TB | Desktop: ~647 M, Mobile: ~780 M | Jan 2016
-all.pages | ~42 TB | Desktop: ~24M, Mobile: ~30M | Mar 2022
-all.requests | ~231 TB | Desktop: ~2.4B, Mobile: ~2.7B | Mar 2022
+crawl.pages | ~42 TB | Desktop: ~24M, Mobile: ~30M | Mar 2022
+crawl.requests | ~231 TB | Desktop: ~2.4B, Mobile: ~2.7B | Mar 2022
 lighthouse.* | ~200 GB | Desktop: 12M, Mobile: ~16M | June 2017
 
 :::note
@@ -95,7 +95,7 @@ If table names are mentioned as a wildcard, then the table names all follow the 
 Size and row are rounded counts as of May 2024.
 :::
 
-In order to understand what each of these tables contain, you can click on the table name and view the details. For example, if you expand the `all` dataset and click on the `pages` table you can see the schema. Clicking **Details** tells you some information about the table, such as its size and the number of rows. Clicking **Preview** shows an example of some data from the table.
+In order to understand what each of these tables contain, you can click on the table name and view the details. For example, if you expand the `crawl` dataset and click on the `pages` table you can see the schema. Clicking **Details** tells you some information about the table, such as its size and the number of rows. Clicking **Preview** shows an example of some data from the table.
 
 ![Table Preview](./exploring_summary_pages_tables.png)
 
@@ -105,63 +105,15 @@ Some of the types of tables you'll find useful when getting started are describe
 
 The HTTP Archive stores detailed information about each page load in [HAR (HTTP Archive) files](https://en.wikipedia.org/wiki/.har). Each HAR file is JSON formatted and contains detailed performance data about a web page. The [specification for this format](https://w3c.github.io/web-performance/specs/HAR/Overview.html) is produced by the Web Performance Working Group of the W3C. The HTTP Archive splits each HAR file into multiple BigQuery tables, which are described below.
 
-* [`httparchive.all.pages`](/reference/tables/pages/):
+* [`httparchive.crawl.pages`](/reference/tables/pages/):
 
   * HAR extract for each page url.
   * This table is very large (~938TB as of Jun 2024).
 
-* [`httparchive.all.requests`](/reference/tables/requests/):
+* [`httparchive.crawl.requests`](/reference/tables/requests/):
 
   * HAR extract for each resource.
   * This table is very large (4.97PB as of Jun 2024)
-
-* `httparchive.response_bodies.YYYY_MM_DD_CLIENT`:
-
-  * Tables are **OUTDATED**, please use the [`response_body` column](/reference/tables/requests/#response_body) instead.
-  * HAR extract containing response bodies for each request.
-  * Table contains a document url, resource url and a JSON-encoded HAR extract containing the first 2MB of each response body.
-  * Payloads are truncated at 2MB, and there is a column to indicate whether the payload was truncated.
-  * These tables are extremely large (2.5TB as of Aug 2018).
-
-* `httparchive.lighthouse.YYYY_MM_DD_CLIENT`:
-
-  * Tables are **OUTDATED**, please use the [`lighthouse` column](/reference/tables/pages/#lighthouse) instead.
-  * Results from a [Lighthouse](https://developers.google.com/web/tools/lighthouse/) audit of a page.
-  * Table contains a url, and a JSON-encoded copy of the lighthouse report.
-  * Lighthouse was intially only run on mobile, but as of May 2021 also runs as part of the desktop crawl.
-  * These tables are very large (2.3 TB for Mobile only as of May 2021)
-
-* `httparchive.pages.YYYY_MM_DD_CLIENT`:
-
-  * Tables are **OUTDATED**, please use the [`httparchive.all.pages` tables](/reference/tables/requests/) instead.
-  * HAR extract for each page url.
-  * Table contains a url and a JSON-encoded HAR file for the document.
-  * These tables are large (~13GB as of Aug 2018).
-
-* `httparchive.requests.YYYY_MM_DD_CLIENT`:
-
-  * Tables are **OUTDATED**, please use the [`httparchive.all.requests` tables](/reference/tables/requests/) instead.
-  * HAR extract for each resource.
-  * Table contains a document url, resource url and a JSON-encoded HAR extract for each resource.
-  * These tables are very large (810GB as of Jun 2024)
-
-### Summary Tables
-
-* `httparchive.summary_pages.YYYY_MM_DD_CLIENT`:
-
-  * Tables are **OUTDATED**, please use the [`summary` column](/reference/tables/pages/#summary) instead.
-  * Each row contains details about a single page including timings, # of requests, types of requests and sizes.
-  * Information about the page load such # of domains, redirects, errors, https requests, CDN, etc.
-  * Summary of different caching parameters.
-  * Each page URL is associated with a "pageid".
-
-* `httparchive.summary_requests.YYYY_MM_DD_CLIENT`:
-
-  * Tables are **OUTDATED**, please use the [`summary` column](/reference/tables/requests/#summary) instead.
-  * Every single object loaded by all of the pages.
-  * Each object has a requestid and a pageid.  The pageid can be used to JOIN the corresponding summary_pages table.
-  * Information about the object, and how it was loaded.
-  * Contains some response headers for each object.
 
 ### Other Tables
 
@@ -171,22 +123,6 @@ The HTTP Archive stores detailed information about each page load in [HAR (HTTP 
   * Table contains the num_urls, the pct_urls and sample urls for each feature.
   * This data is also available in the HAR of the `pages` table but is extracted into the `blink_features` tables for easy lookup.
   * This table is 944 MB as of May 2024.
-
-* `httparchive.technologies.YYYY_MM_DD_CLIENT`:
-
-  * Tables are **OUTDATED**, please use the [`technologies` column](/reference/tables/pages/#technologies) instead.
-  * Information about the technologies detected on each page (using [Wappalyser rules](https://github.com/HTTPArchive/wappalyzer)).
-  * Table contains a url and a list of names and categories for technologies detected on the page.
-  * This data is also available in the HAR of the `pages` table but is extracted into the `technologies` table for easy lookup.
-  * These tables are small (15 GB as of May 2024).
-
-* `httparchive.blink_features.features`:
-
-  * Tables are **OUTDATED**, please use the [`features` column](/reference/tables/pages/#features) instead.
-  * Information about the [Blink features](https://chromestatus.com/roadmap) detected on each page. See also the summary `blink_features.usage` table below.
-  * Table contains a url and Blink feature names detected on the page.
-  * This data is also available in the HAR of the `pages` table but is extracted into the `blink_features` tables for easy lookup.
-  * This table is ~300GB per single platform as of May 2024.
 
 ## Some Example Queries to Get Started Exploring the Data
 
@@ -198,7 +134,7 @@ Now that you are all set up, let's run some queries! Most HTTP Archive users sta
 SELECT
   COUNT(0) total_pages
 FROM
-  `httparchive.all.pages`
+  `httparchive.crawl.pages`
 WHERE
   date = "2024-06-01"
   AND client = "desktop"
@@ -214,9 +150,9 @@ SELECT
   COUNT(DISTINCT pages.page) total_pages,
   COUNT(0) total_requests
 FROM
-  `httparchive.all.pages` pages
+  `httparchive.crawl.pages` pages
 INNER JOIN
-  `httparchive.all.requests`requests
+  `httparchive.crawl.requests`requests
 ON
   pages.page = requests.page
 WHERE
@@ -243,7 +179,7 @@ SELECT
   COUNT(DISTINCT page) total_pages,
   COUNT(0) total_requests
 FROM
-  `httparchive.all.requests`
+  `httparchive.crawl.requests`
 WHERE
   date = "2024-06-01"
   AND client = "desktop"
@@ -258,7 +194,7 @@ SELECT
   COUNT(DISTINCT page) total_pages,
   COUNT(0) total_requests
 FROM
-  `httparchive.all.requests`
+  `httparchive.crawl.requests`
 WHERE
   date = "2024-06-01"
   AND client = "desktop"
@@ -282,7 +218,7 @@ WITH requests AS (
     page,
     COUNT(0) OVER () AS requests_total,
     COUNT(DISTINCT page) OVER () AS pages_total,
-  FROM `httparchive.all.requests`
+  FROM `httparchive.crawl.requests`
   WHERE
     date = "2024-06-01"
     AND client = "desktop"

@@ -1,17 +1,17 @@
 ---
-title: Migrate queries to `all` dataset
+title: Migrate queries to `crawl` dataset
 description: Assisting with query migration to the new dataset
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-New tables have been introduced in the HTTP Archive dataset, which are more efficient and easier to use. The `all` dataset contains all the data from the previous `pages`, `requests`, and other datasets. This guide will help you migrate your queries to the new dataset.
+New tables have been introduced in the HTTP Archive dataset, which are more efficient and easier to use. The `crawl` dataset contains all the data from the previous `pages`, `requests`, and other datasets. This guide will help you migrate your queries to the new dataset.
 
-## Migrating to `all.pages`
+## Migrating to `crawl.pages`
 
 ### Page data schemas comparison
 
-previously | `all.pages`
+previously | `crawl.pages`
 ---|---
 date in a table name | [`date`](/reference/tables/pages/#date)
 client as `_TABLE_SUFFIX` | [`client`](/reference/tables/pages/#client)
@@ -52,7 +52,7 @@ SELECT
   features.feature,
   features.type,
   features.id
-FROM `httparchive.all.pages`,
+FROM `httparchive.crawl.pages`,
 UNNEST (features) AS features
 WHERE date = '2024-06-01'
   AND client = 'desktop'
@@ -78,7 +78,7 @@ FROM `httparchive.lighthouse.2024_06_01_desktop`
 SELECT
   page,
   lighthouse.audits.`largest-contentful-paint`.numericValue AS LCP,
-FROM `httparchive.all.pages`
+FROM `httparchive.crawl.pages`
 WHERE date = '2024-06-01'
   AND client = 'desktop'
   AND is_root_page
@@ -108,7 +108,7 @@ SELECT
   wptid,
 -- JSON with the results of the custom metrics,
   custom_metrics.privacy AS custom_metrics,
-FROM `httparchive.all.pages`
+FROM `httparchive.crawl.pages`
 WHERE date = '2022-06-01'
   AND is_root_page
 ```
@@ -140,7 +140,7 @@ SELECT
   INT64(summary.numDomains) AS numDomains,
   COUNT(0) pages,
   ROUND(AVG(INT64(summary.reqTotal)),2) as avg_requests,
-FROM `httparchive.all.pages`
+FROM `httparchive.crawl.pages`
 WHERE date = '2024-06-01'
   AND client = 'desktop'
   AND is_root_page
@@ -175,7 +175,7 @@ SELECT
   technologies.categories,
   technologies.technology,
   technologies.info
-FROM `httparchive.all.pages`,
+FROM `httparchive.crawl.pages`,
 UNNEST (technologies) AS technologies
 WHERE date = '2024-06-01'
   AND client = 'desktop'
@@ -185,11 +185,11 @@ WHERE date = '2024-06-01'
   </TabItem>
 </Tabs>
 
-## Migrating to `all.requests`
+## Migrating to `crawl.requests`
 
 ### Request data schemas comparison
 
-previously | `all.requests`
+previously | `crawl.requests`
 ---|---
 date in a table name | [`date`](/reference/tables/requests/#date)
 client as `_TABLE_SUFFIX` | [`client`](/reference/tables/requests/#client)
@@ -228,7 +228,7 @@ WHERE date = '2024-06-01'
 SELECT
   LOWER(request_headers.name) AS header_name,
   request_headers.value AS header_value,
-FROM `httparchive.all.requests`,
+FROM `httparchive.crawl.requests`,
 UNNEST(request_headers) AS request_headers
 WHERE date = '2024-06-01'
   AND client = 'desktop'
@@ -258,7 +258,7 @@ SELECT
   url,
   STRING(summary.mimeType) AS mimeType,
   INT64(summary.respBodySize) AS respBodySize,
-FROM `httparchive.all.requests`
+FROM `httparchive.crawl.requests`
 WHERE date = '2024-06-01'
   AND client = 'desktop'
   AND is_root_page
@@ -286,7 +286,7 @@ SELECT
   page,
   url,
   BYTE_LENGTH(response_body) AS bodySize
-FROM `httparchive.all.requests`
+FROM `httparchive.crawl.requests`
 WHERE date = '2024-06-01'
   AND client = 'desktop'
   AND is_root_page
@@ -315,7 +315,7 @@ ORDER BY responseSize100KB ASC
 SELECT
   ROUND(INT64(summary.respBodySize)/1024/100)*100 AS responseSize100KB,
   COUNT(0) requests,
-FROM `httparchive.all.requests`
+FROM `httparchive.crawl.requests`
 WHERE date = '2024-06-01'
   AND client = 'desktop'
   AND is_root_page

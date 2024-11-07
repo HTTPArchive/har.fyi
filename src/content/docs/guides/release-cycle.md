@@ -18,14 +18,12 @@ CrUX also includes origins without any distinct form factor data. HTTP Archive c
 Previously, HTTP Archive would start testing each web page (the crawl) on the first of the month. Now, to be in closer alignment with the upstream CrUX dataset, HTTP Archive starts testing pages as soon as the CrUX dataset is available on the second Tuesday of each month. Crawl dates are always rounded down to the first of the month, regardless of which day they actually started. For example, the June 2023 crawl kicks off on the 13th of the month, but the dataset would be accessible on BigQuery under the date `2023-06-01`.
 
 :::note
-As of [May 2023](https://httparchive.org/reports/state-of-the-web?start=2023_04_01&end=2023_05_01&view=list#numUrls) there are 16.6 million mobile pages and 12.8 million desktop pages. It takes 1–2 weeks to test all of these pages, so the crawl is usually complete by the end of the month.
+As of [May 2023](https://httparchive.org/reports/state-of-the-web?start=2023_04_01&end=2023_05_01&view=list#numUrls) there are 16.6 million mobile pages and 12.8 million desktop pages. It takes 1–2 weeks to test all of these pages, so the crawl is usually complete in the second half of the month.
 :::
 
 ## Publishing the raw data
 
-As each page's test results are completed, the raw data is saved to a public Google Cloud Storage bucket. Once the crawl is complete, the data is processed and published to BigQuery. The BigQuery dataset is available to the public for analysis.
-
-There isn't currently a way to be notified when a new crawl is available to query.
+As each page's test results are completed, the raw data is saved to a public Google Cloud Storage bucket. Once the crawl is complete, the data is processed and published to BigQuery. The `httparchive.crawl` dataset is available to the public for analysis.
 
 ## Generating reports
 
