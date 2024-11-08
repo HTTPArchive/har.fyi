@@ -5,7 +5,8 @@ description: Learn about the process of testing millions of web pages each month
 
 The HTTP Archive dataset is updated each month with data from millions of web pages. This guide explores the end-to-end release cycle from sourcing URLs to publishing results to BigQuery.
 
-_TODO: Add a diagram_
+[](https://www.plantuml.com/plantuml/uml/RL5DRnCn4BtxLppr60aEFLO8LPGJGYKqAN2TsDDT2ySszZXH_ZtEUhUxLNUbMFBplCdxkCz2IShHAKD21ygCX_JyHyMAMcqZUQa0dHsdDzZMHdRMCoZZvckblY8tYqqk5BEJaAXhWmE0XjH17PnZBJRuZ2UE8KcUoLzizxDmkYZr68GHJfm6QNSeiGwnGV2uzGRxmjdG1U45qZEEmKklr2Zwm-V6sOMITFE6vwVlMP4MUoBXLtUedvfChD6EBCdg1NCQLWlQQECEst9mDlTu28dncm_uPOLSnfvrxuCBtGLfc5M6tsriOheKIcpwyAzmOPYIw1eNFk4MP-Q_UPXq8KH4JZYGwFuQHAIEwzlupLai2gdcw3H8szRRdhD0haVYN9naVDlzU7o_OMgbiTyoh9U0BDHPtw6sw4O9x8sglqKdaq_SZVPUhAzXiMd63Q-tqm8vM-cj1w6MFk3hyKsNMVDSYY4XIC1cquj4Ihgt9_weh_-rsGolcMNUijvigwzPNEbmi7nVZt9q_m40)
+![Release cycle diagram](./release_cycle_diagram.svg)
 
 ## Sourcing URLs
 
@@ -27,6 +28,4 @@ As each page's test results are completed, the raw data is saved to a public Goo
 
 ## Generating reports
 
-The reports on the HTTP Archive website are automatically generated as soon as the BigQuery data is available.
-
-Auxilliary reports like the [Core Web Vitals Technology Report](https://cwvtech.report/) are generated manually soon after the data becomes available.
+The reports on the [HTTP Archive website](https://httparchive.org/reports) and auxilliary ones like the [Core Web Vitals Technology Report](https://httparchive.org/reports/techreport/landing) are automatically generated as soon as the data is available in BigQuery.

@@ -41,11 +41,11 @@ In order to access the HTTP Archive via BigQuery, you'll need a Google account. 
 
 8. You should now see the HTTP Archive data set pinned:
 
-    ![BigQuery HTTPArchive pinned](./bigquery-httparchive-dataset-pinned.png)
+    ![BigQuery HTTPArchive pinned](./bigquery-httparchive-pinned.png)
 
 9. Let's run a quick sample query to confirm access is all working. Navigate to the `crawl` dataset and select the `pages` table:
 
-    ![BigQuery summary_pages tables](./bigquery-summary_pages.png)
+    ![BigQuery summary_pages tables](./bigquery-pages.png)
 
 10. Click on the **QUERY** button and select **In a new tab**:
 
@@ -79,21 +79,10 @@ So, now you have access! But what do you have access to?
 
 The table below outlines what some of the different tables include. You'll find page views and HTTP requests. There are also JSON encoded HAR files for pages, requests, lighthouse reports and even response bodies!
 
-Table | Monthly Size | Monthly Rows | History Since
+Table | Monthly Size | History Since
 --|--|--|--
-summary_pages.* | ~16 GB | Desktop: ~13M, Mobile: ~16 M | Desktop: Nov 2010, Mobile: May 2011
-summary_requests.* | ~1.9 TB | Desktop: ~1.3B, Mobile: ~1.5B | Desktop: Nov 2010, Mobile: May 2011
-pages.* | ~3.1 TB | Desktop: ~13 M, Mobile: ~16 M | Jan 2016
-requests.* | ~12.5 TB | Desktop: ~1.3 B, Mobile: ~1.5 B | Jan 2016
-response_bodies.* | ~48 TB | Desktop: ~647 M, Mobile: ~780 M | Jan 2016
-crawl.pages | ~42 TB | Desktop: ~24M, Mobile: ~30M | Mar 2022
-crawl.requests | ~231 TB | Desktop: ~2.4B, Mobile: ~2.7B | Mar 2022
-lighthouse.* | ~200 GB | Desktop: 12M, Mobile: ~16M | June 2017
-
-:::note
-If table names are mentioned as a wildcard, then the table names all follow the format `yyyy_mm_dd_desktop` and `yyyy_mm_dd_mobile`.
-Size and row are rounded counts as of May 2024.
-:::
+crawl.pages | ~30 TB | Oct 2024
+crawl.requests | ~199 TB | Oct 2024
 
 In order to understand what each of these tables contain, you can click on the table name and view the details. For example, if you expand the `crawl` dataset and click on the `pages` table you can see the schema. Clicking **Details** tells you some information about the table, such as its size and the number of rows. Clicking **Preview** shows an example of some data from the table.
 
@@ -105,24 +94,18 @@ Some of the types of tables you'll find useful when getting started are describe
 
 The HTTP Archive stores detailed information about each page load in [HAR (HTTP Archive) files](https://en.wikipedia.org/wiki/.har). Each HAR file is JSON formatted and contains detailed performance data about a web page. The [specification for this format](https://w3c.github.io/web-performance/specs/HAR/Overview.html) is produced by the Web Performance Working Group of the W3C. The HTTP Archive splits each HAR file into multiple BigQuery tables, which are described below.
 
-* [`httparchive.crawl.pages`](/reference/tables/pages/):
+* [`httparchive.crawl.pages`](/reference/tables/pages/) - HAR extract for each page url.
 
-  * HAR extract for each page url.
-  * This table is very large (~938TB as of Jun 2024).
+* [`httparchive.crawl.requests`](/reference/tables/requests/) - HAR extract for each resource.
 
-* [`httparchive.crawl.requests`](/reference/tables/requests/):
-
-  * HAR extract for each resource.
-  * This table is very large (4.97PB as of Jun 2024)
-
-### Other Tables
+### Blink Features Tables
 
 * [`httparchive.blink_features.usage`](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!4m3!1shttparchive!2sblink_features!3susage):
 
   * Summary information about the [Blink features](https://chromestatus.com/roadmap) detected on each page.
-  * Table contains the num_urls, the pct_urls and sample urls for each feature.
+  * Table contains the number, percentage and samples of URLs for each feature.
   * This data is also available in the HAR of the `pages` table but is extracted into the `blink_features` tables for easy lookup.
-  * This table is 944 MB as of May 2024.
+  * This table is ~1 GB as of Oct 2024.
 
 ## Some Example Queries to Get Started Exploring the Data
 
