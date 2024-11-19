@@ -11,7 +11,7 @@
     "update": "npm install @astrojs/starlight@latest"
   },
   "dependencies": {
-    "@astrojs/starlight": "^0.1.2",
-    "astro": "^2.5.0"
+    "@astrojs/starlight": "^0.29.0",
+    "astro": "^4.16.13"
   }
 }
