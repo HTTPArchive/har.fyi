@@ -8,10 +8,10 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "update": "npm install @astrojs/starlight@latest"
+    "update": "npx @astrojs/upgrade"
   },
   "dependencies": {
-    "@astrojs/starlight": "^0.1.2",
-    "astro": "^2.5.0"
+    "@astrojs/starlight": "^0.29.2",
+    "astro": "^4.16.13"
   }
 }
