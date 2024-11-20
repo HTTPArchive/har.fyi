@@ -43,9 +43,8 @@ For custom attributes, only the name needs to match (the value is ignored). For 
 ```sql
 WITH lazy AS (
   SELECT
-    `httparchive.fn.GET_LCP_LAZY`(JSON_QUERY(custom_metrics, '$.performance')).native
-  FROM
-    `httparchive.all.pages`
+    `httparchive.fn.GET_LCP_LAZY`(SAFE.STRING(custom_metrics.performance)).native
+  FROM `httparchive.crawl.pages`
   WHERE
     date = '2023-11-01' AND
     client = 'mobile' AND
@@ -76,9 +75,8 @@ FROM
 ```sql
 WITH lazy AS (
   SELECT
-    `httparchive.fn.GET_LCP_LAZY`(JSON_QUERY(custom_metrics, '$.performance')).custom
-  FROM
-    `httparchive.all.pages`
+    `httparchive.fn.GET_LCP_LAZY`(SAFE.STRING(custom_metrics.performance).custom
+  FROM `httparchive.crawl.pages`
   WHERE
     date = '2023-11-01' AND
     client = 'mobile' AND

@@ -26,11 +26,11 @@ export default defineConfig({
         }
       ],
       social: {
-        github: 'https://github.com/rviscomi/har.fyi',
+        github: 'https://github.com/HTTPArchive/har.fyi',
         twitter: 'https://twitter.com/HTTPArchive',
       },
       editLink: {
-        baseUrl: 'https://github.com/rviscomi/har.fyi/edit/main/'
+        baseUrl: 'https://github.com/HTTPArchive/har.fyi/edit/main/'
       },
       sidebar: [
         {
@@ -40,7 +40,7 @@ export default defineConfig({
             { label: 'Minimizing query costs', link: '/guides/minimizing-costs/' },
             { label: 'Guided tour', link: '/guides/guided-tour/' },
             { label: 'Release cycle', link: '/guides/release-cycle/' },
-            { label: 'Migrate queries to `all` dataset', link: '/guides/migrating-to-all-dataset/' },
+            { label: 'Migrate queries to `crawl` dataset', link: '/guides/migrating-to-crawl-dataset/' },
           ],
         },
         {

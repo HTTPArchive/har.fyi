@@ -31,19 +31,16 @@ The value of the `fetchpriority` attribute of the LCP element, or `null` if the 
 ```sql
 WITH lcp AS (
   SELECT
-    `httparchive.fn.GET_LCP_PRIORITY`(JSON_QUERY(custom_metrics, '$.performance')) AS priority
-  FROM
-    `httparchive.all.pages`
+    `httparchive.fn.GET_LCP_PRIORITY`(SAFE.STRING(custom_metrics.performance)) AS priority
+  FROM `httparchive.crawl.pages`
   WHERE
     date = '2023-11-01' AND
     client = 'mobile' AND
     is_root_page
 )
 
-SELECT
-  APPROX_TOP_COUNT(priority, 10) AS priority
-FROM
-  lcp
+SELECT APPROX_TOP_COUNT(priority, 10) AS priority
+FROM lcp
 ```
 
   </TabItem>

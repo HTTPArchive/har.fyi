@@ -1,17 +1,17 @@
 ---
-title: Migrate queries to `all` dataset
+title: Migrate queries to `crawl` dataset
 description: Assisting with query migration to the new dataset
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-New tables have been introduced in the HTTP Archive dataset, which are more efficient and easier to use. The `all` dataset contains all the data from the previous `pages`, `requests`, and other datasets. This guide will help you migrate your queries to the new dataset.
+New tables have been introduced in the HTTP Archive dataset, which are more efficient and easier to use. The `crawl` dataset contains all the data from the previous `pages`, `requests`, and other datasets. This guide will help you migrate your queries to the new dataset.
 
-## Migrating to `all.pages`
+## Migrating to `crawl.pages`
 
 ### Page data schemas comparison
 
-previously | `all.pages`
+previously | `crawl.pages`
 ---|---
 date in a table name | [`date`](/reference/tables/pages/#date)
 client as `_TABLE_SUFFIX` | [`client`](/reference/tables/pages/#client)
@@ -41,8 +41,9 @@ SELECT
   type,
   id
 FROM `httparchive.blink_features.features`
-WHERE yyyymmdd = DATE('2024-05-01')
-  AND client = 'desktop'
+WHERE
+  yyyymmdd = DATE('2024-05-01') AND
+  client = 'desktop'
 ```
   </TabItem>
   <TabItem label="After">
@@ -52,11 +53,12 @@ SELECT
   features.feature,
   features.type,
   features.id
-FROM `httparchive.all.pages`,
+FROM `httparchive.crawl.pages`,
 UNNEST (features) AS features
-WHERE date = '2024-06-01'
-  AND client = 'desktop'
-  AND is_root_page
+WHERE
+  date = '2024-06-01' AND
+  client = 'desktop' AND
+  is_root_page
 ```
   </TabItem>
 </Tabs>
@@ -77,11 +79,12 @@ FROM `httparchive.lighthouse.2024_06_01_desktop`
 /* This query will process 17 TB when run. */
 SELECT
   page,
-  JSON_QUERY(lighthouse, '$.audits.largest-contentful-paint.numericValue') AS LCP,
-FROM `httparchive.all.pages`
-WHERE date = '2024-06-01'
-  AND client = 'desktop'
-  AND is_root_page
+  lighthouse.audits.`largest-contentful-paint`.numericValue AS LCP,
+FROM `httparchive.crawl.pages`
+WHERE
+  date = '2024-06-01' AND
+  client = 'desktop' AND
+  is_root_page
 ```
   </TabItem>
 </Tabs>
@@ -107,10 +110,11 @@ SELECT
   client,
   wptid,
 -- JSON with the results of the custom metrics,
-  JSON_QUERY(custom_metrics, '$.privacy') AS custom_metrics,
-FROM `httparchive.all.pages`
-WHERE date = '2022-06-01'
-  AND is_root_page
+  custom_metrics.privacy AS custom_metrics,
+FROM `httparchive.crawl.pages`
+WHERE
+  date = '2022-06-01' AND
+  is_root_page
 ```
   </TabItem>
 </Tabs>
@@ -125,31 +129,26 @@ SELECT
   COUNT(0) pages,
   ROUND(AVG(reqTotal),2) avg_requests,
 FROM `httparchive.summary_pages.2024_06_01_desktop`
-GROUP BY
-  numDomains
-HAVING
-  pages > 1000
-ORDER BY
-  numDomains ASC
+GROUP BY numDomains
+HAVING pages > 1000
+ORDER BY numDomains ASC
 ```
   </TabItem>
   <TabItem label="After">
 ```sql
 /* This query will process 110 GB when run. */
 SELECT
-  CAST(JSON_VALUE(summary, '$.numDomains') AS INT64) AS numDomains,
+  INT64(summary.numDomains) AS numDomains,
   COUNT(0) pages,
-  ROUND(AVG(CAST(JSON_VALUE(summary, '$.reqTotal') AS INT64)),2) as avg_requests,
-FROM `httparchive.all.pages`
-WHERE date = '2024-06-01'
-  AND client = 'desktop'
-  AND is_root_page
-GROUP BY
-  numDomains
-HAVING
-  pages > 1000
-ORDER BY
-  numDomains ASC
+  ROUND(AVG(INT64(summary.reqTotal)),2) as avg_requests,
+FROM `httparchive.crawl.pages`
+WHERE
+  date = '2024-06-01' AND
+  client = 'desktop' AND
+  is_root_page
+GROUP BY numDomains
+HAVING pages > 1000
+ORDER BY numDomains ASC
 ```
   </TabItem>
 </Tabs>
@@ -175,21 +174,22 @@ SELECT
   technologies.categories,
   technologies.technology,
   technologies.info
-FROM `httparchive.all.pages`,
+FROM `httparchive.crawl.pages`,
 UNNEST (technologies) AS technologies
-WHERE date = '2024-06-01'
-  AND client = 'desktop'
-  AND is_root_page
+WHERE
+  date = '2024-06-01' AND
+  client = 'desktop' AND
+  is_root_page
 ```
 
   </TabItem>
 </Tabs>
 
-## Migrating to `all.requests`
+## Migrating to `crawl.requests`
 
 ### Request data schemas comparison
 
-previously | `all.requests`
+previously | `crawl.requests`
 ---|---
 date in a table name | [`date`](/reference/tables/requests/#date)
 client as `_TABLE_SUFFIX` | [`client`](/reference/tables/requests/#client)
@@ -218,9 +218,10 @@ SELECT
   JSON_VALUE(request_headers, '$.value') AS header_value,
 FROM `httparchive.almanac.requests`,
 UNNEST(JSON_QUERY_ARRAY(request_headers)) AS request_headers
-WHERE date = '2024-06-01'
-  AND client = 'desktop'
-  AND firstHtml
+WHERE
+  date = '2024-06-01' AND
+  client = 'desktop' AND
+  firstHtml
 ```
   </TabItem>
   <TabItem label="After">
@@ -228,12 +229,13 @@ WHERE date = '2024-06-01'
 SELECT
   LOWER(request_headers.name) AS header_name,
   request_headers.value AS header_value,
-FROM `httparchive.all.requests`,
+FROM `httparchive.crawl.requests`,
 UNNEST(request_headers) AS request_headers
-WHERE date = '2024-06-01'
-  AND client = 'desktop'
-  AND is_main_document
-  AND is_root_page
+WHERE
+  date = '2024-06-01' AND
+  client = 'desktop' AND
+  is_main_document AND
+  is_root_page
 ```
   </TabItem>
 </Tabs>
@@ -256,12 +258,13 @@ FROM `httparchive.requests.2024_06_01_desktop`
 SELECT
   page,
   url,
-  JSON_VALUE(summary, '$.mimeType') AS mimeType,
-  CAST(JSON_VALUE(summary, '$.respBodySize') AS INT64) AS respBodySize,
-FROM `httparchive.all.requests`
-WHERE date = '2024-06-01'
-  AND client = 'desktop'
-  AND is_root_page
+  STRING(summary.mimeType) AS mimeType,
+  INT64(summary.respBodySize) AS respBodySize,
+FROM `httparchive.crawl.requests`
+WHERE
+  date = '2024-06-01' AND
+  client = 'desktop' AND
+  is_root_page
 ```
   </TabItem>
 </Tabs>
@@ -286,10 +289,11 @@ SELECT
   page,
   url,
   BYTE_LENGTH(response_body) AS bodySize
-FROM `httparchive.all.requests`
-WHERE date = '2024-06-01'
-  AND client = 'desktop'
-  AND is_root_page
+FROM `httparchive.crawl.requests`
+WHERE
+  date = '2024-06-01' AND
+  client = 'desktop' AND
+  is_root_page
 ```
   </TabItem>
 </Tabs>
@@ -313,12 +317,13 @@ ORDER BY responseSize100KB ASC
 ```sql
 /* This query will process 10 TB when run. */
 SELECT
-  ROUND(CAST(JSON_VALUE(summary, '$.respBodySize') AS INT64)/1024/100)*100 AS responseSize100KB,
+  ROUND(INT64(summary.respBodySize)/1024/100)*100 AS responseSize100KB,
   COUNT(0) requests,
-FROM `httparchive.all.requests`
-WHERE date = '2024-06-01'
-  AND client = 'desktop'
-  AND is_root_page
+FROM `httparchive.crawl.requests`
+WHERE
+  date = '2024-06-01' AND
+  client = 'desktop' AND
+  is_root_page
 GROUP BY responseSize100KB
 HAVING responseSize100KB > 0
 ORDER BY responseSize100KB ASC
