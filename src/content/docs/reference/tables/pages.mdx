@@ -24,8 +24,8 @@ SELECT
   is_root_page,
   count(0) AS pages_total
 FROM `httparchive.crawl.pages`
-WHERE date = "2024-05-01"
-group by client, is_root_page
+WHERE date = '2024-05-01'
+GROUP BY client, is_root_page
 ```
 
   </TabItem>
@@ -52,19 +52,15 @@ WITH pages AS (
   SELECT
     client,
     INT64(summary.bytesTotal) AS page_weight
-  FROM
-    `httparchive.crawl.pages` TABLESAMPLE SYSTEM (1 PERCENT)
-  WHERE
-    date = '2023-05-01'
+  FROM `httparchive.crawl.pages` TABLESAMPLE SYSTEM (1 PERCENT)
+  WHERE date = '2023-05-01'
 )
 
 SELECT
   client,
   APPROX_QUANTILES(page_weight, 1000)[OFFSET(500)] AS median_page_weight
-FROM
-  pages
-GROUP BY
-  client
+FROM pages
+GROUP BY client
 ```
 
   </TabItem>
@@ -100,8 +96,9 @@ WITH pages_summary AS (
     INT64(summary.reqTotal) AS reqTotal,
     INT64(summary.numDomains) AS numDomains
   FROM `httparchive.crawl.pages` TABLESAMPLE SYSTEM (1 PERCENT)
-  WHERE date = "2024-06-01"
-    AND client = 'mobile'
+  WHERE
+    date = '2024-06-01' AND
+    client = 'mobile'
 )
 
 SELECT
@@ -141,8 +138,8 @@ Field name | Type | Description
 [`summary`](#summary) | [`Page summary`](/reference/structs/page-summary/) | JSON-encoded summarization of the page-level data
 [`custom_metrics`](#custom_metrics) | [`Custom metrics`](/reference/structs/custom-metrics/) | JSON-encoded test results of the custom metrics
 [`lighthouse`](#lighthouse) | [`Lighthouse`](/reference/blobs/lighthouse/) | JSON-encoded Lighthouse report
-[`features`](#features) | <code>ARRAY&lt;<a href="/reference/structs/feature/">Feature</a>></code> | Blink features detected at runtime
-[`technologies`](#technologies) | <code>ARRAY&lt;<a href="/reference/structs/technology/">Technology</a>></code> | Technologies detected at runtime
+[`features`](#features) | <code>ARRAY&lt;<a href='/reference/structs/feature/'>Feature</a>></code> | Blink features detected at runtime
+[`technologies`](#technologies) | <code>ARRAY&lt;<a href='/reference/structs/technology/'>Technology</a>></code> | Technologies detected at runtime
 [`metadata`](#metadata) | [`Page metadata`](/reference/blobs/page-metadata/) | Additional metadata about the test
 
 ### `date`

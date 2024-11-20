@@ -23,7 +23,7 @@ Here are some common operations you can perform with the `requests` table.
     is_root_page,
     count(0) AS requests_total
   FROM `httparchive.crawl.requests`
-  WHERE date = "2024-05-01"
+  WHERE date = '2024-05-01'
   group by client, is_root_page
   ```
 
@@ -53,13 +53,12 @@ Let's check the size of individual requests served from websites across the enti
     SELECT
       CEIL(INT64(summary.respBodySize)/1024/100)*100 AS responseSize100KB,
       COUNT(0) OVER () AS total_requests
-    FROM
-      `httparchive.crawl.requests` TABLESAMPLE SYSTEM (1 PERCENT)
+    FROM `httparchive.crawl.requests` TABLESAMPLE SYSTEM (1 PERCENT)
     WHERE
-      date = '2024-06-01'
-      AND client = 'desktop'
-      AND is_root_page
-      AND INT64(summary.respBodySize) > 0
+      date = '2024-06-01' AND
+      client = 'desktop' AND
+      is_root_page AND
+      INT64(summary.respBodySize) > 0
   )
 
   SELECT
@@ -67,10 +66,8 @@ Let's check the size of individual requests served from websites across the enti
     COUNT(0) AS requests,
     COUNT(0)/ANY_VALUE(total_requests) AS pct_requests
   FROM requests
-  GROUP BY
-    responseSize100KB
-  ORDER BY
-    responseSize100KB ASC
+  GROUP BY responseSize100KB
+  ORDER BY responseSize100KB ASC
   LIMIT 10
   ```
 
@@ -110,13 +107,12 @@ Let's filter out all of the non-Image content and examine the popularity of vari
       page,
       COUNT(0) OVER() AS total_requests,
       COUNT(DISTINCT page) OVER() AS total_pages
-    FROM
-      `httparchive.crawl.requests` TABLESAMPLE SYSTEM (1 PERCENT)
+    FROM `httparchive.crawl.requests` TABLESAMPLE SYSTEM (1 PERCENT)
     WHERE
-      date = '2024-06-01'
-      AND client = 'desktop'
-      AND is_root_page
-      AND type = "image"
+      date = '2024-06-01' AND
+      client = 'desktop' AND
+      is_root_page AND
+      type = 'image'
   )
 
   SELECT
@@ -125,12 +121,9 @@ Let's filter out all of the non-Image content and examine the popularity of vari
     COUNT(DISTINCT page) pages,
     ROUND(COUNT(0) / ANY_VALUE(total_requests), 2) percent_image_requests,
     ROUND(COUNT(DISTINCT page) / ANY_VALUE(total_pages), 2) percent_pages
-  FROM
-    requests
-  GROUP BY
-    format
-  ORDER BY
-    requests DESC
+  FROM requests
+  GROUP BY format
+  ORDER BY requests DESC
   ```
 
   </TabItem>
@@ -170,8 +163,8 @@ Field name | Type | Description
 [`index`](#index) | `INTEGER` | The sequential 0-based index of the request
 [`payload`](#payload) | [`Request payload`](/reference/structs/request-payload/) | JSON-encoded WebPageTest result data for this request
 [`summary`](#summary) | [`Request summary`](/reference/structs/request-summary/) | JSON-encoded summarization of request data
-[`request_headers`](#request_headers) | <code>ARRAY&lt;<a href="/reference/structs/header/">Header</a>></code> | Request headers
-[`response_headers`](#response_headers) | <code>ARRAY&lt;<a href="/reference/structs/header/">Header</a>></code> | Response headers
+[`request_headers`](#request_headers) | <code>ARRAY&lt;<a href='/reference/structs/header/'>Header</a>></code> | Request headers
+[`response_headers`](#response_headers) | <code>ARRAY&lt;<a href='/reference/structs/header/'>Header</a>></code> | Response headers
 [`response_body`](#response_body) | `STRING` | Text-based response body
 
 ### `date`
