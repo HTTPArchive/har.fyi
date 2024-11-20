@@ -41,8 +41,9 @@ SELECT
   type,
   id
 FROM `httparchive.blink_features.features`
-WHERE yyyymmdd = DATE('2024-05-01')
-  AND client = 'desktop'
+WHERE
+  yyyymmdd = DATE('2024-05-01') AND
+  client = 'desktop'
 ```
   </TabItem>
   <TabItem label="After">
@@ -54,9 +55,10 @@ SELECT
   features.id
 FROM `httparchive.crawl.pages`,
 UNNEST (features) AS features
-WHERE date = '2024-06-01'
-  AND client = 'desktop'
-  AND is_root_page
+WHERE
+  date = '2024-06-01' AND
+  client = 'desktop' AND
+  is_root_page
 ```
   </TabItem>
 </Tabs>
@@ -79,9 +81,10 @@ SELECT
   page,
   lighthouse.audits.`largest-contentful-paint`.numericValue AS LCP,
 FROM `httparchive.crawl.pages`
-WHERE date = '2024-06-01'
-  AND client = 'desktop'
-  AND is_root_page
+WHERE
+  date = '2024-06-01' AND
+  client = 'desktop' AND
+  is_root_page
 ```
   </TabItem>
 </Tabs>
@@ -109,8 +112,9 @@ SELECT
 -- JSON with the results of the custom metrics,
   custom_metrics.privacy AS custom_metrics,
 FROM `httparchive.crawl.pages`
-WHERE date = '2022-06-01'
-  AND is_root_page
+WHERE
+  date = '2022-06-01' AND
+  is_root_page
 ```
   </TabItem>
 </Tabs>
@@ -125,12 +129,9 @@ SELECT
   COUNT(0) pages,
   ROUND(AVG(reqTotal),2) avg_requests,
 FROM `httparchive.summary_pages.2024_06_01_desktop`
-GROUP BY
-  numDomains
-HAVING
-  pages > 1000
-ORDER BY
-  numDomains ASC
+GROUP BY numDomains
+HAVING pages > 1000
+ORDER BY numDomains ASC
 ```
   </TabItem>
   <TabItem label="After">
@@ -141,15 +142,13 @@ SELECT
   COUNT(0) pages,
   ROUND(AVG(INT64(summary.reqTotal)),2) as avg_requests,
 FROM `httparchive.crawl.pages`
-WHERE date = '2024-06-01'
-  AND client = 'desktop'
-  AND is_root_page
-GROUP BY
-  numDomains
-HAVING
-  pages > 1000
-ORDER BY
-  numDomains ASC
+WHERE
+  date = '2024-06-01' AND
+  client = 'desktop' AND
+  is_root_page
+GROUP BY numDomains
+HAVING pages > 1000
+ORDER BY numDomains ASC
 ```
   </TabItem>
 </Tabs>
@@ -177,9 +176,10 @@ SELECT
   technologies.info
 FROM `httparchive.crawl.pages`,
 UNNEST (technologies) AS technologies
-WHERE date = '2024-06-01'
-  AND client = 'desktop'
-  AND is_root_page
+WHERE
+  date = '2024-06-01' AND
+  client = 'desktop' AND
+  is_root_page
 ```
 
   </TabItem>
@@ -218,9 +218,10 @@ SELECT
   JSON_VALUE(request_headers, '$.value') AS header_value,
 FROM `httparchive.almanac.requests`,
 UNNEST(JSON_QUERY_ARRAY(request_headers)) AS request_headers
-WHERE date = '2024-06-01'
-  AND client = 'desktop'
-  AND firstHtml
+WHERE
+  date = '2024-06-01' AND
+  client = 'desktop' AND
+  firstHtml
 ```
   </TabItem>
   <TabItem label="After">
@@ -230,10 +231,11 @@ SELECT
   request_headers.value AS header_value,
 FROM `httparchive.crawl.requests`,
 UNNEST(request_headers) AS request_headers
-WHERE date = '2024-06-01'
-  AND client = 'desktop'
-  AND is_main_document
-  AND is_root_page
+WHERE
+  date = '2024-06-01' AND
+  client = 'desktop' AND
+  is_main_document AND
+  is_root_page
 ```
   </TabItem>
 </Tabs>
@@ -259,9 +261,10 @@ SELECT
   STRING(summary.mimeType) AS mimeType,
   INT64(summary.respBodySize) AS respBodySize,
 FROM `httparchive.crawl.requests`
-WHERE date = '2024-06-01'
-  AND client = 'desktop'
-  AND is_root_page
+WHERE
+  date = '2024-06-01' AND
+  client = 'desktop' AND
+  is_root_page
 ```
   </TabItem>
 </Tabs>
@@ -287,9 +290,10 @@ SELECT
   url,
   BYTE_LENGTH(response_body) AS bodySize
 FROM `httparchive.crawl.requests`
-WHERE date = '2024-06-01'
-  AND client = 'desktop'
-  AND is_root_page
+WHERE
+  date = '2024-06-01' AND
+  client = 'desktop' AND
+  is_root_page
 ```
   </TabItem>
 </Tabs>
@@ -316,9 +320,10 @@ SELECT
   ROUND(INT64(summary.respBodySize)/1024/100)*100 AS responseSize100KB,
   COUNT(0) requests,
 FROM `httparchive.crawl.requests`
-WHERE date = '2024-06-01'
-  AND client = 'desktop'
-  AND is_root_page
+WHERE
+  date = '2024-06-01' AND
+  client = 'desktop' AND
+  is_root_page
 GROUP BY responseSize100KB
 HAVING responseSize100KB > 0
 ORDER BY responseSize100KB ASC
