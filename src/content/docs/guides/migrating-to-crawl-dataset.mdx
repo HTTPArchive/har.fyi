@@ -33,6 +33,25 @@ not available | [`metadata`](/reference/tables/pages/#metadata)
 - Migrate custom metrics
 
 <Tabs>
+  <TabItem label="crawl.pages">
+    ```sql
+    /* This query will process 115 GB when run. */
+    SELECT
+      client,
+      STRING(custom_metrics.performance.lcp_elem_stats.nodeName) AS lcp_elem_node_name,
+      AVG(INT64(custom_metrics.performance.lcp_elem_stats.size)) AS lcp_elem_node_size
+    FROM `httparchive.crawl.pages`
+    WHERE
+      date = '2024-10-01' AND
+      is_root_page
+    GROUP BY
+      client,
+      lcp_elem_node_name
+    ORDER BY
+      client,
+      lcp_elem_node_size DESC
+    ```
+  </TabItem>
   <TabItem label="pages.YYYY_MM_DD_client">
     ```sql
     /* This query will process 6.44 TB when run. */
@@ -68,30 +87,30 @@ not available | [`metadata`](/reference/tables/pages/#metadata)
       lcp_elem_node_size DESC
     ```
   </TabItem>
+</Tabs>
+
+- Migrate summary metrics queries
+
+<Tabs>
   <TabItem label="crawl.pages">
     ```sql
-    /* This query will process 115 GB when run. */
+    /* This query will process 34 GB when run. */
     SELECT
       client,
-      STRING(custom_metrics.performance.lcp_elem_stats.nodeName) AS lcp_elem_node_name,
-      AVG(INT64(custom_metrics.performance.lcp_elem_stats.size)) AS lcp_elem_node_size
+      INT64(summary.numDomains) AS numDomains,
+      COUNT(0) pages,
+      AVG(INT64(summary.reqTotal)) AS avg_requests
     FROM `httparchive.crawl.pages`
     WHERE
       date = '2024-10-01' AND
       is_root_page
     GROUP BY
       client,
-      lcp_elem_node_name
-    ORDER BY
-      client,
-      lcp_elem_node_size DESC
+      numDomains
+    HAVING pages > 1000
+    ORDER BY numDomains ASC
     ```
   </TabItem>
-</Tabs>
-
-- Migrate summary metrics queries
-
-<Tabs>
   <TabItem label="summary_pages.YYYY_MM_DD_client">
     ```sql
     /* This query will process 440 MB when run. */
@@ -127,59 +146,11 @@ not available | [`metadata`](/reference/tables/pages/#metadata)
     ORDER BY numDomains ASC
     ```
   </TabItem>
-  <TabItem label="crawl.pages">
-    ```sql
-    /* This query will process 34 GB when run. */
-    SELECT
-      client,
-      INT64(summary.numDomains) AS numDomains,
-      COUNT(0) pages,
-      AVG(INT64(summary.reqTotal)) AS avg_requests
-    FROM `httparchive.crawl.pages`
-    WHERE
-      date = '2024-10-01' AND
-      is_root_page
-    GROUP BY
-      client,
-      numDomains
-    HAVING pages > 1000
-    ORDER BY numDomains ASC
-    ```
-  </TabItem>
 </Tabs>
 
 - Migrate detected technologies metrics
 
 <Tabs>
-  <TabItem label="technologies.YYYY_MM_DD_client">
-    ```sql
-    /* This query will process 14 GB when run. */
-    SELECT
-      url,
-      category,
-      app,
-      info
-    FROM `httparchive.technologies.2024_10_01_desktop`
-    ```
-  </TabItem>
-
-  <TabItem label="all.pages">
-    ```sql
-    /* This query will process 7.18 GB when run. */
-    SELECT
-      page,
-      technologies.categories,
-      technologies.technology,
-      technologies.info
-    FROM `httparchive.all.pages`,
-      UNNEST (technologies) AS technologies
-    WHERE
-      date = '2024-10-01' AND
-      client = 'desktop' AND
-      is_root_page
-    ```
-  </TabItem>
-
   <TabItem label="crawl.pages">
     ```sql
     /* This query will process 7.18 GB when run. */
@@ -196,11 +167,51 @@ not available | [`metadata`](/reference/tables/pages/#metadata)
       is_root_page
     ```
   </TabItem>
+  <TabItem label="technologies.YYYY_MM_DD_client">
+    ```sql
+    /* This query will process 14 GB when run. */
+    SELECT
+      url,
+      category,
+      app,
+      info
+    FROM `httparchive.technologies.2024_10_01_desktop`
+    ```
+  </TabItem>
+  <TabItem label="all.pages">
+    ```sql
+    /* This query will process 7.18 GB when run. */
+    SELECT
+      page,
+      technologies.categories,
+      technologies.technology,
+      technologies.info
+    FROM `httparchive.all.pages`,
+      UNNEST (technologies) AS technologies
+    WHERE
+      date = '2024-10-01' AND
+      client = 'desktop' AND
+      is_root_page
+    ```
+  </TabItem>
 </Tabs>
 
 - Migrate lighthouse insights
 
 <Tabs>
+  <TabItem label="crawl.pages">
+    ```sql
+    /* This query will process 4.2 TB when run. */
+    SELECT
+      page,
+      lighthouse.audits.`largest-contentful-paint`.numericValue AS LCP
+    FROM `httparchive.crawl.pages`
+    WHERE
+      date = '2024-10-01' AND
+      client = 'desktop' AND
+      is_root_page
+    ```
+  </TabItem>
   <TabItem label="lighthouse.YYYY_MM_DD_client">
     ```sql
     /* This query will process 4.23 TB when run. */
@@ -223,24 +234,27 @@ not available | [`metadata`](/reference/tables/pages/#metadata)
       is_root_page
     ```
   </TabItem>
+</Tabs>
+
+- Migrate Blink features metrics
+
+<Tabs>
   <TabItem label="crawl.pages">
     ```sql
-    /* This query will process 4.2 TB when run. */
+    /* This query will process 114 GB when run. */
     SELECT
       page,
-      lighthouse.audits.`largest-contentful-paint`.numericValue AS LCP
-    FROM `httparchive.crawl.pages`
+      features.feature,
+      features.type,
+      features.id
+    FROM `httparchive.crawl.pages`,
+    UNNEST (features) AS features
     WHERE
       date = '2024-10-01' AND
       client = 'desktop' AND
       is_root_page
     ```
   </TabItem>
-</Tabs>
-
-- Migrate Blink features metrics
-
-<Tabs>
   <TabItem label="blink_features.features">
     ```sql
     /* This query will process 548 GB when run. */
@@ -265,22 +279,6 @@ not available | [`metadata`](/reference/tables/pages/#metadata)
       features.id
     FROM `httparchive.all.pages`,
       UNNEST (features) AS features
-    WHERE
-      date = '2024-10-01' AND
-      client = 'desktop' AND
-      is_root_page
-    ```
-  </TabItem>
-  <TabItem label="crawl.pages">
-    ```sql
-    /* This query will process 114 GB when run. */
-    SELECT
-      page,
-      features.feature,
-      features.type,
-      features.id
-    FROM `httparchive.crawl.pages`,
-    UNNEST (features) AS features
     WHERE
       date = '2024-10-01' AND
       client = 'desktop' AND
@@ -315,6 +313,21 @@ not available | [`root_page`](/reference/tables/requests/#root_page)
 - Migrate headers metrics
 
 <Tabs>
+  <TabItem label="crawl.requests">
+    ```sql
+    /* This query will process 169 GB when run. */
+    SELECT
+      response_header.value AS header_value,
+    FROM `httparchive.crawl.requests`,
+      UNNEST(response_headers) AS response_header
+    WHERE
+      date = '2024-10-01' AND
+      client = 'desktop' AND
+      is_main_document AND
+      is_root_page AND
+      LOWER(response_header.name) = 'content-type'
+    ```
+  </TabItem>
   <TabItem label="summary_requests.YYYY_MM_DD_client">
     ```sql
     /* This query will process 22.5 GB when run. */
@@ -341,26 +354,26 @@ not available | [`root_page`](/reference/tables/requests/#root_page)
       LOWER(response_header.name) = 'content-type'
     ```
   </TabItem>
-  <TabItem label="crawl.requests">
-    ```sql
-    /* This query will process 169 GB when run. */
-    SELECT
-      response_header.value AS header_value,
-    FROM `httparchive.crawl.requests`,
-      UNNEST(response_headers) AS response_header
-    WHERE
-      date = '2024-10-01' AND
-      client = 'desktop' AND
-      is_main_document AND
-      is_root_page AND
-      LOWER(response_header.name) = 'content-type'
-    ```
-  </TabItem>
 </Tabs>
 
 - Migrate summary metrics
 
 <Tabs>
+  <TabItem label="crawl.requests">
+    ```sql
+    /* This query will process 376 GB when run. */
+    SELECT
+      page,
+      url,
+      STRING(summary.mimeType) AS mimeType,
+      INT64(summary.respBodySize) AS respBodySize,
+    FROM `httparchive.crawl.requests`
+    WHERE
+      date = '2024-10-01' AND
+      client = 'desktop' AND
+      is_root_page
+    ```
+  </TabItem>
   <TabItem label="summary_requests.YYYY_MM_DD_client">
     ```sql
     /* This query will process 193 GB when run. */
@@ -398,36 +411,11 @@ not available | [`root_page`](/reference/tables/requests/#root_page)
       is_root_page
     ```
   </TabItem>
-  <TabItem label="crawl.requests">
-    ```sql
-    /* This query will process 376 GB when run. */
-    SELECT
-      page,
-      url,
-      STRING(summary.mimeType) AS mimeType,
-      INT64(summary.respBodySize) AS respBodySize,
-    FROM `httparchive.crawl.requests`
-    WHERE
-      date = '2024-10-01' AND
-      client = 'desktop' AND
-      is_root_page
-    ```
-  </TabItem>
 </Tabs>
 
 - Migrate response body queries
 
 <Tabs>
-  <TabItem label="response_bodies.YYYY_MM_DD_client">
-    ```sql
-    /* This query will process 40.7 TB when run. */
-    SELECT
-      page,
-      url,
-      BYTE_LENGTH(response_body) AS bodySize
-    FROM `httparchive.response_bodies.2024_06_01_desktop`
-    ```
-  </TabItem>
   <TabItem label="crawl.requests">
     ```sql
     /* This query will process 42.8 TB when run. */
@@ -440,6 +428,16 @@ not available | [`root_page`](/reference/tables/requests/#root_page)
       date = '2024-10-01' AND
       client = 'desktop' AND
       is_root_page
+    ```
+  </TabItem>
+  <TabItem label="response_bodies.YYYY_MM_DD_client">
+    ```sql
+    /* This query will process 40.7 TB when run. */
+    SELECT
+      page,
+      url,
+      BYTE_LENGTH(response_body) AS bodySize
+    FROM `httparchive.response_bodies.2024_06_01_desktop`
     ```
   </TabItem>
 </Tabs>
