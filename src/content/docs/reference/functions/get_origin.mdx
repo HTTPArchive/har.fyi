@@ -32,8 +32,7 @@ The corresponding origin.
 SELECT
   url,
   `httparchive.fn.GET_ORIGIN`(url) AS origin
-FROM
-  UNNEST([
+FROM UNNEST([
     'https://www.example.com/product/123',
     'https://example.com/',
     'http://example.com:80/index.html'
@@ -61,15 +60,13 @@ http://example.com:80/index.html | http://example.com:80
 WITH cross_origin AS (
   SELECT
     COUNT(0) AS resources
-  FROM
-    `httparchive.all.requests`
+  FROM `httparchive.crawl.requests`
   WHERE
     date = '2023-11-01' AND
     client = 'mobile' AND
     is_root_page AND
     `httparchive.fn.GET_ORIGIN`(url) != `httparchive.fn.GET_ORIGIN`(page)
-  GROUP BY
-    page
+  GROUP BY page
 )
 
 

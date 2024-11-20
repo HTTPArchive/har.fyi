@@ -75,14 +75,12 @@ vizWeight | weight | element
 SELECT
   page,
   httparchive.fn.CAPO(response_body) AS capo
-FROM
-  `httparchive.all.requests` TABLESAMPLE SYSTEM (0.001 PERCENT)
+FROM `httparchive.crawl.requests` TABLESAMPLE SYSTEM (0.001 PERCENT)
 WHERE
   date = '2023-05-01' AND
   client = 'desktop' AND
   is_main_document
-LIMIT
-  1
+LIMIT 1
 ```
 
   </TabItem>
@@ -90,7 +88,7 @@ LIMIT
 
 page | vizWeight | weight | element
 -- | -- | -- | --
-https://www.example.com/ | ██████████ | 9 | `<title>Example Domain</title>` 
+https://www.example.com/ | ██████████ | 9 | `<title>Example Domain</title>`
 https://www.example.com/ | ███████████ | 10 | `<meta charset="utf-8">`
 https://www.example.com/ | ███████████ | 10 | `<meta http-equiv="Content-type" content="text/html; charset=utf-8">`
 https://www.example.com/ | ███████████ | 10 | `<meta name="viewport" content="width=device-width, initial-scale=1">`
