@@ -30,158 +30,262 @@ not available | [`metadata`](/reference/tables/pages/#metadata)
 
 ### Page query updates
 
-- Migrate from `blink_features.features`
+- Migrate custom metrics
 
 <Tabs>
-  <TabItem label="Before">
-```sql
-SELECT
-  url,
-  feature,
-  type,
-  id
-FROM `httparchive.blink_features.features`
-WHERE
-  yyyymmdd = DATE('2024-05-01') AND
-  client = 'desktop'
-```
+  <TabItem label="pages.YYYY_MM_DD_client">
+    ```sql
+    /* This query will process 6.44 TB when run. */
+    SELECT
+      _TABLE_SUFFIX AS client,
+      JSON_VALUE(JSON_EXTRACT(payload, '$._performance'), '$.lcp_elem_stats.nodeName') AS lcp_elem_node_name,
+      AVG(CAST(JSON_VALUE(JSON_EXTRACT(payload, '$._performance'), '$.lcp_elem_stats.size') AS INT64)) AS lcp_elem_node_size
+    FROM `httparchive.pages.2024_10_01_*`
+    GROUP BY
+      client,
+      lcp_elem_node_name
+    ORDER BY
+      client,
+      lcp_elem_node_size DESC
+    ```
   </TabItem>
-  <TabItem label="After">
-```sql
-SELECT
-  page,
-  features.feature,
-  features.type,
-  features.id
-FROM `httparchive.crawl.pages`,
-UNNEST (features) AS features
-WHERE
-  date = '2024-06-01' AND
-  client = 'desktop' AND
-  is_root_page
-```
+  <TabItem label="all.pages">
+    ```sql
+    /* This query will process 9 TB when run. */
+    SELECT
+      client,
+      CAST(JSON_VALUE(custom_metrics, '$.performance.lcp_elem_stats.nodeName') AS STRING) AS lcp_elem_node_name,
+      AVG(CAST(JSON_VALUE(custom_metrics, '$.performance.lcp_elem_stats.size') AS INT64)) AS lcp_elem_node_size
+    FROM `httparchive.all.pages`
+    WHERE
+      date = '2024-10-01' AND
+      is_root_page
+    GROUP BY
+      client,
+      lcp_elem_node_name
+    ORDER BY
+      client,
+      lcp_elem_node_size DESC
+    ```
+  </TabItem>
+  <TabItem label="crawl.pages">
+    ```sql
+    /* This query will process 115 GB when run. */
+    SELECT
+      client,
+      STRING(custom_metrics.performance.lcp_elem_stats.nodeName) AS lcp_elem_node_name,
+      AVG(INT64(custom_metrics.performance.lcp_elem_stats.size)) AS lcp_elem_node_size
+    FROM `httparchive.crawl.pages`
+    WHERE
+      date = '2024-10-01' AND
+      is_root_page
+    GROUP BY
+      client,
+      lcp_elem_node_name
+    ORDER BY
+      client,
+      lcp_elem_node_size DESC
+    ```
   </TabItem>
 </Tabs>
 
-- Migrate from `lighthouse.YYYY_MM_DD_client`
+- Migrate summary metrics queries
 
 <Tabs>
-  <TabItem label="Before">
-```sql
-SELECT
-  url,
-  JSON_QUERY(report, '$.audits.largest-contentful-paint.numericValue') AS LCP,
-FROM `httparchive.lighthouse.2024_06_01_desktop`
-```
+  <TabItem label="summary_pages.YYYY_MM_DD_client">
+    ```sql
+    /* This query will process 440 MB when run. */
+    SELECT
+      _TABLE_SUFFIX AS client,
+      numDomains,
+      COUNT(0) pages,
+      AVG(reqTotal) AS avg_requests
+    FROM `httparchive.summary_pages.2024_06_01_*`
+    GROUP BY
+      client,
+      numDomains
+    HAVING pages > 1000
+    ORDER BY numDomains ASC
+    ```
   </TabItem>
-  <TabItem label="After">
-```sql
-/* This query will process 17 TB when run. */
-SELECT
-  page,
-  lighthouse.audits.`largest-contentful-paint`.numericValue AS LCP,
-FROM `httparchive.crawl.pages`
-WHERE
-  date = '2024-06-01' AND
-  client = 'desktop' AND
-  is_root_page
-```
+  <TabItem label="all.pages">
+    ```sql
+    /* This query will process 110 GB when run. */
+    SELECT
+      client,
+      CAST(JSON_VALUE(summary, '$.numDomains') AS INT64) AS numDomains,
+      COUNT(0) pages,
+      AVG(CAST(JSON_VALUE(summary, '$.reqTotal') AS INT64)) AS avg_requests
+    FROM `httparchive.all.pages`
+    WHERE
+      date = '2024-10-01' AND
+      is_root_page
+    GROUP BY
+      client,
+      numDomains
+    HAVING pages > 1000
+    ORDER BY numDomains ASC
+    ```
+  </TabItem>
+  <TabItem label="crawl.pages">
+    ```sql
+    /* This query will process 34 GB when run. */
+    SELECT
+      client,
+      INT64(summary.numDomains) AS numDomains,
+      COUNT(0) pages,
+      AVG(INT64(summary.reqTotal)) AS avg_requests
+    FROM `httparchive.crawl.pages`
+    WHERE
+      date = '2024-10-01' AND
+      is_root_page
+    GROUP BY
+      client,
+      numDomains
+    HAVING pages > 1000
+    ORDER BY numDomains ASC
+    ```
   </TabItem>
 </Tabs>
 
-- Migrate from `pages.YYYY_MM_DD_client`
+- Migrate detected technologies metrics
 
 <Tabs>
-  <TabItem label="Before">
-```sql
-SELECT
-  url,
-  _TABLE_SUFFIX AS client,
-  JSON_QUERY(payload, '$.testID') AS testID,
--- JSON with the results of the custom metrics,
-  JSON_QUERY(payload, '$._privacy') AS custom_metrics,
-FROM `httparchive.pages.2022_06_01_*`
-```
+  <TabItem label="technologies.YYYY_MM_DD_client">
+    ```sql
+    /* This query will process 14 GB when run. */
+    SELECT
+      url,
+      category,
+      app,
+      info
+    FROM `httparchive.technologies.2024_10_01_desktop`
+    ```
   </TabItem>
-  <TabItem label="After">
-```sql
-SELECT
-  page,
-  client,
-  wptid,
--- JSON with the results of the custom metrics,
-  custom_metrics.privacy AS custom_metrics,
-FROM `httparchive.crawl.pages`
-WHERE
-  date = '2022-06-01' AND
-  is_root_page
-```
+
+  <TabItem label="all.pages">
+    ```sql
+    /* This query will process 7.18 GB when run. */
+    SELECT
+      page,
+      technologies.categories,
+      technologies.technology,
+      technologies.info
+    FROM `httparchive.all.pages`,
+      UNNEST (technologies) AS technologies
+    WHERE
+      date = '2024-10-01' AND
+      client = 'desktop' AND
+      is_root_page
+    ```
+  </TabItem>
+
+  <TabItem label="crawl.pages">
+    ```sql
+    /* This query will process 7.18 GB when run. */
+    SELECT
+      page,
+      technologies.categories,
+      technologies.technology,
+      technologies.info
+    FROM `httparchive.crawl.pages`,
+      UNNEST (technologies) AS technologies
+    WHERE
+      date = '2024-10-01' AND
+      client = 'desktop' AND
+      is_root_page
+    ```
   </TabItem>
 </Tabs>
 
-- Migrate from `summary_pages.YYYY_MM_DD_client`
+- Migrate lighthouse insights
 
 <Tabs>
-  <TabItem label="Before">
-```sql
-SELECT
-  numDomains,
-  COUNT(0) pages,
-  ROUND(AVG(reqTotal),2) avg_requests,
-FROM `httparchive.summary_pages.2024_06_01_desktop`
-GROUP BY numDomains
-HAVING pages > 1000
-ORDER BY numDomains ASC
-```
+  <TabItem label="lighthouse.YYYY_MM_DD_client">
+    ```sql
+    /* This query will process 4.23 TB when run. */
+    SELECT
+      url,
+      JSON_QUERY(report, '$.audits.largest-contentful-paint.numericValue') AS LCP
+    FROM `httparchive.lighthouse.2024_06_01_desktop`
+    ```
   </TabItem>
-  <TabItem label="After">
-```sql
-/* This query will process 110 GB when run. */
-SELECT
-  INT64(summary.numDomains) AS numDomains,
-  COUNT(0) pages,
-  ROUND(AVG(INT64(summary.reqTotal)),2) as avg_requests,
-FROM `httparchive.crawl.pages`
-WHERE
-  date = '2024-06-01' AND
-  client = 'desktop' AND
-  is_root_page
-GROUP BY numDomains
-HAVING pages > 1000
-ORDER BY numDomains ASC
-```
+  <TabItem label="all.pages">
+    ```sql
+    /* This query will process 18 TB when run. */
+    SELECT
+      page,
+      JSON_QUERY(lighthouse, '$.audits.largest-contentful-paint.numericValue') AS LCP
+    FROM `httparchive.all.pages`
+    WHERE
+      date = '2024-10-01' AND
+      client = 'desktop' AND
+      is_root_page
+    ```
+  </TabItem>
+  <TabItem label="crawl.pages">
+    ```sql
+    /* This query will process 4.2 TB when run. */
+    SELECT
+      page,
+      lighthouse.audits.`largest-contentful-paint`.numericValue AS LCP
+    FROM `httparchive.crawl.pages`
+    WHERE
+      date = '2024-10-01' AND
+      client = 'desktop' AND
+      is_root_page
+    ```
   </TabItem>
 </Tabs>
 
-- Migrate from `technologies.YYYY_MM_DD_client`
+- Migrate Blink features metrics
 
 <Tabs>
-  <TabItem label="Before">
-```sql
-SELECT
-  url,
-  category,
-  app,
-  info
-FROM `httparchive.technologies.2024_06_01_desktop`
-```
+  <TabItem label="blink_features.features">
+    ```sql
+    /* This query will process 548 GB when run. */
+    SELECT
+      url,
+      feature,
+      type,
+      id
+    FROM `httparchive.blink_features.features`
+    WHERE
+      yyyymmdd = DATE('2024-05-01') AND
+      client = 'desktop'
+    ```
   </TabItem>
-  <TabItem label="After">
-```sql
-/* This query will process 27 GB when run. */
-SELECT
-  page,
-  technologies.categories,
-  technologies.technology,
-  technologies.info
-FROM `httparchive.crawl.pages`,
-UNNEST (technologies) AS technologies
-WHERE
-  date = '2024-06-01' AND
-  client = 'desktop' AND
-  is_root_page
-```
-
+  <TabItem label="all.pages">
+    ```sql
+    /* This query will process 478 GB when run. */
+    SELECT
+      page,
+      features.feature,
+      features.type,
+      features.id
+    FROM `httparchive.all.pages`,
+      UNNEST (features) AS features
+    WHERE
+      date = '2024-10-01' AND
+      client = 'desktop' AND
+      is_root_page
+    ```
+  </TabItem>
+  <TabItem label="crawl.pages">
+    ```sql
+    /* This query will process 114 GB when run. */
+    SELECT
+      page,
+      features.feature,
+      features.type,
+      features.id
+    FROM `httparchive.crawl.pages`,
+    UNNEST (features) AS features
+    WHERE
+      date = '2024-10-01' AND
+      client = 'desktop' AND
+      is_root_page
+    ```
   </TabItem>
 </Tabs>
 
@@ -202,131 +306,140 @@ not available | [`root_page`](/reference/tables/requests/#root_page)
 `$._index` within `payload` in `requests.YYYY_MM_DD_client` | [`index`](/reference/tables/requests/#index)
 `payload` column in `requests.YYYY_MM_DD_client` | [`payload`](/reference/tables/requests/#payload)
 `req*`, `resp*` and other in `summary_requests.YYYY_MM_DD_client` | [`summary`](/reference/tables/requests/#summary)
-`req_*` and `reqOtherHeaders` in `almanac.requests` | [`request_headers`](/reference/tables/requests/#request_headers)
-`resp_*` and `respOtherHeaders` in `almanac.requests` | [`response_headers`](/reference/tables/requests/#response_headers)
+`req_*` and `reqOtherHeaders` in `summary_requests.YYYY_MM_DD_client` | [`request_headers`](/reference/tables/requests/#request_headers)
+`resp_*` and `respOtherHeaders` in `summary_requests.YYYY_MM_DD_client` | [`response_headers`](/reference/tables/requests/#response_headers)
 `body` in `response_bodies.YYYY_MM_DD_client` | [`response_body`](/reference/tables/requests/#response_body)
 
 ### Request query updates
 
-- Migrate from `almanac.requests`
+- Migrate headers metrics
 
 <Tabs>
-  <TabItem label="Before">
-```sql
-SELECT
-  LOWER(JSON_VALUE(request_headers, '$.name')) AS header_name,
-  JSON_VALUE(request_headers, '$.value') AS header_value,
-FROM `httparchive.almanac.requests`,
-UNNEST(JSON_QUERY_ARRAY(request_headers)) AS request_headers
-WHERE
-  date = '2024-06-01' AND
-  client = 'desktop' AND
-  firstHtml
-```
+  <TabItem label="summary_requests.YYYY_MM_DD_client">
+    ```sql
+    /* This query will process 22.5 GB when run. */
+    SELECT
+      resp_content_type
+    FROM `httparchive.summary_requests.2024_10_01_desktop`,
+      UNNEST(JSON_QUERY_ARRAY(request_headers)) AS request_headers
+    WHERE
+      firstHtml
+    ```
   </TabItem>
-  <TabItem label="After">
-```sql
-SELECT
-  LOWER(request_headers.name) AS header_name,
-  request_headers.value AS header_value,
-FROM `httparchive.crawl.requests`,
-UNNEST(request_headers) AS request_headers
-WHERE
-  date = '2024-06-01' AND
-  client = 'desktop' AND
-  is_main_document AND
-  is_root_page
-```
+  <TabItem label="all.requests">
+    ```sql
+    /* This query will process 10 GB when run. */
+    SELECT
+      response_header.value AS header_value,
+    FROM `httparchive.all.requests`,
+      UNNEST(response_headers) AS response_header
+    WHERE
+      date = '2024-10-01' AND
+      client = 'desktop' AND
+      is_main_document AND
+      is_root_page AND
+      LOWER(response_header.name) = 'content-type'
+    ```
+  </TabItem>
+  <TabItem label="crawl.requests">
+    ```sql
+    /* This query will process 169 GB when run. */
+    SELECT
+      response_header.value AS header_value,
+    FROM `httparchive.crawl.requests`,
+      UNNEST(response_headers) AS response_header
+    WHERE
+      date = '2024-10-01' AND
+      client = 'desktop' AND
+      is_main_document AND
+      is_root_page AND
+      LOWER(response_header.name) = 'content-type'
+    ```
   </TabItem>
 </Tabs>
 
-- Migrate from `requests.YYYY_MM_DD_client`
+- Migrate summary metrics
 
 <Tabs>
-  <TabItem label="Before">
-```sql
-SELECT
-  page,
-  url,
-  JSON_VALUE(payload, '$.response.content.mimeType') AS mimeType,
-  CAST(JSON_VALUE(payload, '$.response.bodySize') AS INT64) AS respBodySize,
-FROM `httparchive.requests.2024_06_01_desktop`
-```
+  <TabItem label="summary_requests.YYYY_MM_DD_client">
+    ```sql
+    /* This query will process 193 GB when run. */
+    SELECT
+      page,
+      url,
+      mimeType,
+      respBodySize
+    FROM `httparchive.summary_requests.2024_10_01_desktop`
+    ```
   </TabItem>
-  <TabItem label="After">
-```sql
-SELECT
-  page,
-  url,
-  STRING(summary.mimeType) AS mimeType,
-  INT64(summary.respBodySize) AS respBodySize,
-FROM `httparchive.crawl.requests`
-WHERE
-  date = '2024-06-01' AND
-  client = 'desktop' AND
-  is_root_page
-```
+  <TabItem label="requests.YYYY_MM_DD_client">
+    ```sql
+    /* This query will process 10.8 TB when run. */
+    SELECT
+      page,
+      url,
+      JSON_VALUE(payload, '$.response.content.mimeType') AS mimeType,
+      CAST(JSON_VALUE(payload, '$.response.bodySize') AS INT64) AS respBodySize
+    FROM `httparchive.requests.2024_10_01_desktop`
+    ```
+  </TabItem>
+  <TabItem label="all.requests">
+    ```sql
+    /* This query will process 11.19 TB when run. */
+    SELECT
+      page,
+      url,
+      JSON_VALUE(summary, '$.mimeType') AS mimeType,
+      CAST(JSON_VALUE(summary, '$.respBodySize') AS INT64) AS respBodySize
+    FROM `httparchive.all.requests`
+    WHERE
+      date = '2024-10-01' AND
+      client = 'desktop' AND
+      is_root_page
+    ```
+  </TabItem>
+  <TabItem label="crawl.requests">
+    ```sql
+    /* This query will process 376 GB when run. */
+    SELECT
+      page,
+      url,
+      STRING(summary.mimeType) AS mimeType,
+      INT64(summary.respBodySize) AS respBodySize,
+    FROM `httparchive.crawl.requests`
+    WHERE
+      date = '2024-10-01' AND
+      client = 'desktop' AND
+      is_root_page
+    ```
   </TabItem>
 </Tabs>
 
-- Migrate from `response_bodies.YYYY_MM_DD_client`
-
-
-<Tabs>
-  <TabItem label="Before">
-```sql
-SELECT
-  page,
-  url,
-  BYTE_LENGTH(response_body) AS bodySize
-FROM `httparchive.response_bodies.2024_06_01_desktop`
-```
-  </TabItem>
-  <TabItem label="After">
-```sql
-/* This query will process 174 TB when run. */
-SELECT
-  page,
-  url,
-  BYTE_LENGTH(response_body) AS bodySize
-FROM `httparchive.crawl.requests`
-WHERE
-  date = '2024-06-01' AND
-  client = 'desktop' AND
-  is_root_page
-```
-  </TabItem>
-</Tabs>
-
-- Migrate from `summary_requests.YYYY_MM_DD_client`
-
+- Migrate response body queries
 
 <Tabs>
-  <TabItem label="Before">
-```sql
-SELECT
-  ROUND(respBodySize/1024/100)*100 AS responseSize100KB,
-  COUNT(0) requests,
-FROM `httparchive.summary_requests.2024_06_01_desktop`
-GROUP BY responseSize100KB
-HAVING responseSize100KB > 0
-ORDER BY responseSize100KB ASC
-```
+  <TabItem label="response_bodies.YYYY_MM_DD_client">
+    ```sql
+    /* This query will process 40.7 TB when run. */
+    SELECT
+      page,
+      url,
+      BYTE_LENGTH(response_body) AS bodySize
+    FROM `httparchive.response_bodies.2024_06_01_desktop`
+    ```
   </TabItem>
-  <TabItem label="After">
-```sql
-/* This query will process 10 TB when run. */
-SELECT
-  ROUND(INT64(summary.respBodySize)/1024/100)*100 AS responseSize100KB,
-  COUNT(0) requests,
-FROM `httparchive.crawl.requests`
-WHERE
-  date = '2024-06-01' AND
-  client = 'desktop' AND
-  is_root_page
-GROUP BY responseSize100KB
-HAVING responseSize100KB > 0
-ORDER BY responseSize100KB ASC
-```
+  <TabItem label="crawl.requests">
+    ```sql
+    /* This query will process 42.8 TB when run. */
+    SELECT
+      page,
+      url,
+      BYTE_LENGTH(response_body) AS bodySize
+    FROM `httparchive.crawl.requests`
+    WHERE
+      date = '2024-10-01' AND
+      client = 'desktop' AND
+      is_root_page
+    ```
   </TabItem>
 </Tabs>
