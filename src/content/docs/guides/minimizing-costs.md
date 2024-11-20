@@ -99,7 +99,7 @@ Table names correspond to their full-size counterparts of the form `[table]_1k` 
 
 BigQuery allows you to preview entire rows of a table without incurring a query cost. This is useful for getting a rough idea of the data in a table before running a more expensive query.
 
-![Preview tab on BigQuery](../../../assets/bq-preview.webp)
+![Preview tab on BigQuery](./bq-preview.webp)
 
 To access the preview, click on a table name from the workspace explorer and select the **Preview** tab.
 
