@@ -3,152 +3,127 @@ title: Custom metrics struct
 description: Reference docs for the custom metrics struct
 ---
 
-_Appears in: [`pages` table](/reference/tables/pages/)_\
+_Appears in: [`pages`](/reference/tables/pages/) table_\
 _As [`custom_metrics`](/reference/tables/pages/#custom_metrics)_
 
 ## Schema
 
-| Field name         | Type    | Description                                     |
-|--------------------|---------|-------------------------------------------------|
-| `a11y`             | JSON  | Accessibility.                                    |
-| `cms`              | JSON  | Content Management Systems.                       |
-| `cookies`          | JSON  | Cookie usage.                                     |
-| `css_variables`    | JSON  | Use of CSS variables.                             |
-| `ecommerce`        | JSON  | E-commerce features.                              |
-| `element_count`    | JSON  | Number of elements on a page.                     |
-| `javascript`       | JSON  | JavaScript usage.                                 |
-| `markup`           | JSON  | HTML markup.                                      |
-| `media`            | JSON  | Media elements.                                   |
-| `origin_trials`    | JSON  | Origin Trials.                                    |
-| `performance`      | JSON  | Web performance.                                  |
-| `privacy`          | JSON  | Privacy settings and policies.                    |
-| `responsive_images`| JSON  | Responsive image techniques.                      |
-| `robots_txt`       | JSON  | robots.txt file.                                  |
-| `security`         | JSON  | Security features.                                |
-| `structured_data`  | JSON  | Structured data.                                  |
-| `third_parties`    | JSON  | Third-party resources.                            |
-| `well_known`       | JSON  | well-known URIs.                                  |
-| `wpt_bodies`       | JSON  | Metrics derived from WebPageTest bodies object.   |
-| `other`            | JSON  | Other custom metrics.                             |
-
 ### `a11y`
+
+Type: `JSON`
 
 Accessibility.
 
 ### `cms`
 
+Type: `JSON`
+
 Content Management Systems.
 
 ### `cookies`
+
+Type: `JSON`
 
 Cookie usage.
 
 ### `css_variables`
 
+Type: `JSON`
+
 Use of CSS variables.
 
 ### `ecommerce`
+
+Type: `JSON`
 
 E-commerce features.
 
 ### `element_count`
 
+Type: `JSON`
+
 Number of elements on a page.
 
 ### `javascript`
+
+Type: `JSON`
 
 JavaScript usage.
 
 ### `markup`
 
+Type: `JSON`
+
 HTML markup.
 
 ### `media`
+
+Type: `JSON`
 
 Media elements.
 
 ### `origin_trials`
 
+Type: `JSON`
+
 Origin Trials.
 
 ### `performance`
 
-Web performance. See the [`performance` custom metric](/reference/custom-metrics/performance/) for more information.
+Type: `JSON`
+
+Web performance.
 
 ### `privacy`
 
-Privacy settings and policies. See the [`privacy`](/reference/custom-metrics/privacy/) custom metric for more information.
+Type: `JSON`
+
+Privacy settings and policies. See the [`privacy`](/reference/custom-metrics/privacy/) custom metrics for more information.
 
 ### `responsive_images`
+
+Type: `JSON`
 
 Responsive image techniques.
 
 ### `robots_txt`
 
+Type: `JSON`
+
 robots.txt file.
 
 ### `security`
+
+Type: `JSON`
 
 Security features.
 
 ### `structured_data`
 
+Type: `JSON`
+
 Structured data.
 
 ### `third_parties`
+
+Type: `JSON`
 
 Third-party resources.
 
 ### `well_known`
 
+Type: `JSON`
+
 well-known URIs.
 
 ### `wpt_bodies`
+
+Type: `JSON`
 
 Metrics derived from WebPageTest bodies object.
 
 ### `other`
 
-Other custom metrics.
+Type: `JSON`
 
-List:
-
-| Field name         | Description                                       |
-|--------------------|---------------------------------------------------|
-| `ads`              | Advertising technology and usage. See the [`ads` custom metric](/reference/custom-metrics/ads/) for more information.                |
-| `almanac`          | Metrics defined in the early versions of Web Almanac crawls. |
-| `aurora`           | Project Aurora.                                   |
-| `avg_dom_depth`    | The average DOM depth of a page.                  |
-| `Colordepth`       | Color depth of a screen.                          |
-| `crawl_links`      | The links found during a crawl.                   |
-| `css`              | CSS usage.                                        |
-| `doctype`          | Document type declaration.                        |
-| `document_height`  | Height of the document.                           |
-| `document_width`   | Width of the document.                            |
-| `Dpi`              | Dots per inch (DPI) of a screen.                  |
-| `event-names`      | Event names used in JavaScript.                   |
-| `fugu-apis`        | Usage of Fugu APIs.                               |
-| `generated-content`| Client-side generated content.                    |
-| `has_shadow_root`  | Presence of shadow DOM roots.                     |
-| `Images`           | Images usage.                                     |
-| `img-loading-attr` | Image loading attributes.                         |
-| `initiators`           | Resource initiators.                              |
-| `inline_style_bytes`   |  Size of inline styles.                            |
-| `lib-detector-version` | Libraries detector version.                       |
-| `localstorage_size`|  Size of local storage.                            |
-| `meta_viewport`    |  Meta viewport tag.                                |
-| `num_iframes`      |  Number of iframes on a page.                      |
-| `num_scripts`      |  Number of script tags.                            |
-| `num_scripts`      |  Number of script tags.                            |
-| `num_scripts_async`|  Number of asynchronous scripts.                   |
-| `num_scripts_sync` |  Number of synchronous scripts.                    |
-| `observers`        |  Metrics related to the usage of observer APIs.    |
-| `privacy-sandbox`  |  Privacy Sandbox initiative usage.                 |
-| `pwa`              |  Progressive Web Apps.                             |
-| `quirks_mode`      |  Usage of quirks mode in browsers.                 |
-| `Resolution`       |  Resolution of a screen.                           |
-| `robots_meta`          |  Robots meta tag.                                  |
-| `sass`                 |  Usage of Sass.                                    |
-| `sessionstorage_size`  |  Size of session storage.                          |
-| `usertiming`           |  User Timing API.                                  |
-| `valid-head`           |  Validity of the head element.                     |
+See the [other](/reference/custom-metrics/other/) custom metrics for more information.

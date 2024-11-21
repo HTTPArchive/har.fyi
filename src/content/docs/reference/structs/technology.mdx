@@ -3,9 +3,30 @@ title: Technology struct
 description: Reference docs for the technology struct
 ---
 
-_Appears in: [`pages` table](/reference/tables/pages/)_
+_Appears in: [`pages`](/reference/tables/pages/) table_\
+_As: [`technologies`](/reference/tables/pages/#technologies)_
 
 Technologies are detected by [Wappalyzer](https://www.wappalyzer.com/). Refer to HTTP Archive's fork of the [Wappalyzer repository](https://github.com/HTTPArchive/wappalyzer) on GitHub to request a new technology detection or to browse the source code of existing detections.
+
+## Schema
+
+### `technology`
+
+Type: `STRING`
+
+Name of the detected technology
+
+### `categories`
+
+Type: `ARRAY<STRING>`
+
+List of categories to which this technology belongs
+
+### `info`
+
+Type: `ARRAY<STRING>`
+
+Additional metadata about the detected technology, ie version number
 
 ## Example queries
 
@@ -46,7 +67,7 @@ GROUP BY
   cms
 ORDER BY
   sites DESC
-LIMIT 
+LIMIT
   10
 ```
 
@@ -71,23 +92,3 @@ WHERE
   date = '2023-09-01' AND
   t.technology = 'WordPress'
 ```
-
-## Schema
-
-Field name | Type | Description
----|---|---
-`technology` | `STRING` | Name of the detected technology
-`categories` | `ARRAY<STRING>` | List of categories to which this technology belongs
-`info` | `ARRAY<STRING>` | Additional metadata about the detected technology, ie version number
-
-### `technology`
-
-Name of the detected technology
-
-### `categories`
-
-List of categories to which this technology belongs
-
-### `info`
-
-Additional metadata about the detected technology, ie version number
