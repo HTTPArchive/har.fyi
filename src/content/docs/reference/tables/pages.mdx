@@ -9,7 +9,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ## Schema
 
-Field name | Type | Description
+<div style="width:140px">Field name</div> | <div style="width:115px">Type</div> | Description
 ---|---|---
 [`date`](#date) | `DATE` | YYYY-MM-DD format of the HTTP Archive monthly crawl
 [`client`](#client) | `STRING` | Test environment: `'desktop'` or `'mobile'`
@@ -18,13 +18,13 @@ Field name | Type | Description
 [`root_page`](#root_page) | `STRING` | The URL of the root page being tested, the origin followed by `/`
 [`rank`](#rank) | `INTEGER` | Site popularity rank, from CrUX
 [`wptid`](#wptid) | `STRING` | ID of the WebPageTest results
-[`payload`](#payload) | [`HAR`](/reference/blobs/har/) | JSON-encoded WebPageTest results for the page
-[`summary`](#summary) | [`Page summary`](/reference/structs/page-summary/) | JSON-encoded summarization of the page-level data
-[`custom_metrics`](#custom_metrics) | [`Custom metrics`](/reference/structs/custom-metrics/) | JSON-encoded test results of the custom metrics
-[`lighthouse`](#lighthouse) | [`Lighthouse`](/reference/blobs/lighthouse/) | JSON-encoded Lighthouse report
-[`features`](#features) | <code>ARRAY&lt;<a href='/reference/structs/feature/'>Feature</a>></code> | Blink features detected at runtime
-[`technologies`](#technologies) | <code>ARRAY&lt;<a href='/reference/structs/technology/'>Technology</a>></code> | Technologies detected at runtime
-[`metadata`](#metadata) | [`Page metadata`](/reference/blobs/page-metadata/) | Additional metadata about the test
+[`payload`](#payload) | `JSON` | JSON-encoded WebPageTest results for the page
+[`summary`](#summary) | `JSON` | JSON-encoded summarization of the page-level data
+[`custom_metrics`](#custom_metrics) | `RECORD` | JSON-encoded test results of the custom metrics
+[`lighthouse`](#lighthouse) | `JSON` | JSON-encoded Lighthouse report
+[`features`](#features) | <code>ARRAY\<RECORD\></code> | Blink features detected at runtime
+[`technologies`](#technologies) | <code>ARRAY\<RECORD\></code> | Technologies detected at runtime
+[`metadata`](#metadata) | `JSON` | Additional metadata about the test
 
 ### `date`
 
