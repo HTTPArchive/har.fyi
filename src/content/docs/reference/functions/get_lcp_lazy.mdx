@@ -75,7 +75,7 @@ FROM
 ```sql
 WITH lazy AS (
   SELECT
-    `httparchive.fn.GET_LCP_LAZY`(TO_JSON_STRING(custom_metrics.performance).custom
+    `httparchive.fn.GET_LCP_LAZY`(TO_JSON_STRING(custom_metrics.performance)).custom
   FROM `httparchive.crawl.pages`
   WHERE
     date = '2023-11-01' AND
