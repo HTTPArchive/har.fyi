@@ -27,7 +27,8 @@ export default defineConfig({
       ],
       social: {
         github: 'https://github.com/HTTPArchive/har.fyi',
-        twitter: 'https://twitter.com/HTTPArchive',
+        twitter: 'https://x.com/HTTPArchive',
+        blueSky: 'https://bsky.app/profile/httparchive.org',
       },
       editLink: {
         baseUrl: 'https://github.com/HTTPArchive/har.fyi/edit/main/'
