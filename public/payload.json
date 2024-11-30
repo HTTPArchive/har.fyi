@@ -1010,27 +1010,6 @@
                   "p75": "0.00"
               }
           },
-          "experimental_interaction_to_next_paint": {
-              "histogram": [
-                  {
-                      "start": 0,
-                      "end": 200,
-                      "density": 0.9835904971834437
-                  },
-                  {
-                      "start": 200,
-                      "end": 500,
-                      "density": 0.00979671809943669
-                  },
-                  {
-                      "start": 500,
-                      "density": 0.006612784717119725
-                  }
-              ],
-              "percentiles": {
-                  "p75": 15
-              }
-          },
           "experimental_time_to_first_byte": {
               "histogram": [
                   {
