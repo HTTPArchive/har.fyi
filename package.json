@@ -11,7 +11,7 @@
     "update": "npx @astrojs/upgrade"
   },
   "dependencies": {
-    "@astrojs/starlight": "^0.30.3",
+    "@astrojs/starlight": "^0.31.0",
     "astro": "^5.1.5"
   }
 }
