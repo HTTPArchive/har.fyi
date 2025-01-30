@@ -36,7 +36,7 @@ Additional metadata about the detected technology, ie version number
 
 ## Example queries
 
-### Pages using WordPress in the top 5k
+### Pages using WordPress in the top 1k
 
 As the `technologies` field is a repeated struct, we need to use `UNNEST` to query it.
 
@@ -77,7 +77,7 @@ LIMIT
   10
 ```
 
-### Top 5 WordPress versions
+### Top 10 WordPress versions
 
 There is usually only one technology version on a given page, but in some cases a site uses the same technology twice. For example, multiple widgets load different versions of jQuery.
 
