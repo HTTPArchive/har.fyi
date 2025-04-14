@@ -25,11 +25,11 @@ export default defineConfig({
             gtag('config', 'G-SK2FZXB50K');`
         }
       ],
-      social: {
-        github: 'https://github.com/HTTPArchive/har.fyi',
-        twitter: 'https://x.com/HTTPArchive',
-        blueSky: 'https://bsky.app/profile/httparchive.org',
-      },
+      social: [
+        {icon: "github", label: 'GitHub', href: 'https://github.com/HTTPArchive/har.fyi' },
+        {icon: "x.com", label: 'x.com', href: 'https://x.com/HTTPArchive' },
+        {icon: "blueSky", label: 'BlueSky', href: 'https://bsky.app/profile/httparchive.org' },
+      ],
       editLink: {
         baseUrl: 'https://github.com/HTTPArchive/har.fyi/edit/main/'
       },
