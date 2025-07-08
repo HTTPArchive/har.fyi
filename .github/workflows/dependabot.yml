@@ -6,12 +6,7 @@ on:
     branches:
       - main
 
-permissions:
-  contents: read
-  packages: read
-
 jobs:
-
   dependabot:
     name: Dependabot auto-merge
     runs-on: ubuntu-latest
