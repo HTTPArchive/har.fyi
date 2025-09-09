@@ -1,5 +1,6 @@
-import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import { defineConfig } from 'astro/config';
+import starlightLinksValidator from 'starlight-links-validator'
 
 // https://astro.build/config
 export default defineConfig({
@@ -65,6 +66,7 @@ export default defineConfig({
           autogenerate: { directory: 'reference/functions' }
         },
       ],
+      plugins: [starlightLinksValidator()],
     }),
   ],
 });
