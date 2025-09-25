@@ -5,20 +5,18 @@ description: Practical tips for minimizing the cost of querying the HTTP Archive
 
 The HTTP Archive dataset is large and complex, and it's easy to write queries that are slow and expensive. All BigQuery users have a free quota of 1 TB per month. To stretch your free quota as far as possible, you'll want to minimize the amount of data that your queries scan. This guide provides some practical tips for minimizing the cost of querying the HTTP Archive dataset.
 
-## Use clustered tables
+## Use cluster columns
 
 Table | Partitioned by | Clustered by
 --- | --- | ---
 `httparchive.crawl.pages` | `date` | `client`<br>`is_root_page`<br>`rank`<br>`page`
-`httparchive.crawl.requests` | `date` | `client`<br>`is_root_page`<br>`is_main_document`<br>`type`
+`httparchive.crawl.requests` | `date` | `client`<br>`is_root_page`<br>`type`<br>`rank`
 
 For example, the `httparchive.crawl.pages` table is [partitioned](https://cloud.google.com/bigquery/docs/partitioned-tables) by `date` and [clustered](https://cloud.google.com/bigquery/docs/clustered-tables) by the `client`, `is_root_page`, `rank` and `page` columns, which means that queries that filter on these columns will be much faster and cheaper than queries that don't.
 
 :::caution
 BigQuery [doesn't guarantee](https://cloud.google.com/bigquery/docs/clustered-tables#clustered_table_pricing:~:text=BigQuery%20might%20not%20be%20able%20to%20accurately%20estimate%20the%20bytes%20to%20be%20processed) accuracy of estimations for 'Bytes processed' when querying clustered tables ([Issue Link](https://issuetracker.google.com/issues/176795805)). The actual data volume may be smaller than the amount provided in the estimate.
 :::
-
-Legacy tables like `httparchive.pages.2023_05_01_desktop`, however, do not take advantage of these optimizations and always incur the full cost of scanning the entire table.
 
 :::tip
 Filter by the top 1k websites. This is the smallest rank bucket and will result in the smallest amount of data being scanned.
@@ -31,10 +29,58 @@ FROM
 WHERE
   date = '2023-05-01' AND
   client = 'desktop' AND
-  rank = 1000
+  rank <= 1000
 ```
 
 :::
+
+:::tip
+Use the `type` column for `requests` table as often you may only be interested in `html` and `script` contents but not `css` for example.
+
+```sql
+SELECT
+  page
+FROM
+  `httparchive.crawl.requests`
+WHERE
+  date = '2023-05-01' AND
+  client = 'desktop' AND
+  rank <= 1000 AND
+  type IN ('html', 'script')
+```
+
+This is particularly relevant if using the `response_bodies` or `payload` columns. But these are large columns so try to avoid using them where at all possible. Also note that binary response bodies (e.g. images and fonts) are not stored, so these are mostly `html`, `script`, and `css` so selecting all three of those will not save much.
+:::
+
+## Use the `RECORD` columns
+
+Some of our columns in the table are structured `RECORD` columns. When querying these you only pay for the costs of the records needed.
+
+```sql
+SELECT
+  custom_metrics
+FROM
+  `httparchive.crawl.pages`
+WHERE
+  date = '2023-05-01' AND
+  client = 'desktop' AND
+  rank <= 1000
+```
+
+This query will process 329 MB when run as it's looking at all the custom_metrics.
+
+However, the same query looking at just the `a11y` custom metrics is much cheaper at 10 MB:
+
+```sql
+SELECT
+  custom_metrics.a11y
+FROM
+  `httparchive.crawl.pages`
+WHERE
+  date = '2023-05-01' AND
+  client = 'desktop' AND
+  rank <= 1000
+```
 
 ## Use `TABLESAMPLE`
 
@@ -93,7 +139,9 @@ LIMIT
 
 The `sample_data` dataset contains 10k subsets of the full pages and requests tables. These tables are useful for testing queries before running them on the full dataset, without the risk of incurring a large query cost.
 
-Table names correspond to their full-size counterparts of the form `[table]_1k` for `crawl.pages` and `crawl.requests` tables. For example, to query the summary data for the subset of 10k pages, you would use the `httparchive.sample_data.pages_10k` table.
+Table names correspond to their full-size counterparts of the form `[table]_10k` for `crawl.pages` and `crawl.requests` tables. For example, to query the summary data for the subset of 10k pages, you would use the `httparchive.sample_data.pages_10k` table.
+
+In reality as `rank` is part of the clustering of the tables you don't need to use the `sample_data` dataset. However, due to inaccurate estimates mentioned above, the `sample_data` dataset is safer since it only contains 10,000 pages so even with inaccurate estimates it will be smaller than the full `crawl` dataset.
 
 ## Use table previews
 
