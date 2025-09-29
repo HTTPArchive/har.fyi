@@ -117,6 +117,7 @@ This query will only process 680.01 MB when run.
 The 0.01% of rows that are sampled are chosen randomly, so the results of the query will be different each time it's run.
 
 :::danger
+## Don't rely on LIMIT
 Don't rely on the `LIMIT` clause to reduce the amount of data scanned. `LIMIT` is applied after the query is run, so the entire table will still be scanned.
 
 For example, this query still processes 6.56 TB:
@@ -134,6 +135,25 @@ LIMIT
 ```
 
 :::
+
+## Use RANK
+
+An alternative to `TABLESAMPLE`, to get a consistent set of data returning for a subset of data, is to use the `rank` column as mentioned previously:
+
+```sql
+SELECT
+  custom_metrics.other.avg_dom_depth
+FROM
+  `httparchive.crawl.pages`
+WHERE
+  date = '2023-05-01' AND
+  client = 'desktop' AND
+  rank <= 1000
+```
+
+While this constency is an advantage over `TABLESAMPLE`, annoyingly due to the [previously mentioned bug](https://issuetracker.google.com/issues/176795805), using `rank` will not give an accurate estimate, while `TABLESAMPLE` will. So it can be a bit more of a leap of faith using `rank`.
+
+To get around that you can use the `sample_data` dataset.
 
 ## Use the `sample_data` dataset
 
