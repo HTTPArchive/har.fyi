@@ -138,7 +138,7 @@ LIMIT
 
 ## Use RANK
 
-An alternative to `TABLESAMPLE`, to get a consistent set of data returning for a subset of data, is to use the `rank` column as mentioned previously:
+An alternative to `TABLESAMPLE`, to get a consistent set of data returning for a subset of data, is to use the `rank` column as mentioned previously. For the top 1,000 or even 10,000 sites:
 
 ```sql
 SELECT
@@ -162,6 +162,20 @@ The `sample_data` dataset contains 10k subsets of the full pages and requests ta
 Table names correspond to their full-size counterparts of the form `[table]_10k` for `crawl.pages` and `crawl.requests` tables. For example, to query the summary data for the subset of 10k pages, you would use the `httparchive.sample_data.pages_10k` table.
 
 In reality as `rank` is part of the clustering of the tables you don't need to use the `sample_data` dataset. However, due to inaccurate estimates mentioned above, the `sample_data` dataset is safer since it only contains 10,000 pages so even with inaccurate estimates it will be smaller than the full `crawl` dataset.
+
+## Whether to use `TABLESAMPLE`, `rank`, or `sample_data`
+
+This comes down largely to a matter of personal preference. Each has their advantage and disadvantage.
+
+Advantage |`TABLESAMPLE`|`rank`|`sample_data`
+----|---|---|---
+Consistency of results returned|❌|✅|✅ (if run in same month)
+Accurate estimates|✅|❌|✅
+Ease of commenting out for full run|✅|✅|❌
+Allows querying of any months|✅|✅|❌ (previous month only)
+Allows variable sample size|✅|✅|❌
+
+If they ever fix the estimate bug then `rank` will be a clear winner. Until then use whatever works for you!
 
 ## Use table previews
 
