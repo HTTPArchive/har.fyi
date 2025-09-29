@@ -117,6 +117,7 @@ This query will only process 680.01 MB when run.
 The 0.01% of rows that are sampled are chosen randomly, so the results of the query will be different each time it's run.
 
 :::danger
+## Don't rely on LIMIT
 Don't rely on the `LIMIT` clause to reduce the amount of data scanned. `LIMIT` is applied after the query is run, so the entire table will still be scanned.
 
 For example, this query still processes 6.56 TB:
@@ -135,6 +136,25 @@ LIMIT
 
 :::
 
+## Use RANK
+
+An alternative to `TABLESAMPLE`, to get a consistent set of data returning for a subset of data, is to use the `rank` column as mentioned previously. For the top 1,000 or even 10,000 sites:
+
+```sql
+SELECT
+  custom_metrics.other.avg_dom_depth
+FROM
+  `httparchive.crawl.pages`
+WHERE
+  date = '2023-05-01' AND
+  client = 'desktop' AND
+  rank <= 1000
+```
+
+While this constency is an advantage over `TABLESAMPLE`, annoyingly due to the [previously mentioned bug](https://issuetracker.google.com/issues/176795805), using `rank` will not give an accurate estimate, while `TABLESAMPLE` will. So it can be a bit more of a leap of faith using `rank`.
+
+To get around that you can use the `sample_data` dataset.
+
 ## Use the `sample_data` dataset
 
 The `sample_data` dataset contains 10k subsets of the full pages and requests tables. These tables are useful for testing queries before running them on the full dataset, without the risk of incurring a large query cost.
@@ -142,6 +162,20 @@ The `sample_data` dataset contains 10k subsets of the full pages and requests ta
 Table names correspond to their full-size counterparts of the form `[table]_10k` for `crawl.pages` and `crawl.requests` tables. For example, to query the summary data for the subset of 10k pages, you would use the `httparchive.sample_data.pages_10k` table.
 
 In reality as `rank` is part of the clustering of the tables you don't need to use the `sample_data` dataset. However, due to inaccurate estimates mentioned above, the `sample_data` dataset is safer since it only contains 10,000 pages so even with inaccurate estimates it will be smaller than the full `crawl` dataset.
+
+## Whether to use `TABLESAMPLE`, `rank`, or `sample_data`
+
+This comes down largely to a matter of personal preference. Each has their advantage and disadvantage.
+
+Advantage |`TABLESAMPLE`|`rank`|`sample_data`
+----|---|---|---
+Consistency of results returned|❌|✅|✅ (if run in same month)
+Accurate estimates|✅|❌|✅
+Ease of commenting out for full run|✅|✅|❌
+Allows querying of any months|✅|✅|❌ (previous month only)
+Allows variable sample size|✅|✅|❌
+
+If they ever fix the estimate bug then `rank` will be a clear winner. Until then use whatever works for you!
 
 ## Use table previews
 
