@@ -10,7 +10,7 @@
     "update": "npx @astrojs/upgrade"
   },
   "dependencies": {
-    "@astrojs/starlight": "0.36.2",
+    "@astrojs/starlight": "0.37.0",
     "astro": "5.16.0",
     "starlight-links-validator": "0.19.2"
   }
