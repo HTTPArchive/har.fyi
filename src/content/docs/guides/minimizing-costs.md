@@ -9,12 +9,13 @@ The HTTP Archive dataset is large and complex, and it's easy to write queries th
 
 Table | Partitioned by | Clustered by
 --- | --- | ---
-`httparchive.crawl.pages` | `date` | `client`<br>`is_root_page`<br>`rank`<br>`page`
-`httparchive.crawl.requests` | `date` | `client`<br>`is_root_page`<br>`type`<br>`rank`
+`httparchive.crawl.pages` | `date` | 1.`client`<br>2.`is_root_page`<br>3.`rank`<br>4.`page`
+`httparchive.crawl.requests` | `date` | 1.`client`<br>2.`is_root_page`<br>3.`type`<br>4.`rank`
 
 For example, the `httparchive.crawl.pages` table is [partitioned](https://cloud.google.com/bigquery/docs/partitioned-tables) by `date` and [clustered](https://cloud.google.com/bigquery/docs/clustered-tables) by the `client`, `is_root_page`, `rank` and `page` columns, which means that queries that filter on these columns will be much faster and cheaper than queries that don't.
 
 :::caution
+[Cluster column ordering](https://docs.cloud.google.com/bigquery/docs/clustered-tables#cluster_column_ordering) is important. BigQuery can only take advantage of clustering if the query filters on the clustered columns in the order they are defined. For example, a query that filters on `client` and `is_root_page` will be able to take advantage of clustering, but a query that filters on `rank` and `page` will not.
 BigQuery [doesn't guarantee](https://cloud.google.com/bigquery/docs/clustered-tables#clustered_table_pricing:~:text=BigQuery%20might%20not%20be%20able%20to%20accurately%20estimate%20the%20bytes%20to%20be%20processed) accuracy of estimations for 'Bytes processed' when querying clustered tables ([Issue Link](https://issuetracker.google.com/issues/176795805)). The actual data volume may be smaller than the amount provided in the estimate.
 :::
 
