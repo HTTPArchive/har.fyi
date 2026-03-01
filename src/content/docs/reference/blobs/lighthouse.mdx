@@ -10,6 +10,61 @@ JSON-encoded blob of Lighthouse data for the page.
 
 **The actual schema of the Lighthouse object is liable to change depending on the page and Lighthouse version.**
 
+<details>
+<summary>An example of the decoded object</summary>
+
+```json
+{
+  "lighthouseVersion": "12.0.0",
+  "requestedUrl": "https://www.example.com/",
+  "audits": {
+    "largest-contentful-paint": {
+      "id": "largest-contentful-paint",
+      "title": "Largest Contentful Paint",
+      "numericValue": 780.895,
+      "score": 1,
+      ...
+    },
+    ...
+  },
+  "categories": {
+    "performance": {
+      "id": "performance",
+      "title": "Performance",
+      "score": 0.95,
+      ...
+    },
+    ...
+  },
+  "categoryGroups": {
+    "metrics": {
+      "title": "Metrics",
+      ...
+    },
+    ...
+  }
+}
+```
+</details>
+
 ## Schema
 
-TODO
+### `lighthouseVersion`
+
+The version of Lighthouse used to generate the report.
+
+### `requestedUrl`
+
+The URL that was requested for testing.
+
+### `audits`
+
+An object containing the results of all audits performed. Each audit is identified by its ID (e.g., `largest-contentful-paint`) and contains details such as `title`, `numericValue`, and `score`.
+
+### `categories`
+
+An object containing the overall scores for each Lighthouse category, such as Performance and Accessibility. Each category has a `title` and a `score` ranging from 0 to 1.
+
+### `categoryGroups`
+
+Information about how audits are grouped within the report.
