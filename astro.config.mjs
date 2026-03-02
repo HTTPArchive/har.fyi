@@ -42,7 +42,6 @@ export default defineConfig({
             { label: 'Minimizing query costs', link: '/guides/minimizing-costs/' },
             { label: 'Guided tour', link: '/guides/guided-tour/' },
             { label: 'Release cycle', link: '/guides/release-cycle/' },
-            { label: 'Migrate queries to `crawl` dataset', link: '/guides/migrating-to-crawl-dataset/' },
           ],
         },
         {

@@ -44,7 +44,7 @@ As the `technologies` field is a repeated struct, we need to use `UNNEST` to que
 SELECT DISTINCT
   root_page
 FROM
-  `httparchive.all.pages`,
+  `httparchive.crawl.pages`,
   UNNEST(technologies) AS t
 WHERE
   date = '2023-09-01' AND
@@ -63,7 +63,7 @@ SELECT
   t.technology AS cms,
   COUNT(DISTINCT root_page) AS sites
 FROM
-  `httparchive.all.pages`,
+  `httparchive.crawl.pages`,
   UNNEST(technologies) AS t,
   UNNEST(t.categories) AS category
 WHERE
@@ -91,7 +91,7 @@ Regular expressions can be used to parse major version numbers, for example `REG
 SELECT
   APPROX_TOP_COUNT(version, 10)
 FROM
-  `httparchive.all.pages`,
+  `httparchive.crawl.pages`,
   UNNEST(technologies) AS t,
   UNNEST(t.info) AS version
 WHERE
