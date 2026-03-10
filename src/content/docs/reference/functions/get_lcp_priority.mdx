@@ -3,8 +3,6 @@ title: GET_LCP_PRIORITY function
 description: Reference docs for the httparchive.fn.GET_LCP_PRIORITY function
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-
 The [`httparchive.fn.GET_LCP_PRIORITY`](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!6m3!1shttparchive!2sfn!3sGET_LCP_PRIORITY) function returns the value of the `fetchpriority` attribute of the LCP element.
 
 ## Input
@@ -25,8 +23,7 @@ The value of the `fetchpriority` attribute of the LCP element, or `null` if the 
 
 ### Top `fetchpriority` values
 
-<Tabs>
-  <TabItem label="Query">
+#### Query
 
 ```sql
 WITH lcp AS (
@@ -43,8 +40,7 @@ SELECT APPROX_TOP_COUNT(priority, 10) AS priority
 FROM lcp
 ```
 
-  </TabItem>
-  <TabItem label="Results">
+#### Results
 
 priority.value | priority.count
 -- | --
@@ -58,9 +54,6 @@ highest | 17
 ”high” | 4
 High | 4
 medium | 3
-
-  </TabItem>
-</Tabs>
 
 ## Routine
 
