@@ -5,15 +5,22 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "sync-vectors": "node scripts/sync-vectors.js",
     "preview": "astro preview",
     "astro": "astro",
     "update": "npx @astrojs/upgrade"
   },
   "dependencies": {
+    "@astrojs/check": "0.9.2",
     "@astrojs/starlight": "0.38.1",
+    "@google-cloud/firestore": "7.5.0",
+    "@google-cloud/vertexai": "1.10.0",
     "astro": "6.0.3",
+    "dotenv": "17.3.1",
+    "marked": "^17.0.4",
     "starlight-links-validator": "0.20.0",
     "starlight-llms-txt": "0.8.0",
-    "zod": "^4.3.6"
+    "typescript": "5.9.3",
+    "zod": "4.3.6"
   }
 }
