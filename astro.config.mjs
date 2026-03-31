@@ -1,6 +1,7 @@
 import starlight from '@astrojs/starlight';
 import { defineConfig } from 'astro/config';
-import starlightLinksValidator from 'starlight-links-validator'
+import starlightLinksValidator from 'starlight-links-validator';
+import starlightLlmsTxt from 'starlight-llms-txt';
 
 // https://astro.build/config
 export default defineConfig({
@@ -27,9 +28,9 @@ export default defineConfig({
         }
       ],
       social: [
-        {icon: "github", label: 'GitHub', href: 'https://github.com/HTTPArchive/har.fyi' },
-        {icon: "x.com", label: 'x.com', href: 'https://x.com/HTTPArchive' },
-        {icon: "blueSky", label: 'BlueSky', href: 'https://bsky.app/profile/httparchive.org' },
+        { icon: "github", label: 'GitHub', href: 'https://github.com/HTTPArchive/har.fyi' },
+        { icon: "x.com", label: 'x.com', href: 'https://x.com/HTTPArchive' },
+        { icon: "blueSky", label: 'BlueSky', href: 'https://bsky.app/profile/httparchive.org' },
       ],
       editLink: {
         baseUrl: 'https://github.com/HTTPArchive/har.fyi/edit/main/'
@@ -65,7 +66,7 @@ export default defineConfig({
           autogenerate: { directory: 'reference/functions' }
         },
       ],
-      plugins: [starlightLinksValidator()],
+      plugins: [starlightLlmsTxt(), starlightLinksValidator()],
     }),
   ],
 });
