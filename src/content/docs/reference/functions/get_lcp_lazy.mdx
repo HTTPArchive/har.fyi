@@ -123,17 +123,21 @@ try {
   }, {
     name: 'class',
     value: 'swiper-lazy'
-  }];
+  }].map(config => {
+    if (config.value) {
+      config.regex = new RegExp(`(^|\\s)${config.value}(\\s|$)`);
+    }
+    return config;
+  });
 
 
   return {
     native: lcpAttrs.some(({name, value}) => {
       return name == 'loading' && value == 'lazy';
     }),
-    custom: custom.filter(({name, value}) => {
-      const valueRegex = new RegExp(`(^|\s)${value}(\s|$)`);
+    custom: custom.filter(({name, value, regex}) => {
       return lcpAttrs.some(attr => {
-        return attr.name == name && (!value || valueRegex.test(attr.value));
+        return attr.name == name && (!value || regex.test(attr.value));
       });
     }).map(({name, value}) => {
       return `[${name}${value ? `~=${value}` : ''}]`;
