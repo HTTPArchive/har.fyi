@@ -1,5 +1,7 @@
----
-name: Dependabot Auto-Merge
+name: Test and Merge
+
+permissions:
+  contents: read
 
 on:
   pull_request:
@@ -7,9 +9,21 @@ on:
       - main
 
 jobs:
+  build:
+    runs-on: ubuntu-slim
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
   dependabot:
     name: Dependabot auto-merge
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
+    needs: build
     if: github.event.pull_request.user.login == 'dependabot[bot]' && github.repository == 'HTTPArchive/har.fyi'
 
     permissions:
@@ -20,12 +34,10 @@ jobs:
       - name: Dependabot metadata
         id: metadata
         uses: dependabot/fetch-metadata@v2
-        with:
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
 
       - name: Enable auto-merge for Dependabot PRs
         if: steps.metadata.outputs.update-type == 'version-update:semver-patch' || steps.metadata.outputs.update-type == 'version-update:semver-minor'
-        run: gh pr merge --auto --squash "$PR_URL"
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
           GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: gh pr merge --auto --squash "$PR_URL"
