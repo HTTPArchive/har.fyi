@@ -13,7 +13,7 @@
     "astro": "6.2.1",
     "@astrojs/starlight": "0.38.4",
     "starlight-links-validator": "0.24.0",
-    "starlight-llms-txt": "0.8.0",
+    "starlight-llms-txt": "0.8.1",
     "zod": "^4.4.1"
   }
 }
