@@ -47,23 +47,23 @@ export default defineConfig({
         },
         {
           label: 'Tables',
-          autogenerate: { directory: 'reference/tables' }
+          items: [{ autogenerate: { directory: 'reference/tables' } }]
         },
         {
           label: 'Structs',
-          autogenerate: { directory: 'reference/structs' }
+          items: [{ autogenerate: { directory: 'reference/structs' } }]
         },
         {
           label: 'Blobs',
-          autogenerate: { directory: 'reference/blobs' }
+          items: [{ autogenerate: { directory: 'reference/blobs' } }]
         },
         {
           label: 'Custom Metrics',
-          autogenerate: { directory: 'reference/custom-metrics' }
+          items: [{ autogenerate: { directory: 'reference/custom-metrics' } }]
         },
         {
           label: 'Functions',
-          autogenerate: { directory: 'reference/functions' }
+          items: [{ autogenerate: { directory: 'reference/functions' } }]
         },
       ],
       plugins: [starlightLlmsTxt(), starlightLinksValidator()],
