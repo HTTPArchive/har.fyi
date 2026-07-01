@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@astrojs/starlight": "0.39.3",
-    "astro": "6.4.3",
+    "astro": "7.0.4",
     "starlight-links-validator": "0.24.0",
     "starlight-llms-txt": "0.10.0",
     "zod": "4.4.3"
