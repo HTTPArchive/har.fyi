@@ -101,7 +101,7 @@ Text-based response body
 :::note
 There is lots of extracted information in the [custom metrics](/reference/structs/custom-metrics/), which are custom pieces of JavaScript run during the crawl to extra information from the page.
 
-Always check if the information you need exists there before using the `response_body` column. Using the custom metrics from the `pages` table is likely less brittle than attempting to use regular expressions on HTML, includes the rendered DOM after JavaScript runs, is much cheaper to query, and so is considerably faster to get back results.
+Check the custom metrics before falling back to `response_body`. Custom metrics include the post-JavaScript DOM, are far less brittle than regexing HTML, and are significantly faster and cheaper to query.
 
 For example, to get the `title` and `meta_description` you can use:
 ```sql
