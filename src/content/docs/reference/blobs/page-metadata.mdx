@@ -31,7 +31,7 @@ JSON-encoded HTTP Archive metadata about the page that was tested.
 </details>
 
 :::note
-There is lots of other metadata in the [custom metrics](/reference/structs/custom-metrics/), which are custom pieces of JavaScript run during the crawl to extra information from the page.
+There is lots of other page-level metadata in the [custom metrics](/reference/structs/custom-metrics/), which are custom pieces of JavaScript run during the crawl to extra information from the page.
 
 Always check that before reverting to `response_body` in `requests` table which is slow, does not include the rendered DOM after JavaScript runs, and is expensive to query.
 
@@ -47,7 +47,7 @@ WHERE
   ...
 ```
 
-The source of the [custom metrics](https://github.com/HTTPArchive/custom-metrics/) can be useful to understand exactly what is collected.
+The [source code](https://github.com/HTTPArchive/custom-metrics/) of the custom metrics can be useful to understand exactly how they are collected.
 :::
 
 ## Schema
