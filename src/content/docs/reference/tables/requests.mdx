@@ -98,6 +98,26 @@ See the [Header](/reference/structs/header/) reference for more details.
 
 Text-based response body
 
+:::note
+There is lots of extracted information in the [custom metrics](/reference/structs/custom-metrics/), which are custom pieces of JavaScript run during the crawl to extra information from the page.
+
+Check the custom metrics before falling back to `response_body`. Custom metrics include the post-JavaScript DOM, are far less brittle than regexing HTML, and are significantly faster and cheaper to query.
+
+For example, to get the `title` and `meta_description` you can use:
+```sql
+SELECT
+  page,
+  custom_metrics.wpt_bodies.title.rendered.primary.text AS title,
+  custom_metrics.wpt_bodies.meta_description.rendered.primary.text AS meta_description.
+FROM
+  `httparchive.crawl.pages`
+WHERE
+  ...
+```
+
+The source of the [custom metrics](https://github.com/HTTPArchive/custom-metrics/) can be useful to understand exactly what is collected.
+:::
+
 ## Example queries
 
 Here are some common operations you can perform with the `requests` table.
