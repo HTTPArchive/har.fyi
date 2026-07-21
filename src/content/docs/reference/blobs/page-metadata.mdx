@@ -30,6 +30,26 @@ JSON-encoded HTTP Archive metadata about the page that was tested.
 ```
 </details>
 
+:::note
+There is lots of other metadata in the [custom metrics](/reference/structs/custom-metrics/), which are custom pieces of JavaScript run during the crawl to extra information from the page.
+
+Always check that before reverting to `response_body` in `requests` table which is slow, does not include the rendered DOM after JavaScript runs, and is expensive to query.
+
+For example, to get the `title` and `meta_description` you can use:
+```sql
+SELECT
+  page,
+  custom_metrics.wpt_bodies.title.rendered.primary.text AS title,
+  custom_metrics.wpt_bodies.meta_description.rendered.primary.text AS meta_description.
+FROM
+  `httparchive.crawl.pages`
+WHERE
+  ...
+```
+
+The source of the [custom metrics](https://github.com/HTTPArchive/custom-metrics/) can be useful to understand exactly what is collected.
+:::
+
 ## Schema
 
 ### `crawl_depth`
