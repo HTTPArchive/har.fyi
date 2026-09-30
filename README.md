@@ -1,8 +1,17 @@
-# [har.fyi](https://har.fyi/)
+# [DEPRECATED] [har.fyi](https://har.fyi/)
+
+> [!WARNING]
+> **This repository is deprecated and no longer maintained.**
+>
+> The HTTP Archive documentation has moved and is now hosted at:
+> 👉 **[httparchive.org/docs](https://httparchive.org/docs)**
+>
+> Active development, issue tracking, and contributions now happen in the main repository:
+> 📦 **[`HTTPArchive/httparchive.org`](https://github.com/HTTPArchive/httparchive.org)**
+>
+> Please submit all future documentation PRs and issues there.
 
 Reference documentation for the [HTTP Archive](https://httparchive.org/) dataset on BigQuery.
-
-Please [contribute](#contributing) a PR to add new docs or make any corrections!
 
 ## Contributing
 
